@@ -95,6 +95,76 @@ An exceptional, award-worthy showcase website for a customizable microseasons ca
 - **Vestaboard-Inspired**: Modular tile system with premium materials
 - **Everyday Calendar DNA**: Tactile interaction with LED tracking
 
+### 🎓 Microseason Deep-Dive Modal
+- **Educational Content**: Click any microseason to explore rich historical and cultural context
+- **5 Interactive Tabs**:
+  - Overview: Long description, historical origin, evolution, and cultural significance
+  - Nature: Phenomena, flora, fauna, and weather patterns
+  - Culture: Traditions, activities, seasonal foods, and festivals
+  - Art & Poetry: Haiku with translations, symbolism, and artistic interpretations
+  - Modern Life: Contemporary relevance, activities, and mindfulness practices
+- **Sample Content**: 3 detailed spring microseasons with complete information
+- **Authentic Poetry**: Traditional haiku with Japanese text, romaji, and English translations
+- **Cultural Depth**: Festivals, symbolism, and connections to Japanese aesthetics
+- **Keyboard Navigation**: ESC to close, Tab navigation, fully accessible
+- **Beautiful Design**: Gradient headers with microseason colors, smooth animations
+
+### 🌐 Social Sharing System
+- **Multi-Platform Sharing**: Twitter/X, Facebook, LinkedIn, Reddit, Email
+- **Web Share API**: Native mobile sharing with automatic fallback
+- **Copy to Clipboard**: One-click link copying with visual confirmation
+- **Share Calendar Configurations**: URL parameters preserve material, vibe, region selections
+- **Share Individual Microseasons**: Rich descriptions with Japanese names and cultural context
+- **Platform-Specific Optimization**: Custom text formatting for each social network
+- **Integrated Throughout**: Share buttons in modals and key sections
+
+### 📬 Newsletter & Waitlist
+- **Beautiful Signup Form**: Interest selection (physical, digital, or both)
+- **Email Validation**: Client-side validation with error states
+- **Success Animation**: Celebration state with confirmation message
+- **Waitlist Stats**: Real-time counters (2,847 signups, Q2 2025 launch, 30% early-bird discount)
+- **Privacy-Focused**: Clear messaging about no spam and easy unsubscribe
+- **Interest Tracking**: Separate options for physical calendar, digital version, or both
+- **Fully Responsive**: Beautiful design across all devices with dark mode support
+
+### 📅 Calendar Export & Integration
+- **iCal (.ics) Files**: Download all 72 microseasons for any year
+- **Google Calendar**: Direct "Add to Calendar" integration for individual events
+- **Outlook/Office 365**: One-click calendar additions
+- **Apple Calendar**: webcal:// protocol support for seamless iOS/macOS integration
+- **JSON Backup**: Export complete microseason data for backup/restore
+- **CSV Export**: Spreadsheet-compatible format for data analysis
+- **Year Selection**: Generate calendars for any year with proper date formatting
+- **Batch Export**: Download all microseasons at once or individually
+- **Event Details**: Full descriptions, Japanese names, and solar term information
+
+### 🎵 Ambient Sound System
+- **16 Nature Sounds**: Curated library of seasonal ambient audio
+- **Seasonal Categories**:
+  - Spring: East wind, bird songs, spring rain, mountain streams
+  - Summer: Warm winds, cicadas, summer rain, ocean waves
+  - Autumn: Rustling leaves, falling leaves, autumn rain, evening crickets
+  - Winter: Cold wind, falling snow, crackling fire, winter silence
+- **Smart Mapping**: Automatic sound selection based on microseason keywords
+- **Audio Controls**: Volume slider, mute toggle, sound selection menu
+- **Smooth Transitions**: Configurable fade-in/out durations (2-5 seconds)
+- **Beautiful Player UI**: Compact controls that expand when active
+- **Dark Mode Support**: Consistent styling across themes
+
+### 🔄 Comparison Tool
+- **Side-by-Side Comparison**: Compare two region + vibe combinations simultaneously
+- **Interactive Selectors**: Choose from all German regions and 10 vibes for each side
+- **Visual Previews**:
+  - Color palette display for each vibe
+  - Sample microseasons (first 6) for each combination
+  - Climate statistics (summer high, winter low temperatures)
+- **Differences Summary**:
+  - Climate variance calculation
+  - Biggest vibe focus area shift
+  - Region similarity analysis
+- **Real-Time Generation**: Microseasons generated instantly as selections change
+- **Responsive Layout**: Two-column grid with visual divider on desktop, stacked on mobile
+
 ### Design Excellence
 - **Swiss Modern meets Japanese Minimalism** aesthetic
 - **Generous white space** and precise mathematical grid
