@@ -9,7 +9,13 @@ export type ThemeId =
   | 'cyberpunk'
   | 'japanese'
   | 'artdeco'
-  | 'glassmorphic';
+  | 'glassmorphic'
+  | 'neomemphis'
+  | 'darkacademia'
+  | 'vaporwave'
+  | 'swiss'
+  | 'retrofuturism'
+  | 'maximalist';
 
 export interface ThemeColors {
   // Primary backgrounds

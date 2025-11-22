@@ -1,6 +1,6 @@
 # Microseasons Theme System
 
-Award-winning, performant theme system with 6 distinct visual aesthetics.
+Award-winning, performant theme system with 12 distinct visual aesthetics.
 
 ## 🎨 Available Themes
 
@@ -34,6 +34,36 @@ Award-winning, performant theme system with 6 distinct visual aesthetics.
 - **Colors**: Soft pastels, translucent overlays, purple/blue gradients
 - **Best For**: Contemporary, sleek, Apple-inspired design
 
+### 7. **Neo-Memphis**
+- **Aesthetic**: Playful 80s postmodern, geometric shapes, Memphis Group
+- **Colors**: Hot pink, yellow, cyan, coral, bold patterns
+- **Best For**: Energetic, joyful, playful experiences
+
+### 8. **Dark Academia**
+- **Aesthetic**: Scholarly warmth, vintage libraries, classical education
+- **Colors**: Rich browns, burgundy, aged paper, leather tones
+- **Best For**: Intellectual, studious, warm atmospheres
+
+### 9. **Vaporwave**
+- **Aesthetic**: Digital nostalgia, retro internet, dreamy aesthetics
+- **Colors**: Pastel pink, cyan, purple gradients, soft retrowave
+- **Best For**: Nostalgic, surreal, dreamy experiences
+
+### 10. **Swiss Modernist**
+- **Aesthetic**: International Typographic Style, mathematical precision
+- **Colors**: Black, white, red accents, grid-based layouts
+- **Best For**: Rational, functional, perfectly aligned design
+
+### 11. **Retro Futurism**
+- **Aesthetic**: 1950s atomic age optimism, space age design
+- **Colors**: Turquoise, orange, cream, starburst patterns
+- **Best For**: Optimistic, nostalgic futurism
+
+### 12. **Maximalist Baroque**
+- **Aesthetic**: Ornate opulence, more is more, theatrical grandeur
+- **Colors**: Deep jewel tones, gold, rich patterns, layered textures
+- **Best For**: Bold, rich, unapologetically decorative experiences
+
 ## 🏗️ Architecture
 
 ### Core Files
@@ -47,9 +77,15 @@ src/
 │   ├── brutalist.ts          # Brutalist theme definition
 │   ├── organic.ts            # Organic Nature theme
 │   ├── cyberpunk.ts          # Cyberpunk Neon theme
-│   ├── japanese.ts           # Japanese Minimalist theme
+│   ├── japanese.ts           # Japanese Minimalist theme (default)
 │   ├── artdeco.ts            # Art Deco Luxury theme
-│   └── glassmorphic.ts       # Glassmorphic Modern theme
+│   ├── glassmorphic.ts       # Glassmorphic Modern theme
+│   ├── neomemphis.ts         # Neo-Memphis theme
+│   ├── darkacademia.ts       # Dark Academia theme
+│   ├── vaporwave.ts          # Vaporwave theme
+│   ├── swiss.ts              # Swiss Modernist theme
+│   ├── retrofuturism.ts      # Retro Futurism theme
+│   └── maximalist.ts         # Maximalist Baroque theme
 ├── hooks/
 │   └── useTheme.ts           # Theme switching hook
 ├── store/
@@ -213,7 +249,13 @@ export type ThemeId =
   | 'japanese'
   | 'artdeco'
   | 'glassmorphic'
-  | 'mytheme';  // Add here
+  | 'neomemphis'
+  | 'darkacademia'
+  | 'vaporwave'
+  | 'swiss'
+  | 'retrofuturism'
+  | 'maximalist'
+  | 'mytheme';  // Add new themes here
 ```
 
 ## 🧪 Testing Themes

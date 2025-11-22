@@ -18,6 +18,12 @@ const themeIcons: Record<ThemeId, string> = {
   japanese: '🌸',
   artdeco: '◆',
   glassmorphic: '◇',
+  neomemphis: '◢',
+  darkacademia: '📚',
+  vaporwave: '🌴',
+  swiss: '✚',
+  retrofuturism: '🚀',
+  maximalist: '✦',
 };
 
 const themeDescriptions: Record<ThemeId, string> = {
@@ -27,6 +33,12 @@ const themeDescriptions: Record<ThemeId, string> = {
   japanese: 'Minimal elegance & subtle beauty',
   artdeco: 'Geometric luxury & golden glamour',
   glassmorphic: 'Frosted glass & modern depth',
+  neomemphis: 'Playful 80s geometric patterns',
+  darkacademia: 'Scholarly warmth & vintage libraries',
+  vaporwave: 'Dreamy pastel nostalgia & glitch art',
+  swiss: 'Mathematical precision & grid systems',
+  retrofuturism: 'Atomic age optimism & space dreams',
+  maximalist: 'Ornate opulence & baroque richness',
 };
 
 export function ThemeSwitcher() {
@@ -111,9 +123,9 @@ export function ThemeSwitcher() {
               exit={{ opacity: 0, y: -10, scale: 0.95 }}
               transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
             >
-              <div className="p-4">
+              <div className="p-4 max-h-[70vh] overflow-y-auto custom-scrollbar">
                 <h3 className="text-sm font-semibold text-sumi-900 dark:text-washi-50 mb-3">
-                  Choose Theme
+                  Choose Theme ({availableThemes.length} available)
                 </h3>
 
                 <div className="grid grid-cols-1 gap-2">
