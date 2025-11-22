@@ -62,6 +62,39 @@ An exceptional, award-worthy showcase website for a customizable microseasons ca
   - SVG-based for crisp, scalable graphics
 - **Export Options**: Fine-tune format, quality, and duration
 
+### 🔧 Laser Cut Manufacturing Files
+- **Production-Ready Vector Files**: Generate SVG files for laser cutting your own physical calendar
+- **Multiple Layers**: Separate layers for cutting (red), engraving (blue), and scoring (green)
+- **Complete File Set**:
+  - Main calendar frame with tile slots and mounting holes
+  - Individual tile pieces (72 tiles for microseasons)
+  - LED diffuser layer (acrylic)
+  - Back panel with electronics mounting guides
+  - Assembly guide with step-by-step instructions
+- **Customizable Options**:
+  - 3 sizes: 16", 20", or 24" diagonal
+  - 3 wood materials: Walnut, Maple, or Oak
+  - Adjustable material thickness (3-12mm)
+  - Custom grid layout (default 12×6 for 72 tiles)
+  - Optional mounting holes
+- **Laser Settings Included**: Recommended power, speed, and settings for cutting and engraving
+- **Technical Specifications**: Precise dimensions in millimeters, kerf compensation (0.2mm)
+- **Manufacturing Notes**: Material recommendations, test cut guidelines, safety information
+- **Preview System**: View all generated files with layer-by-layer breakdown before downloading
+- **Batch Download**: Get all files at once or download individually
+
+### Physical Calendar Mockups
+- **Photorealistic 3D Renders**: CSS-based mockup renders of the physical calendar concept
+- **5 Render Variants**:
+  - Hero shot (wall-mounted view)
+  - Detail view (close-up of tiles and materials)
+  - Lifestyle context (in a minimal interior)
+  - Exploded view (layered construction)
+  - Hand interaction (human scale reference)
+- **Material Visualization**: See how walnut, maple, or oak looks in the design
+- **Vestaboard-Inspired**: Modular tile system with premium materials
+- **Everyday Calendar DNA**: Tactile interaction with LED tracking
+
 ### Design Excellence
 - **Swiss Modern meets Japanese Minimalism** aesthetic
 - **Generous white space** and precise mathematical grid

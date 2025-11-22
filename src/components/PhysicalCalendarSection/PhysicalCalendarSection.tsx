@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { PhysicalCalendarMockup } from './PhysicalCalendarMockup';
+import { LaserCutExport } from '@/components/LaserCutExport';
 import { useCalendarStore } from '@/store/useCalendarStore';
 import clsx from 'clsx';
 
@@ -410,6 +411,52 @@ export const PhysicalCalendarSection = () => {
               </ul>
             </div>
           </div>
+        </motion.div>
+
+        {/* Laser Cut Files Section */}
+        <motion.div
+          className="mt-32"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
+          <div className="text-center mb-12">
+            <motion.div
+              className={clsx(
+                'inline-block px-6 py-2 rounded-full text-sm font-medium mb-6',
+                darkMode
+                  ? 'bg-emerald-500/20 text-emerald-300'
+                  : 'bg-emerald-100 text-emerald-800'
+              )}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              Make Your Own
+            </motion.div>
+
+            <h3
+              className={clsx(
+                'text-4xl md:text-5xl font-light mb-6',
+                darkMode ? 'text-washi-100' : 'text-sumi-900'
+              )}
+            >
+              Production-Ready Vector Files
+            </h3>
+            <p
+              className={clsx(
+                'text-lg max-w-3xl mx-auto leading-relaxed',
+                darkMode ? 'text-washi-300' : 'text-sumi-600'
+              )}
+            >
+              Download laser-cut ready SVG files to manufacture your own microseasons calendar.
+              All files include separate layers for cutting, engraving, and scoring.
+            </p>
+          </div>
+
+          <LaserCutExport />
         </motion.div>
 
         {/* Closing Statement */}
