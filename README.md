@@ -34,6 +34,34 @@ An exceptional, award-worthy showcase website for a customizable microseasons ca
   - Major world cities (Tokyo, New York, London, Paris, Sydney, Barcelona, Reykjavik, Singapore)
   - Extensible system for adding more locations
 
+### 🎯 LED Tracking System (Everyday Calendar-inspired)
+- **Interactive LED Grid**: Click any day to mark it with a colorful LED indicator
+- **6 LED Colors**: Green, Blue, Amber, Red, Purple, Pink - each for different categories
+- **Quick Categories**: Pre-configured tracking for Exercise, Meditation, Creative Work, Learning, Social, and Important Events
+- **Custom Notes**: Add notes to marked days for context
+- **Streak Tracking**: Automatic calculation of current and longest streaks
+- **Statistics Dashboard**: Total days marked, color breakdowns, and progress percentages
+- **Data Persistence**: All LED data saved locally in browser
+- **Import/Export**: Backup and restore your tracking data
+- **Beautiful Visualizations**: Glowing LED effects with smooth animations
+
+### 📸 Export & Graphics
+- **Image Export**: Capture your calendar as high-quality PNG or JPG
+  - Adjustable quality settings (10%-100%)
+  - Instant download
+  - Includes LED tracking data
+- **Video Export**: Record animated 3D calendar videos
+  - Configurable duration (3-30 seconds)
+  - 30fps recording
+  - WebM format with VP9 codec
+  - Progress indicator during recording
+- **Microseason Graphics**: Tasteful, auto-generated visuals for each microseason
+  - 6 pattern styles: Waves, Circles, Leaves, Geometric, Abstract, Seasonal
+  - Based on microseason themes and imagery
+  - Custom color palettes from vibe selection
+  - SVG-based for crisp, scalable graphics
+- **Export Options**: Fine-tune format, quality, and duration
+
 ### Design Excellence
 - **Swiss Modern meets Japanese Minimalism** aesthetic
 - **Generous white space** and precise mathematical grid
