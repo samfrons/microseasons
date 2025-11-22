@@ -20,9 +20,7 @@ export const ExportControls = ({ canvasRef }: ExportControlsProps) => {
   // Export options
   const [imageQuality, setImageQuality] = useState(0.95);
   const [imageFormat, setImageFormat] = useState<'png' | 'jpg'>('png');
-  const [videoD
-
-uration, setVideoDuration] = useState(5);
+  const [videoDuration, setVideoDuration] = useState(5);
 
   const handleImageExport = async () => {
     if (!canvasRef?.current) {
