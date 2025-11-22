@@ -22,6 +22,18 @@ An exceptional, award-worthy showcase website for a customizable microseasons ca
   - Minimal (clean, simplified)
 - **Light/Dark Mode**: Elegant theme switching with smooth transitions
 
+### 🌍 Personalized Microseasons
+- **Location-Based Generation**: Select your location from German regions, major world cities, or enter a zip code
+- **10 Unique Vibes**: Choose from poetic, vibrant, scientific, culinary, urban, wellness, adventurous, nostalgic, whimsical, or minimalist tones
+- **Custom Microseason Calendars**: Generate 72 unique microseasons tailored to your location's climate, culture, and chosen vibe
+- **Regional Climate Data**: Accurate temperature ranges, precipitation patterns, and seasonal characteristics
+- **Cultural Integration**: Local festivals, natural features, flora, fauna, and culinary traditions
+- **Preview System**: See a sample microseason before generating your full custom calendar
+- **Includes**:
+  - German regions (Bavaria, Berlin, Black Forest, Hamburg)
+  - Major world cities (Tokyo, New York, London, Paris, Sydney, Barcelona, Reykjavik, Singapore)
+  - Extensible system for adding more locations
+
 ### Design Excellence
 - **Swiss Modern meets Japanese Minimalism** aesthetic
 - **Generous white space** and precise mathematical grid

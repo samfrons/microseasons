@@ -2,6 +2,7 @@
 
 import { HeroSection } from '@/components/HeroSection/HeroSection';
 import { MicroseasonsSection } from '@/components/MicroseasonsSection/MicroseasonsSection';
+import { PersonalizationSection } from '@/components/PersonalizationSection/PersonalizationSection';
 import { PhysicalCalendarSection } from '@/components/PhysicalCalendarSection/PhysicalCalendarSection';
 import { Footer } from '@/components/Footer/Footer';
 import { useCalendarStore } from '@/store/useCalendarStore';
@@ -29,6 +30,7 @@ export default function Home() {
     >
       <HeroSection />
       <MicroseasonsSection />
+      <PersonalizationSection />
       <PhysicalCalendarSection />
       <Footer />
     </main>

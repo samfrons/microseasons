@@ -1,4 +1,8 @@
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
+import { Region } from '@/data/regionalData';
+import { Vibe } from '@/data/vibes';
+import { Microseason } from '@/data/microseasons';
 
 export type MaterialType = 'wood' | 'paper' | 'metal' | 'ceramic';
 export type ColorPalette = 'natural' | 'sakura' | 'sumi' | 'seasonal';
@@ -20,6 +24,12 @@ export interface CalendarState {
   autoRotate: boolean;
   rotationSpeed: number;
 
+  // Personalization
+  selectedRegion: Region | null;
+  selectedVibe: Vibe | null;
+  customMicroseasons: Microseason[] | null;
+  useCustomMicroseasons: boolean;
+
   // Actions
   setMaterial: (material: MaterialType) => void;
   setColorPalette: (palette: ColorPalette) => void;
@@ -28,6 +38,10 @@ export interface CalendarState {
   setLocation: (location: string, lat: number, lon: number) => void;
   setAutoRotate: (enabled: boolean) => void;
   setRotationSpeed: (speed: number) => void;
+  setSelectedRegion: (region: Region | null) => void;
+  setSelectedVibe: (vibe: Vibe | null) => void;
+  setCustomMicroseasons: (microseasons: Microseason[] | null) => void;
+  setUseCustomMicroseasons: (use: boolean) => void;
 }
 
 export const useCalendarStore = create<CalendarState>((set) => ({
@@ -41,6 +55,10 @@ export const useCalendarStore = create<CalendarState>((set) => ({
   longitude: 139.6503,
   autoRotate: true,
   rotationSpeed: 0.5,
+  selectedRegion: null,
+  selectedVibe: null,
+  customMicroseasons: null,
+  useCustomMicroseasons: false,
 
   // Actions
   setMaterial: (material) => set({ material }),
@@ -51,4 +69,8 @@ export const useCalendarStore = create<CalendarState>((set) => ({
     set({ location, latitude, longitude }),
   setAutoRotate: (autoRotate) => set({ autoRotate }),
   setRotationSpeed: (rotationSpeed) => set({ rotationSpeed }),
+  setSelectedRegion: (selectedRegion) => set({ selectedRegion }),
+  setSelectedVibe: (selectedVibe) => set({ selectedVibe }),
+  setCustomMicroseasons: (customMicroseasons) => set({ customMicroseasons }),
+  setUseCustomMicroseasons: (useCustomMicroseasons) => set({ useCustomMicroseasons }),
 }));
