@@ -5,6 +5,7 @@ import { MicroseasonsSection } from '@/components/MicroseasonsSection/Microseaso
 import { PersonalizationSection } from '@/components/PersonalizationSection/PersonalizationSection';
 import { TrackingSection } from '@/components/TrackingSection/TrackingSection';
 import { PhysicalCalendarSection } from '@/components/PhysicalCalendarSection/PhysicalCalendarSection';
+import { NewsletterSection } from '@/components/NewsletterSection';
 import { Footer } from '@/components/Footer/Footer';
 import { useCalendarStore } from '@/store/useCalendarStore';
 import { useEffect } from 'react';
@@ -34,6 +35,7 @@ export default function Home() {
       <PersonalizationSection />
       <TrackingSection />
       <PhysicalCalendarSection />
+      <NewsletterSection />
       <Footer />
     </main>
   );

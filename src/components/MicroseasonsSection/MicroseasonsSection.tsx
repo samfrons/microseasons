@@ -1,14 +1,18 @@
 'use client';
 
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { useCalendarStore } from '@/store/useCalendarStore';
 import { microseasons } from '@/data/microseasons';
+import { MicroseasonDetailModal } from '@/components/MicroseasonDetailModal';
+import { getMicroseasonDetailByName, type MicroseasonDetail } from '@/data/microseasonDetails';
 import clsx from 'clsx';
 
 export function MicroseasonsSection() {
   const { darkMode } = useCalendarStore();
   const sectionRef = useRef<HTMLDivElement>(null);
+  const [selectedMicroseason, setSelectedMicroseason] = useState<MicroseasonDetail | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -17,6 +21,14 @@ export function MicroseasonsSection() {
 
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
   const y = useTransform(scrollYProgress, [0, 0.2], [100, 0]);
+
+  const handleMicroseasonClick = (microseasonName: string) => {
+    const detail = getMicroseasonDetailByName(microseasonName);
+    if (detail) {
+      setSelectedMicroseason(detail);
+      setIsModalOpen(true);
+    }
+  };
 
   return (
     <section
@@ -102,6 +114,7 @@ export function MicroseasonsSection() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.05 }}
                   whileHover={{ scale: 1.05, y: -5 }}
+                  onClick={() => handleMicroseasonClick(season.nameEn)}
                   className={clsx(
                     'p-6 rounded-xl border backdrop-blur-sm',
                     'transition-all duration-300 cursor-pointer',
@@ -109,6 +122,15 @@ export function MicroseasonsSection() {
                       ? 'bg-sumi-800/50 border-sumi-700 hover:border-sakura-500'
                       : 'bg-white/50 border-washi-200 hover:border-sumi-400'
                   )}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`Learn more about ${season.nameEn}`}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      handleMicroseasonClick(season.nameEn);
+                    }
+                  }}
                 >
                   <div
                     className="w-full h-2 rounded-full mb-4"
@@ -132,12 +154,25 @@ export function MicroseasonsSection() {
                   >
                     {season.nameEn}
                   </p>
+                  <div className={clsx(
+                    'mt-3 text-xs opacity-0 group-hover:opacity-100 transition-opacity',
+                    darkMode ? 'text-emerald-400' : 'text-emerald-600'
+                  )}>
+                    Click to learn more →
+                  </div>
                 </motion.div>
               ))}
             </div>
           </div>
         </motion.div>
       </div>
+
+      {/* Microseason Detail Modal */}
+      <MicroseasonDetailModal
+        microseason={selectedMicroseason}
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </section>
   );
 }
