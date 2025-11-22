@@ -2,6 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Theme System CSS Variables */
+:root {
+  /* Default theme colors (will be overridden by theme system) */
+  --color-bgPrimary: #fafaf9;
+  --color-bgSecondary: #f5f5f4;
+  --color-bgTertiary: #e7e5e4;
+  --color-textPrimary: #1c1917;
+  --color-textSecondary: #57534e;
+  --color-textAccent: #b87b7b;
+  --color-accent: #d4a5a5;
+  --color-accentHover: #c89090;
+  --color-accentActive: #b87b7b;
+  --color-border: #e7e5e4;
+  --color-borderSubtle: #f5f5f4;
+  --color-borderAccent: #d4a5a5;
+  --color-glow: rgba(212, 165, 165, 0.3);
+  --color-shadow: rgba(0, 0, 0, 0.1);
+  --color-overlay: rgba(0, 0, 0, 0.5);
+  --color-calendarPrimary: #d4a5a5;
+  --color-calendarSecondary: #c89090;
+  --color-calendarAccent: #b87b7b;
+}
+
 @layer base {
   * {
     @apply border-border;
