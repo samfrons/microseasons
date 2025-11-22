@@ -75,6 +75,24 @@ npm run build
 npm run start
 ```
 
+### Running Tests
+
+```bash
+# Run unit tests
+npm test
+
+# Run e2e tests
+npm run test:e2e
+
+# Run all tests
+npm run test:all
+
+# Run tests with coverage
+npm run test:coverage
+```
+
+For detailed testing documentation, see [TESTING.md](./TESTING.md).
+
 ## 🏗️ Tech Stack
 
 - **Framework**: Next.js 14 with App Router
