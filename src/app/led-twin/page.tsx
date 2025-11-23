@@ -116,7 +116,7 @@ export default function LEDTwinPage() {
                       Theme Colors
                     </div>
                     <div className="flex gap-2">
-                      {microseason.colors.map((color, idx) => (
+                      {microseason.colors.map((color: string, idx: number) => (
                         <div
                           key={idx}
                           className="w-12 h-12 rounded-lg border-2 border-gray-600"

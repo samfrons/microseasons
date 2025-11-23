@@ -49,9 +49,9 @@ const config: Config = {
         },
       },
       fontFamily: {
-        sans: ['var(--font-geist-sans)', 'system-ui', 'sans-serif'],
-        serif: ['var(--font-eb-garamond)', 'Georgia', 'serif'],
-        mono: ['var(--font-geist-mono)', 'monospace'],
+        sans: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Helvetica Neue', 'sans-serif'],
+        serif: ['Georgia', 'Cambria', 'Times New Roman', 'Times', 'serif'],
+        mono: ['Menlo', 'Monaco', 'Courier New', 'monospace'],
       },
       spacing: {
         '18': '4.5rem',

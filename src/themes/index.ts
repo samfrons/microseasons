@@ -11,15 +11,17 @@ import { japaneseTheme } from './japanese';
 import { artdecoTheme } from './artdeco';
 import { glassmorphicTheme } from './glassmorphic';
 
+export const themes = {
+  brutalist: brutalistTheme,
+  organic: organicTheme,
+  cyberpunk: cyberpunkTheme,
+  japanese: japaneseTheme,
+  artdeco: artdecoTheme,
+  glassmorphic: glassmorphicTheme,
+};
+
 export const themeConfig: ThemeConfig = {
-  themes: {
-    brutalist: brutalistTheme,
-    organic: organicTheme,
-    cyberpunk: cyberpunkTheme,
-    japanese: japaneseTheme,
-    artdeco: artdecoTheme,
-    glassmorphic: glassmorphicTheme,
-  },
+  themes,
   defaultTheme: 'japanese', // Keep Japanese as default to maintain current aesthetic
 };
 
