@@ -57,33 +57,61 @@ export function CustomizationPanel() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, x: 20 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.6, delay: 0.3 }}
-      className={clsx(
-        'rounded-2xl p-8 backdrop-blur-md',
-        'border transition-colors duration-300',
-        darkMode
-          ? 'bg-sumi-900/80 border-sumi-700'
-          : 'bg-white/80 border-washi-200'
-      )}
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+      className="p-8 lg:p-12 border transition-all duration-700"
+      style={{
+        backgroundColor: 'var(--color-bgSecondary)',
+        borderColor: 'var(--color-border)',
+        borderRadius: '16px',
+        boxShadow: '0 4px 24px var(--color-shadow)',
+      }}
     >
-      <h2
-        className={clsx(
-          'text-2xl font-light mb-6 tracking-wide',
-          darkMode ? 'text-washi-50' : 'text-sumi-900'
-        )}
-      >
-        Customize
-      </h2>
+      {/* Section header with handwritten accent */}
+      <div className="mb-10">
+        <div className="flex items-center gap-3 mb-4">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            className="opacity-40"
+            style={{ transform: 'rotate(8deg)' }}
+          >
+            <circle
+              cx="12"
+              cy="12"
+              r="10"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeDasharray="1 3"
+              style={{ color: 'var(--color-accent)' }}
+            />
+          </svg>
+          <h2
+            className="text-3xl lg:text-4xl font-serif tracking-tight"
+            style={{
+              color: 'var(--color-textPrimary)',
+              letterSpacing: '-0.01em',
+            }}
+          >
+            Personalize
+          </h2>
+        </div>
+        <p
+          className="text-sm font-serif italic"
+          style={{ color: 'var(--color-textSecondary)' }}
+        >
+          Craft your perfect microseasons experience
+        </p>
+      </div>
 
       {/* Material Selection */}
-      <section className="mb-8">
+      <section className="mb-10">
         <h3
-          className={clsx(
-            'text-sm uppercase tracking-widest mb-4 font-medium',
-            darkMode ? 'text-washi-300' : 'text-sumi-600'
-          )}
+          className="text-xs font-mono uppercase tracking-[0.2em] mb-5 opacity-60"
+          style={{ color: 'var(--color-textSecondary)' }}
         >
           Material
         </h3>
@@ -92,33 +120,21 @@ export function CustomizationPanel() {
             <button
               key={mat.value}
               onClick={() => setMaterial(mat.value)}
-              className={clsx(
-                'p-4 rounded-xl border-2 transition-all duration-300',
-                'hover:scale-105 active:scale-95',
-                material === mat.value
-                  ? darkMode
-                    ? 'border-sakura-400 bg-sakura-400/10'
-                    : 'border-sumi-700 bg-sumi-50'
-                  : darkMode
-                  ? 'border-sumi-700 hover:border-sumi-600'
-                  : 'border-washi-200 hover:border-washi-300'
-              )}
+              className="p-4 rounded-lg border transition-all duration-300 text-left group hover-lift"
+              style={{
+                backgroundColor: material === mat.value ? 'var(--color-blush)' : 'var(--color-bgPrimary)',
+                borderColor: material === mat.value ? 'var(--color-accent)' : 'var(--color-border)',
+                borderWidth: material === mat.value ? '2px' : '1px',
+              }}
             >
+              <div className="font-medium mb-1 text-sm" style={{ color: 'var(--color-textPrimary)' }}>
+                {mat.label}
+              </div>
               <div
-                className={clsx(
-                  'text-left',
-                  darkMode ? 'text-washi-100' : 'text-sumi-800'
-                )}
+                className="text-xs opacity-70"
+                style={{ color: 'var(--color-textSecondary)' }}
               >
-                <div className="font-medium mb-1">{mat.label}</div>
-                <div
-                  className={clsx(
-                    'text-xs',
-                    darkMode ? 'text-washi-400' : 'text-sumi-500'
-                  )}
-                >
-                  {mat.description}
-                </div>
+                {mat.description}
               </div>
             </button>
           ))}
@@ -126,12 +142,10 @@ export function CustomizationPanel() {
       </section>
 
       {/* Color Palette */}
-      <section className="mb-8">
+      <section className="mb-10">
         <h3
-          className={clsx(
-            'text-sm uppercase tracking-widest mb-4 font-medium',
-            darkMode ? 'text-washi-300' : 'text-sumi-600'
-          )}
+          className="text-xs font-mono uppercase tracking-[0.2em] mb-5 opacity-60"
+          style={{ color: 'var(--color-textSecondary)' }}
         >
           Color Palette
         </h3>
@@ -140,33 +154,25 @@ export function CustomizationPanel() {
             <button
               key={palette.value}
               onClick={() => setColorPalette(palette.value)}
-              className={clsx(
-                'w-full p-3 rounded-xl border-2 transition-all duration-300',
-                'hover:scale-102 active:scale-98',
-                'flex items-center justify-between',
-                colorPalette === palette.value
-                  ? darkMode
-                    ? 'border-sakura-400 bg-sakura-400/10'
-                    : 'border-sumi-700 bg-sumi-50'
-                  : darkMode
-                  ? 'border-sumi-700 hover:border-sumi-600'
-                  : 'border-washi-200 hover:border-washi-300'
-              )}
+              className="w-full p-4 rounded-lg border transition-all duration-300 flex items-center justify-between hover-lift"
+              style={{
+                backgroundColor: colorPalette === palette.value ? 'var(--color-blush)' : 'var(--color-bgPrimary)',
+                borderColor: colorPalette === palette.value ? 'var(--color-accent)' : 'var(--color-border)',
+                borderWidth: colorPalette === palette.value ? '2px' : '1px',
+              }}
             >
-              <span
-                className={clsx(
-                  'font-medium',
-                  darkMode ? 'text-washi-100' : 'text-sumi-800'
-                )}
-              >
+              <span className="font-medium text-sm" style={{ color: 'var(--color-textPrimary)' }}>
                 {palette.label}
               </span>
               <div className="flex gap-2">
                 {palette.colors.map((color, i) => (
                   <div
                     key={i}
-                    className="w-6 h-6 rounded-full border-2 border-white/50"
-                    style={{ backgroundColor: color }}
+                    className="w-6 h-6 rounded-full transition-transform duration-300 hover:scale-110"
+                    style={{
+                      backgroundColor: color,
+                      boxShadow: `0 2px 8px ${color}30`,
+                    }}
                   />
                 ))}
               </div>
@@ -176,12 +182,10 @@ export function CustomizationPanel() {
       </section>
 
       {/* Display Mode */}
-      <section className="mb-8">
+      <section className="mb-10">
         <h3
-          className={clsx(
-            'text-sm uppercase tracking-widest mb-4 font-medium',
-            darkMode ? 'text-washi-300' : 'text-sumi-600'
-          )}
+          className="text-xs font-mono uppercase tracking-[0.2em] mb-5 opacity-60"
+          style={{ color: 'var(--color-textSecondary)' }}
         >
           Display Mode
         </h3>
@@ -190,31 +194,19 @@ export function CustomizationPanel() {
             <button
               key={mode.value}
               onClick={() => setDisplayMode(mode.value)}
-              className={clsx(
-                'w-full p-4 rounded-xl border-2 transition-all duration-300',
-                'hover:scale-102 active:scale-98 text-left',
-                displayMode === mode.value
-                  ? darkMode
-                    ? 'border-sakura-400 bg-sakura-400/10'
-                    : 'border-sumi-700 bg-sumi-50'
-                  : darkMode
-                  ? 'border-sumi-700 hover:border-sumi-600'
-                  : 'border-washi-200 hover:border-washi-300'
-              )}
+              className="w-full p-4 rounded-lg border transition-all duration-300 text-left hover-lift"
+              style={{
+                backgroundColor: displayMode === mode.value ? 'var(--color-blush)' : 'var(--color-bgPrimary)',
+                borderColor: displayMode === mode.value ? 'var(--color-accent)' : 'var(--color-border)',
+                borderWidth: displayMode === mode.value ? '2px' : '1px',
+              }}
             >
-              <div
-                className={clsx(
-                  'font-medium mb-1',
-                  darkMode ? 'text-washi-100' : 'text-sumi-800'
-                )}
-              >
+              <div className="font-medium mb-1 text-sm" style={{ color: 'var(--color-textPrimary)' }}>
                 {mode.label}
               </div>
               <div
-                className={clsx(
-                  'text-sm',
-                  darkMode ? 'text-washi-400' : 'text-sumi-500'
-                )}
+                className="text-xs opacity-70"
+                style={{ color: 'var(--color-textSecondary)' }}
               >
                 {mode.description}
               </div>
@@ -223,19 +215,17 @@ export function CustomizationPanel() {
         </div>
       </section>
 
-      {/* Toggle Controls */}
-      <section className="space-y-4">
+      {/* Toggle Controls - elegant minimal design */}
+      <section className="space-y-3 pt-4 border-t" style={{ borderColor: 'var(--color-borderSubtle)' }}>
         <ToggleControl
           label="Auto Rotate"
           checked={autoRotate}
           onChange={setAutoRotate}
-          darkMode={darkMode}
         />
         <ToggleControl
           label="Dark Mode"
           checked={darkMode}
           onChange={toggleDarkMode}
-          darkMode={darkMode}
         />
       </section>
     </motion.div>
@@ -246,42 +236,31 @@ interface ToggleControlProps {
   label: string;
   checked: boolean;
   onChange: (checked: boolean) => void;
-  darkMode: boolean;
 }
 
-function ToggleControl({ label, checked, onChange, darkMode }: ToggleControlProps) {
+function ToggleControl({ label, checked, onChange }: ToggleControlProps) {
   return (
     <button
       onClick={() => onChange(!checked)}
-      className={clsx(
-        'w-full flex items-center justify-between p-4 rounded-xl',
-        'border-2 transition-all duration-300 hover:scale-102',
-        darkMode
-          ? 'border-sumi-700 hover:border-sumi-600'
-          : 'border-washi-200 hover:border-washi-300'
-      )}
+      className="w-full flex items-center justify-between p-4 rounded-lg border transition-all duration-300"
+      style={{
+        backgroundColor: 'var(--color-bgPrimary)',
+        borderColor: 'var(--color-border)',
+      }}
     >
-      <span
-        className={clsx(
-          'font-medium',
-          darkMode ? 'text-washi-100' : 'text-sumi-800'
-        )}
-      >
+      <span className="font-medium text-sm" style={{ color: 'var(--color-textPrimary)' }}>
         {label}
       </span>
       <div
-        className={clsx(
-          'relative w-14 h-7 rounded-full transition-colors duration-300',
-          checked
-            ? 'bg-sakura-500'
-            : darkMode
-            ? 'bg-sumi-700'
-            : 'bg-washi-300'
-        )}
+        className="relative w-12 h-6 rounded-full transition-all duration-300"
+        style={{
+          backgroundColor: checked ? 'var(--color-accent)' : 'var(--color-border)',
+        }}
       >
         <motion.div
-          className="absolute top-1 left-1 w-5 h-5 bg-white rounded-full shadow-md"
-          animate={{ x: checked ? 26 : 0 }}
+          className="absolute top-1 left-1 w-4 h-4 rounded-full shadow-sm"
+          style={{ backgroundColor: 'var(--color-bgPrimary)' }}
+          animate={{ x: checked ? 24 : 0 }}
           transition={{ type: 'spring', stiffness: 500, damping: 30 }}
         />
       </div>
