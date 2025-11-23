@@ -21,53 +21,66 @@ export function MicroseasonsSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-40 lg:py-48 transition-colors duration-500"
-      style={{ backgroundColor: 'var(--color-bgPrimary)' }}
+      className="relative py-32 lg:py-48 transition-colors duration-700"
+      style={{ backgroundColor: 'var(--color-bgSecondary)' }}
     >
-      <div className="container mx-auto px-8 lg:px-16">
-        <motion.div style={{ opacity, y }} className="max-w-4xl mx-auto">
-          {/* Section header */}
-          <div className="text-center mb-20">
-            <div className="inline-flex items-center gap-2 mb-6">
-              <div
-                className="w-1 h-1 rounded-full animate-pulse"
-                style={{
-                  backgroundColor: 'var(--color-accent)',
-                  boxShadow: `0 0 10px var(--color-accent)`
-                }}
-              />
-              <span
-                className="text-xs font-mono uppercase tracking-wider opacity-60"
-                style={{ color: 'var(--color-textSecondary)' }}
-              >
-                SYSTEM OVERVIEW
-              </span>
-            </div>
-            <motion.h2
+      <div className="container mx-auto px-6 lg:px-20 max-w-[1600px]">
+        <motion.div style={{ opacity, y }} className="max-w-6xl mx-auto">
+          {/* Section header - elegant and spacious */}
+          <div className="text-center mb-24 lg:mb-32">
+            {/* Handwritten label */}
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="text-5xl lg:text-7xl font-bold mb-6"
+              className="inline-flex items-center gap-3 mb-8"
+            >
+              <svg width="30" height="12" viewBox="0 0 30 12" className="opacity-40">
+                <path
+                  d="M2 6 Q10 2, 18 6 T28 6"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  style={{ color: 'var(--color-accent)' }}
+                />
+              </svg>
+              <span
+                className="text-xs font-serif italic tracking-wide"
+                style={{ color: 'var(--color-textSecondary)' }}
+              >
+                The ancient art of time
+              </span>
+            </motion.div>
+
+            <motion.h2
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="text-5xl lg:text-7xl xl:text-8xl font-bold mb-8 leading-tight"
               style={{
                 color: 'var(--color-textPrimary)',
-                letterSpacing: '-0.03em',
-                lineHeight: '1.1'
+                letterSpacing: '-0.04em',
+                lineHeight: '1'
               }}
             >
               72 Microseasons,
               <br />
-              <span style={{ color: 'var(--color-accent)' }}>72 LED States</span>
+              <span className="font-serif italic" style={{ color: 'var(--color-accent)', fontWeight: 400 }}>
+                one luminous year
+              </span>
             </motion.h2>
+
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-base lg:text-lg max-w-2xl mx-auto opacity-70 font-serif italic"
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-lg lg:text-xl max-w-3xl mx-auto font-serif leading-relaxed"
               style={{
                 color: 'var(--color-textSecondary)',
-                lineHeight: '1.7'
+                lineHeight: '1.8'
               }}
             >
               The Japanese calendar divides the year into 72 distinct periods,
@@ -101,55 +114,69 @@ export function MicroseasonsSection() {
             />
           </div>
 
-          {/* Seasonal grid preview */}
+          {/* Seasonal grid preview - elegant gallery */}
           <div className="mt-32">
-            <h3
-              className="text-3xl lg:text-4xl font-extralight mb-16 text-center tracking-tight opacity-90"
-              style={{
-                color: 'var(--color-textPrimary)',
-                letterSpacing: '-0.015em'
-              }}
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="text-center mb-16"
             >
-              A Year of Subtle Changes
-            </h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6">
+              <h3
+                className="text-4xl lg:text-5xl font-serif mb-4 tracking-tight"
+                style={{
+                  color: 'var(--color-textPrimary)',
+                  letterSpacing: '-0.02em'
+                }}
+              >
+                A Year of Subtle Changes
+              </h3>
+              <p
+                className="text-sm font-serif italic opacity-60"
+                style={{ color: 'var(--color-textSecondary)' }}
+              >
+                Featured microseasons
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-5 lg:gap-6">
               {microseasons.slice(0, 8).map((season, index) => (
                 <motion.div
                   key={season.id}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: index * 0.05 }}
-                  whileHover={{ y: -4 }}
-                  className="p-6 cursor-pointer border-2 group relative overflow-hidden"
-                  style={{
-                    backgroundColor: 'var(--color-bgPrimary)',
-                    borderRadius: '2px',
-                    borderColor: 'var(--color-border)',
-                    transition: 'all 0.3s'
-                  }}
+                  transition={{ duration: 0.5, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                  whileHover={{ y: -8 }}
+                  className="group cursor-pointer"
                 >
-                  {/* LED Light Bar */}
                   <div
-                    className="w-full h-2 mb-5 relative overflow-hidden"
+                    className="p-6 lg:p-8 border transition-all duration-500 hover-lift"
                     style={{
-                      background: `linear-gradient(90deg, ${season.colors.join(', ')})`,
-                      borderRadius: '2px',
-                      boxShadow: `0 0 10px ${season.colors[0]}40`
+                      backgroundColor: 'var(--color-bgPrimary)',
+                      borderRadius: '12px',
+                      borderColor: 'var(--color-border)',
+                      boxShadow: '0 2px 12px var(--color-shadow)',
                     }}
                   >
-                    <div
-                      className="absolute inset-0 opacity-50 group-hover:opacity-100 transition-opacity"
-                      style={{
-                        background: `linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent)`,
-                        animation: 'shimmer 2s infinite'
-                      }}
-                    />
-                  </div>
+                    {/* Color palette bar - soft and elegant */}
+                    <div className="flex gap-1.5 mb-6">
+                      {season.colors.map((color, i) => (
+                        <div
+                          key={i}
+                          className="flex-1 h-3 rounded-full transition-all duration-300"
+                          style={{
+                            backgroundColor: color,
+                            boxShadow: `0 2px 8px ${color}20`,
+                            transform: 'scale(1)',
+                          }}
+                        />
+                      ))}
+                    </div>
 
-                  <div className="flex items-start justify-between mb-3">
                     <p
-                      className="text-base font-bold"
+                      className="text-lg font-serif mb-2 leading-tight"
                       style={{
                         color: 'var(--color-textPrimary)',
                         letterSpacing: '-0.01em'
@@ -157,28 +184,13 @@ export function MicroseasonsSection() {
                     >
                       {season.nameJa}
                     </p>
-                    <div
-                      className="w-1.5 h-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
-                      style={{
-                        backgroundColor: season.colors[0],
-                        boxShadow: `0 0 8px ${season.colors[0]}`
-                      }}
-                    />
-                  </div>
 
-                  <p
-                    className="text-xs opacity-60 font-serif italic mb-3"
-                    style={{ color: 'var(--color-textSecondary)' }}
-                  >
-                    {season.nameEn}
-                  </p>
-
-                  {/* Tech detail */}
-                  <div
-                    className="text-[9px] font-mono opacity-30"
-                    style={{ color: 'var(--color-textSecondary)' }}
-                  >
-                    LED_{String(index + 1).padStart(2, '0')}
+                    <p
+                      className="text-xs font-serif italic opacity-60"
+                      style={{ color: 'var(--color-textSecondary)' }}
+                    >
+                      {season.nameEn}
+                    </p>
                   </div>
                 </motion.div>
               ))}
@@ -199,50 +211,44 @@ interface ConceptCardProps {
 function ConceptCard({ title, description, darkMode }: ConceptCardProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
-      className="p-8 border-2 relative overflow-hidden group"
+      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      className="p-8 lg:p-10 border relative group hover-lift"
       style={{
         backgroundColor: 'var(--color-bgPrimary)',
-        borderRadius: '2px',
+        borderRadius: '12px',
         borderColor: 'var(--color-border)',
+        boxShadow: '0 2px 12px var(--color-shadow)',
       }}
     >
-      {/* LED Accent Line */}
+      {/* Subtle organic accent */}
       <div
-        className="absolute top-0 left-0 right-0 h-0.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        className="absolute top-6 right-6 w-8 h-8 rounded-full opacity-10 transition-opacity duration-300 group-hover:opacity-20"
         style={{
-          background: `linear-gradient(90deg, transparent, var(--color-accent), transparent)`,
-          boxShadow: `0 0 10px var(--color-accent)`
+          backgroundColor: 'var(--color-accent)',
         }}
       />
 
       <h3
-        className="text-2xl font-bold mb-4"
+        className="text-2xl lg:text-3xl font-serif mb-4 relative z-10"
         style={{
           color: 'var(--color-textPrimary)',
-          letterSpacing: '-0.02em'
+          letterSpacing: '-0.01em'
         }}
       >
         {title}
       </h3>
       <p
-        className="leading-relaxed opacity-70 text-sm"
+        className="leading-relaxed text-sm lg:text-base opacity-80 relative z-10"
         style={{
           color: 'var(--color-textSecondary)',
-          lineHeight: '1.7'
+          lineHeight: '1.8'
         }}
       >
         {description}
       </p>
-
-      {/* Tech corner detail */}
-      <div
-        className="absolute bottom-4 right-4 w-6 h-6 border-r-2 border-b-2 opacity-20"
-        style={{ borderColor: 'var(--color-accent)' }}
-      />
     </motion.div>
   );
 }

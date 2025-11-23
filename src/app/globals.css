@@ -2,27 +2,34 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Theme System CSS Variables - Warm, sophisticated defaults */
+/* Theme System CSS Variables - Elegant, sophisticated aesthetic */
 :root {
-  /* Default theme colors - warm dark mode for elegance */
-  --color-bgPrimary: #1a1816;
-  --color-bgSecondary: #242220;
-  --color-bgTertiary: #2d2a27;
-  --color-textPrimary: #f8f6f3;
-  --color-textSecondary: #a8a29e;
-  --color-textAccent: #d4b896;
-  --color-accent: #d4b896;
-  --color-accentHover: #e0c8a8;
-  --color-accentActive: #c4a676;
-  --color-border: #3a3735;
-  --color-borderSubtle: #2d2a27;
-  --color-borderAccent: #d4b896;
-  --color-glow: rgba(212, 184, 150, 0.12);
-  --color-shadow: rgba(0, 0, 0, 0.3);
-  --color-overlay: rgba(26, 24, 22, 0.9);
-  --color-calendarPrimary: #1a1816;
-  --color-calendarSecondary: #242220;
-  --color-calendarAccent: #d4b896;
+  /* Elegant light mode with soft, sophisticated tones */
+  --color-bgPrimary: #faf8f5;
+  --color-bgSecondary: #f5f2ed;
+  --color-bgTertiary: #ede9e3;
+  --color-textPrimary: #2a2520;
+  --color-textSecondary: #6b635c;
+  --color-textAccent: #d17b6f;
+  --color-accent: #d17b6f;
+  --color-accentHover: #e09489;
+  --color-accentActive: #bc6a5e;
+  --color-border: #ddd9d3;
+  --color-borderSubtle: #e8e4de;
+  --color-borderAccent: #d17b6f;
+  --color-glow: rgba(209, 123, 111, 0.08);
+  --color-shadow: rgba(42, 37, 32, 0.08);
+  --color-overlay: rgba(250, 248, 245, 0.95);
+  --color-calendarPrimary: #faf8f5;
+  --color-calendarSecondary: #f5f2ed;
+  --color-calendarAccent: #d17b6f;
+
+  /* Additional elegant tones */
+  --color-sage: #a8b5a0;
+  --color-clay: #c9a394;
+  --color-cream: #f9f3eb;
+  --color-charcoal: #3d3935;
+  --color-blush: #f5dcd6;
 }
 
 @layer base {
@@ -61,10 +68,10 @@
     backface-visibility: hidden;
   }
 
-  /* Custom scrollbar */
+  /* Custom scrollbar - elegant styling */
   .custom-scrollbar::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
   }
 
   .custom-scrollbar::-webkit-scrollbar-track {
@@ -72,11 +79,77 @@
   }
 
   .custom-scrollbar::-webkit-scrollbar-thumb {
-    @apply bg-washi-300 dark:bg-sumi-700 rounded-full;
+    background: var(--color-border);
+    border-radius: 10px;
   }
 
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    @apply bg-washi-400 dark:bg-sumi-600;
+    background: var(--color-accent);
+  }
+
+  /* Handwritten/organic accent line */
+  .handwritten-underline {
+    position: relative;
+  }
+
+  .handwritten-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--color-accent);
+    opacity: 0.6;
+    transform: scaleX(0);
+    transform-origin: left;
+    animation: draw-line 0.8s ease-out forwards;
+  }
+
+  @keyframes draw-line {
+    to {
+      transform: scaleX(1);
+    }
+  }
+
+  /* Elegant fade in */
+  .fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Organic circle accent */
+  .organic-circle {
+    position: relative;
+  }
+
+  .organic-circle::before {
+    content: '';
+    position: absolute;
+    inset: -8px;
+    border: 2px solid var(--color-accent);
+    border-radius: 50%;
+    opacity: 0.3;
+    animation: draw-circle 1.2s ease-out forwards;
+  }
+
+  @keyframes draw-circle {
+    from {
+      stroke-dasharray: 0 1000;
+    }
+    to {
+      stroke-dasharray: 1000 1000;
+    }
   }
 
   /* LED Shimmer Animation */
@@ -89,16 +162,26 @@
     }
   }
 
-  /* LED Glow Pulse */
+  /* LED Glow Pulse - softer */
   @keyframes glow-pulse {
     0%, 100% {
-      opacity: 1;
+      opacity: 0.8;
       filter: brightness(1);
     }
     50% {
-      opacity: 0.8;
-      filter: brightness(1.2);
+      opacity: 1;
+      filter: brightness(1.1);
     }
+  }
+
+  /* Elegant hover lift */
+  .hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px var(--color-shadow);
   }
 }
 
@@ -113,18 +196,16 @@ html {
   }
 }
 
-/* Selection colors */
+/* Selection colors - elegant */
 ::selection {
-  @apply bg-sakura-200 text-sumi-900;
-}
-
-.dark ::selection {
-  @apply bg-sakura-600 text-washi-50;
+  background: var(--color-blush);
+  color: var(--color-charcoal);
 }
 
 /* Focus visible */
 :focus-visible {
-  @apply outline-2 outline-offset-2 outline-sakura-500;
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
 }
 
 /* Remove default focus styles for mouse users */
