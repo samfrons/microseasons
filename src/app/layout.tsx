@@ -6,12 +6,16 @@ const inter = Inter({
   subsets: ['latin'],
   variable: '--font-geist-sans',
   display: 'swap',
+  preload: true,
+  adjustFontFallback: true,
 })
 
 const ebGaramond = EB_Garamond({
   subsets: ['latin'],
   variable: '--font-eb-garamond',
   display: 'swap',
+  preload: true,
+  adjustFontFallback: true,
 })
 
 export const metadata: Metadata = {

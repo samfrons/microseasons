@@ -10,7 +10,30 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Premium color palette inspired by Japanese aesthetics
+        // Dynamic theme colors using CSS variables
+        theme: {
+          bg: {
+            primary: 'var(--color-bgPrimary)',
+            secondary: 'var(--color-bgSecondary)',
+            tertiary: 'var(--color-bgTertiary)',
+          },
+          text: {
+            primary: 'var(--color-textPrimary)',
+            secondary: 'var(--color-textSecondary)',
+            accent: 'var(--color-textAccent)',
+          },
+          accent: {
+            DEFAULT: 'var(--color-accent)',
+            hover: 'var(--color-accentHover)',
+            active: 'var(--color-accentActive)',
+          },
+          border: {
+            DEFAULT: 'var(--color-border)',
+            subtle: 'var(--color-borderSubtle)',
+            accent: 'var(--color-borderAccent)',
+          },
+        },
+        // Keep original palette for fallback
         washi: {
           50: '#fafaf9',
           100: '#f5f5f4',

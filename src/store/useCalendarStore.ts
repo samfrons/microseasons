@@ -38,7 +38,7 @@ export const useCalendarStore = create<CalendarState>((set) => ({
   material: 'wood',
   colorPalette: 'natural',
   displayMode: 'balanced',
-  darkMode: false,
+  darkMode: true,  // Default to dark mode for Kitamura-inspired aesthetic
   selectedTheme: 'japanese',
   location: 'Tokyo, Japan',
   latitude: 35.6762,

@@ -22,70 +22,70 @@ export const japaneseTheme: Theme = {
   description: 'Serene and timeless design inspired by wabi-sabi, zen gardens, and traditional Japanese aesthetics',
 
   colors: {
-    // Light mode: Inspired by washi paper, rice straw, natural wood, and soft daylight
+    // Light mode: Inspired by Bennett Tea & WAKA WAKA - soft, elegant, sophisticated
     light: {
-      // Primary backgrounds - warm, natural paper tones
-      bgPrimary: '#fdfcfb',        // Washi paper white with warmth
-      bgSecondary: '#f7f5f2',      // Soft rice paper
-      bgTertiary: '#f0ede8',       // Aged paper with subtle beige
+      // Primary backgrounds - warm, soft neutrals
+      bgPrimary: '#f8f6f3',        // Warm off-white, like premium paper
+      bgSecondary: '#f0ede8',      // Soft beige
+      bgTertiary: '#e8e3db',       // Warmer beige
 
-      // Text colors - sumi ink variations
-      textPrimary: '#2d2a26',      // Rich sumi ink black
-      textSecondary: '#5a564f',    // Faded ink gray
-      textAccent: '#8b4513',       // Burnt sienna - traditional rust/bronze
+      // Text colors - refined contrast
+      textPrimary: '#2d2a26',      // Warm black, not pure black
+      textSecondary: '#8a8580',    // Warm medium gray
+      textAccent: '#a67c52',       // Warm bronze/caramel
 
-      // Accent colors - inspired by sakura and traditional pigments
-      accent: '#d4a5a5',           // Dusty sakura pink
-      accentHover: '#c89090',      // Deeper sakura
-      accentActive: '#b87b7b',     // Rich sakura
+      // Accent colors - sophisticated earth tones
+      accent: '#a67c52',           // Warm caramel/bronze
+      accentHover: '#b8916e',      // Lighter caramel
+      accentActive: '#8b6844',     // Deeper caramel
 
-      // Border colors - subtle and natural
-      border: '#e3dfd8',           // Soft neutral border
-      borderSubtle: '#ebe8e3',     // Barely-there border
-      borderAccent: '#d4a5a5',     // Sakura accent border
+      // Border colors - barely visible, elegant
+      border: '#e8e3db',           // Soft warm border
+      borderSubtle: '#f0ede8',     // Almost invisible
+      borderAccent: '#d4c4b0',     // Warm accent border
 
       // Special effects
-      glow: 'rgba(212, 165, 165, 0.15)',        // Soft sakura glow
-      shadow: 'rgba(45, 42, 38, 0.08)',         // Gentle natural shadow
-      overlay: 'rgba(253, 252, 251, 0.85)',     // Paper overlay
+      glow: 'rgba(166, 124, 82, 0.08)',         // Subtle warm glow
+      shadow: 'rgba(45, 42, 38, 0.04)',         // Ultra-minimal shadow
+      overlay: 'rgba(248, 246, 243, 0.95)',     // Warm overlay
 
-      // Calendar-specific - inspired by traditional calendar materials
-      calendarPrimary: '#fdfcfb',   // Washi paper
-      calendarSecondary: '#e8e3db',  // Aged wood
-      calendarAccent: '#c89090',     // Sakura accent
+      // Calendar-specific
+      calendarPrimary: '#f8f6f3',   // Warm paper
+      calendarSecondary: '#f0ede8',  // Soft beige
+      calendarAccent: '#a67c52',     // Caramel accent
     },
 
-    // Dark mode: Inspired by sumi ink, charcoal, indigo dye (ai), and nighttime zen gardens
+    // Dark mode: Inspired by Genussfabrik - warm darks with sophisticated accents
     dark: {
-      // Primary backgrounds - deep, contemplative tones
-      bgPrimary: '#1a1816',        // Deep charcoal, almost black
-      bgSecondary: '#242220',      // Slightly lighter charcoal
-      bgTertiary: '#2d2a27',       // Warm dark brown-gray
+      // Primary backgrounds - warm deep tones, not pure black
+      bgPrimary: '#1a1816',        // Warm charcoal
+      bgSecondary: '#242220',      // Slightly lighter warm charcoal
+      bgTertiary: '#2d2a27',       // Warm brown-gray
 
-      // Text colors - moonlight and soft illumination
-      textPrimary: '#e8e3db',      // Soft paper white
-      textSecondary: '#b8b3a8',    // Muted beige-gray
-      textAccent: '#d4a5a5',       // Sakura accent for emphasis
+      // Text colors - soft whites, not harsh
+      textPrimary: '#f8f6f3',      // Warm off-white
+      textSecondary: '#a8a29e',    // Warm light gray
+      textAccent: '#d4b896',       // Warm gold
 
-      // Accent colors - inspired by indigo dye and moonlit sakura
-      accent: '#9b7b7b',           // Muted sakura in darkness
-      accentHover: '#b89090',      // Illuminated sakura
-      accentActive: '#d4a5a5',     // Bright sakura
+      // Accent colors - warm sophisticated golds
+      accent: '#d4b896',           // Warm champagne gold
+      accentHover: '#e0c8a8',      // Lighter gold
+      accentActive: '#c4a676',     // Deeper gold
 
-      // Border colors - subtle definition in darkness
-      border: '#3a3735',           // Subtle dark border
-      borderSubtle: '#2d2a27',     // Barely visible
-      borderAccent: '#9b7b7b',     // Sakura accent border
+      // Border colors - warm and subtle
+      border: '#3a3735',           // Warm subtle border
+      borderSubtle: '#2d2a27',     // Barely visible warm
+      borderAccent: '#d4b896',     // Gold accent border
 
       // Special effects
-      glow: 'rgba(155, 123, 123, 0.2)',         // Soft sakura glow in darkness
-      shadow: 'rgba(0, 0, 0, 0.3)',             // Deeper shadows at night
-      overlay: 'rgba(26, 24, 22, 0.85)',        // Dark overlay
+      glow: 'rgba(212, 184, 150, 0.12)',        // Warm gold glow
+      shadow: 'rgba(0, 0, 0, 0.3)',             // Soft deep shadows
+      overlay: 'rgba(26, 24, 22, 0.9)',         // Warm dark overlay
 
-      // Calendar-specific - inspired by lacquerware and night materials
-      calendarPrimary: '#242220',   // Dark lacquer
-      calendarSecondary: '#3a3735',  // Aged dark wood
-      calendarAccent: '#b89090',     // Illuminated sakura
+      // Calendar-specific
+      calendarPrimary: '#1a1816',   // Warm charcoal
+      calendarSecondary: '#242220',  // Lighter charcoal
+      calendarAccent: '#d4b896',     // Champagne gold
     },
   },
 

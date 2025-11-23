@@ -26,10 +26,8 @@ export default function Home() {
   return (
     <ThemeProvider>
       <main
-        className={clsx(
-          'min-h-screen transition-colors duration-500',
-          darkMode ? 'bg-sumi-900' : 'bg-washi-50'
-        )}
+        className="min-h-screen transition-colors duration-500"
+        style={{ backgroundColor: 'var(--color-bgPrimary)' }}
       >
         {/* Theme Switcher - Fixed Position */}
         <div className="fixed top-4 right-4 z-50">

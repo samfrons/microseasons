@@ -9,7 +9,7 @@ export function Scene() {
   const { darkMode } = useCalendarStore();
 
   return (
-    <div className="w-full h-full">
+    <div className="relative w-full h-full">
       <Canvas
         shadows
         dpr={[1, 2]}

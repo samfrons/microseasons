@@ -86,7 +86,6 @@ export function Calendar3D() {
         color={darkMode ? '#1c1917' : '#fafaf9'}
         anchorX="center"
         anchorY="middle"
-        font="/fonts/NotoSerifJP-Regular.otf"
         maxWidth={5}
       >
         {currentMicroseason.nameJa}
@@ -133,7 +132,6 @@ export function Calendar3D() {
               color={isToday ? '#fafaf9' : darkMode ? '#e7e5e4' : '#1c1917'}
               anchorX="center"
               anchorY="middle"
-              font="/fonts/Inter-Bold.ttf"
             >
               {day}
             </Text>

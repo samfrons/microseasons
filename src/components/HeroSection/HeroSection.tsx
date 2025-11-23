@@ -13,149 +13,258 @@ export function HeroSection() {
 
   return (
     <section
-      className={clsx(
-        'min-h-screen relative overflow-hidden transition-colors duration-500',
-        darkMode
-          ? 'bg-gradient-to-b from-sumi-950 via-sumi-900 to-sumi-800'
-          : 'bg-gradient-to-b from-washi-50 via-white to-washi-100'
-      )}
+      className="min-h-screen relative overflow-hidden transition-colors duration-500"
+      style={{ backgroundColor: 'var(--color-bgPrimary)' }}
     >
-      {/* Decorative background elements */}
-      <div className="absolute inset-0 opacity-30">
+      {/* Subtle gradient background - barely visible */}
+      <div className="absolute inset-0 opacity-5">
         <div
-          className={clsx(
-            'absolute top-20 right-20 w-96 h-96 rounded-full blur-3xl',
-            darkMode ? 'bg-sakura-900/30' : 'bg-sakura-200/40'
-          )}
-        />
-        <div
-          className={clsx(
-            'absolute bottom-20 left-20 w-96 h-96 rounded-full blur-3xl',
-            darkMode ? 'bg-sumi-800/30' : 'bg-washi-300/40'
-          )}
+          className="absolute top-0 right-0 w-[800px] h-[800px] rounded-full blur-[120px]"
+          style={{ backgroundColor: 'var(--color-accent)' }}
         />
       </div>
 
-      <div className="container mx-auto px-6 lg:px-12 py-12 relative z-10">
+      <div className="container mx-auto px-8 lg:px-16 py-20 relative z-10">
         {/* Header */}
         <motion.header
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="flex justify-between items-center mb-12"
+          transition={{ duration: 0.6 }}
+          className="flex justify-between items-start mb-16"
         >
           <div>
-            <h1
-              className={clsx(
-                'text-4xl lg:text-5xl font-light tracking-tight mb-2',
-                darkMode ? 'text-washi-50' : 'text-sumi-900'
-              )}
-            >
-              Microseasons
-            </h1>
+            <div className="flex items-baseline gap-4 mb-2">
+              <h1
+                className="text-6xl lg:text-8xl font-bold tracking-tight"
+                style={{
+                  color: 'var(--color-textPrimary)',
+                  letterSpacing: '-0.03em',
+                  lineHeight: '0.9'
+                }}
+              >
+                Microseasons
+              </h1>
+              <div
+                className="w-3 h-3 rounded-full animate-pulse"
+                style={{
+                  backgroundColor: 'var(--color-accent)',
+                  boxShadow: `0 0 20px var(--color-accent), 0 0 40px var(--color-accent)`
+                }}
+              />
+            </div>
             <p
-              className={clsx(
-                'text-sm tracking-widest uppercase',
-                darkMode ? 'text-washi-400' : 'text-sumi-500'
-              )}
+              className="text-sm tracking-wide opacity-60 font-serif italic mb-4"
+              style={{ color: 'var(--color-textSecondary)' }}
             >
-              七十二候 Calendar
+              An LED-powered journey through Japanese microseasons
             </p>
+            <div className="flex gap-3 items-center">
+              <span
+                className="text-xs px-3 py-1.5 border font-mono"
+                style={{
+                  borderColor: 'var(--color-border)',
+                  color: 'var(--color-textSecondary)',
+                  borderRadius: '2px'
+                }}
+              >
+                七十二候
+              </span>
+              <span
+                className="text-xs px-3 py-1.5 font-mono"
+                style={{
+                  backgroundColor: 'var(--color-accent)',
+                  color: '#1a1816',
+                  borderRadius: '2px'
+                }}
+              >
+                LED EDITION
+              </span>
+            </div>
           </div>
         </motion.header>
 
-        {/* Main content grid */}
-        <div className="grid lg:grid-cols-[1fr,400px] gap-8 lg:gap-12 items-start">
+        {/* Main content grid - generous spacing */}
+        <div className="grid lg:grid-cols-[1.2fr,0.8fr] gap-12 lg:gap-20 items-start">
           {/* Left column: 3D Calendar */}
-          <div className="space-y-8">
+          <div className="space-y-12">
             <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.4, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
             >
-              <div
-                className={clsx(
-                  'rounded-2xl overflow-hidden border backdrop-blur-sm',
-                  darkMode
-                    ? 'bg-sumi-900/50 border-sumi-700'
-                    : 'bg-white/50 border-washi-200'
-                )}
-              >
-                <div className="aspect-[4/3] lg:aspect-[16/10]">
-                  <Scene />
+              <div className="relative">
+                {/* LED Power Indicator */}
+                <div className="absolute top-4 right-4 z-10 flex items-center gap-2 px-3 py-2 bg-black/80 backdrop-blur-sm border border-white/10">
+                  <div
+                    className="w-1.5 h-1.5 rounded-full animate-pulse"
+                    style={{
+                      backgroundColor: '#00ff00',
+                      boxShadow: '0 0 10px #00ff00'
+                    }}
+                  />
+                  <span className="text-[9px] font-mono text-white/80">
+                    POWER ON
+                  </span>
+                </div>
+
+                <div
+                  className="overflow-hidden border-2"
+                  style={{
+                    backgroundColor: 'var(--color-bgSecondary)',
+                    borderRadius: '2px',
+                    borderColor: 'var(--color-border)',
+                    boxShadow: '0 4px 20px rgba(0,0,0,0.1)'
+                  }}
+                >
+                  <div className="aspect-[4/3] lg:aspect-[16/10]">
+                    <Scene />
+                  </div>
+                </div>
+
+                {/* Tech Specs Below */}
+                <div className="mt-4 flex gap-4 text-[10px] font-mono opacity-50">
+                  <span style={{ color: 'var(--color-textSecondary)' }}>
+                    RGB LED × 72
+                  </span>
+                  <span style={{ color: 'var(--color-textSecondary)' }}>
+                    3D RENDERED
+                  </span>
+                  <span style={{ color: 'var(--color-textSecondary)' }}>
+                    REAL-TIME SYNC
+                  </span>
                 </div>
               </div>
             </motion.div>
 
-            {/* Current microseason info */}
+            {/* Technical Specifications - LED Focus */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className={clsx(
-                'rounded-2xl p-8 border backdrop-blur-md',
-                darkMode
-                  ? 'bg-sumi-900/80 border-sumi-700'
-                  : 'bg-white/80 border-washi-200'
-              )}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="p-8 border-2"
+              style={{
+                backgroundColor: 'var(--color-bgPrimary)',
+                borderColor: 'var(--color-accent)',
+                borderRadius: '2px',
+                boxShadow: `0 0 40px rgba(212, 184, 150, 0.1)`
+              }}
             >
-              <div className="flex items-start justify-between mb-6">
-                <div>
-                  <p
-                    className={clsx(
-                      'text-xs uppercase tracking-widest mb-3',
-                      darkMode ? 'text-washi-400' : 'text-sumi-500'
-                    )}
-                  >
-                    Current Microseason
-                  </p>
-                  <h2
-                    className={clsx(
-                      'text-3xl lg:text-4xl font-light mb-2 tracking-wide',
-                      darkMode ? 'text-washi-50' : 'text-sumi-900'
-                    )}
-                  >
-                    {currentMicroseason.nameJa}
-                  </h2>
-                  <p
-                    className={clsx(
-                      'text-xl',
-                      darkMode ? 'text-washi-300' : 'text-sumi-600'
-                    )}
-                  >
-                    {currentMicroseason.nameEn}
-                  </p>
-                </div>
+              {/* LED Indicator */}
+              <div className="flex items-center gap-3 mb-6">
                 <div
-                  className={clsx(
-                    'px-4 py-2 rounded-full text-xs font-medium',
-                    darkMode
-                      ? 'bg-sakura-500/20 text-sakura-300'
-                      : 'bg-sakura-100 text-sakura-700'
-                  )}
+                  className="w-2 h-2 rounded-full animate-pulse"
+                  style={{
+                    backgroundColor: 'var(--color-accent)',
+                    boxShadow: `0 0 10px var(--color-accent)`
+                  }}
+                />
+                <span
+                  className="text-xs font-mono uppercase tracking-wider"
+                  style={{ color: 'var(--color-accent)' }}
                 >
-                  {currentMicroseason.solarTerm}
-                </div>
+                  NOW DISPLAYING
+                </span>
               </div>
 
+              <h2
+                className="text-3xl lg:text-4xl font-bold mb-2"
+                style={{
+                  color: 'var(--color-textPrimary)',
+                  letterSpacing: '-0.02em'
+                }}
+              >
+                {currentMicroseason.nameJa}
+              </h2>
               <p
-                className={clsx(
-                  'text-lg leading-relaxed',
-                  darkMode ? 'text-washi-300' : 'text-sumi-600'
-                )}
+                className="text-base font-serif italic mb-6 opacity-70"
+                style={{ color: 'var(--color-textSecondary)' }}
+              >
+                {currentMicroseason.nameEn}
+              </p>
+
+              <p
+                className="text-sm leading-relaxed mb-6 opacity-80"
+                style={{
+                  color: 'var(--color-textSecondary)',
+                  lineHeight: '1.7'
+                }}
               >
                 {currentMicroseason.description}
               </p>
 
-              {/* Color swatches */}
-              <div className="flex gap-3 mt-6">
-                {currentMicroseason.colors.map((color, i) => (
+              {/* LED Color Display */}
+              <div className="space-y-3">
+                <div className="flex items-center gap-2">
+                  <span
+                    className="text-xs font-mono opacity-50"
+                    style={{ color: 'var(--color-textSecondary)' }}
+                  >
+                    LED COLORS:
+                  </span>
+                </div>
+                <div className="flex gap-2">
+                  {currentMicroseason.colors.map((color, i) => (
+                    <div key={i} className="flex flex-col gap-2">
+                      <div
+                        className="w-14 h-14 relative"
+                        style={{
+                          backgroundColor: color,
+                          borderRadius: '2px',
+                          boxShadow: `0 0 20px ${color}40, inset 0 0 20px ${color}20`
+                        }}
+                      >
+                        <div
+                          className="absolute inset-0 animate-pulse"
+                          style={{
+                            background: `radial-gradient(circle, ${color}40 0%, transparent 70%)`,
+                            borderRadius: '2px'
+                          }}
+                        />
+                      </div>
+                      <span
+                        className="text-[9px] font-mono opacity-50"
+                        style={{ color: 'var(--color-textSecondary)' }}
+                      >
+                        {color.toUpperCase()}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Technical Specs */}
+              <div
+                className="mt-6 pt-6 border-t grid grid-cols-2 gap-4"
+                style={{ borderColor: 'var(--color-border)' }}
+              >
+                <div>
                   <div
-                    key={i}
-                    className="w-12 h-12 rounded-lg shadow-md border-2 border-white/30"
-                    style={{ backgroundColor: color }}
-                  />
-                ))}
+                    className="text-[10px] font-mono uppercase tracking-wider opacity-40 mb-1"
+                    style={{ color: 'var(--color-textSecondary)' }}
+                  >
+                    SOLAR TERM
+                  </div>
+                  <div
+                    className="text-sm font-mono"
+                    style={{ color: 'var(--color-textPrimary)' }}
+                  >
+                    {currentMicroseason.solarTerm}
+                  </div>
+                </div>
+                <div>
+                  <div
+                    className="text-[10px] font-mono uppercase tracking-wider opacity-40 mb-1"
+                    style={{ color: 'var(--color-textSecondary)' }}
+                  >
+                    DURATION
+                  </div>
+                  <div
+                    className="text-sm font-mono"
+                    style={{ color: 'var(--color-textPrimary)' }}
+                  >
+                    ~5 DAYS
+                  </div>
+                </div>
               </div>
             </motion.div>
           </div>
