@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import type { ThemeId } from '@/types/theme';
 
 export type MaterialType = 'wood' | 'paper' | 'metal' | 'ceramic';
 export type ColorPalette = 'natural' | 'sakura' | 'sumi' | 'seasonal';
@@ -10,6 +11,7 @@ export interface CalendarState {
   colorPalette: ColorPalette;
   displayMode: DisplayMode;
   darkMode: boolean;
+  selectedTheme: ThemeId;
 
   // Location (for future location-specific features)
   location: string;
@@ -25,6 +27,7 @@ export interface CalendarState {
   setColorPalette: (palette: ColorPalette) => void;
   setDisplayMode: (mode: DisplayMode) => void;
   toggleDarkMode: () => void;
+  setSelectedTheme: (theme: ThemeId) => void;
   setLocation: (location: string, lat: number, lon: number) => void;
   setAutoRotate: (enabled: boolean) => void;
   setRotationSpeed: (speed: number) => void;
@@ -36,6 +39,7 @@ export const useCalendarStore = create<CalendarState>((set) => ({
   colorPalette: 'natural',
   displayMode: 'balanced',
   darkMode: false,
+  selectedTheme: 'japanese',
   location: 'Tokyo, Japan',
   latitude: 35.6762,
   longitude: 139.6503,
@@ -47,6 +51,7 @@ export const useCalendarStore = create<CalendarState>((set) => ({
   setColorPalette: (colorPalette) => set({ colorPalette }),
   setDisplayMode: (displayMode) => set({ displayMode }),
   toggleDarkMode: () => set((state) => ({ darkMode: !state.darkMode })),
+  setSelectedTheme: (selectedTheme) => set({ selectedTheme }),
   setLocation: (location, latitude, longitude) =>
     set({ location, latitude, longitude }),
   setAutoRotate: (autoRotate) => set({ autoRotate }),
