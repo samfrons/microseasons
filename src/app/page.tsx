@@ -3,6 +3,7 @@
 import { HeroSection } from '@/components/HeroSection/HeroSection';
 import { MicroseasonsSection } from '@/components/MicroseasonsSection/MicroseasonsSection';
 import { PhysicalCalendarSection } from '@/components/PhysicalCalendarSection/PhysicalCalendarSection';
+import { ArchitecturalRendersSection } from '@/components/ArchitecturalRenders';
 import { Footer } from '@/components/Footer/Footer';
 import { ThemeSwitcher } from '@/components/ThemeSwitcher/ThemeSwitcher';
 import { ThemeProvider } from '@/components/ThemeProvider/ThemeProvider';
