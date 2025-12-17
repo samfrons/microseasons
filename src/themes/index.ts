@@ -20,7 +20,7 @@ export const themeConfig: ThemeConfig = {
     artdeco: artdecoTheme,
     glassmorphic: glassmorphicTheme,
   },
-  defaultTheme: 'japanese', // Keep Japanese as default to maintain current aesthetic
+  defaultTheme: 'organic', // Organic nature theme as default
 };
 
 export * from './brutalist';

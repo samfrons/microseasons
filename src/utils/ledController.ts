@@ -3,8 +3,8 @@
  * Manages 35 WS2812B RGB LEDs in a 7×5 grid
  */
 
-import { Microseason } from '@/types/microseason'
-import { themes } from '@/themes'
+import { Microseason } from '@/data/microseasons'
+import { themeConfig } from '@/themes'
 
 // LED Grid Configuration
 export const LED_GRID = {
@@ -318,8 +318,8 @@ export function getRainbowColor(
  * Get theme accent color
  */
 export function getThemeAccentColor(themeId: string): string {
-  const theme = themes[themeId as keyof typeof themes]
-  return theme?.colors.accent || '#d4a5a5'
+  const theme = themeConfig.themes[themeId as keyof typeof themeConfig.themes]
+  return theme?.colors.light.accent || '#d4a5a5'
 }
 
 /**
