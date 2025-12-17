@@ -1,19 +1,15 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { Scene } from '../Calendar3D/Scene';
 import { CustomizationPanel } from '../CustomizationPanel/CustomizationPanel';
-import { useCalendarStore } from '@/store/useCalendarStore';
 import { getCurrentMicroseason } from '@/data/microseasons';
-import clsx from 'clsx';
 
 export function HeroSection() {
-  const { darkMode } = useCalendarStore();
   const currentMicroseason = getCurrentMicroseason();
 
   return (
     <section
-      className="min-h-screen relative overflow-hidden transition-colors duration-700"
+      className="min-h-screen relative overflow-hidden"
       style={{ backgroundColor: 'var(--color-bgPrimary)' }}
     >
       {/* Elegant organic shapes background */}
@@ -30,20 +26,10 @@ export function HeroSection() {
 
       <div className="container mx-auto px-6 lg:px-20 py-16 lg:py-24 relative z-10 max-w-[1600px]">
         {/* Header - elegant and airy */}
-        <motion.header
-          initial={{ opacity: 0, y: -30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-20 lg:mb-32"
-        >
+        <header className="mb-20 lg:mb-32">
           <div className="max-w-5xl">
             {/* Small handwritten-style label */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="mb-6 flex items-center gap-3"
-            >
+            <div className="mb-6 flex items-center gap-3">
               <div
                 className="w-2 h-2 rounded-full"
                 style={{ backgroundColor: 'var(--color-accent)' }}
@@ -54,7 +40,7 @@ export function HeroSection() {
               >
                 A contemporary celebration of
               </span>
-            </motion.div>
+            </div>
 
             {/* Main title - sophisticated mix */}
             <div className="relative mb-8">
@@ -68,11 +54,8 @@ export function HeroSection() {
                 Microseasons
               </h1>
               {/* Handwritten-style accent */}
-              <motion.div
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: 1 }}
-                transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                className="absolute -bottom-2 left-0 h-1 rounded-full origin-left"
+              <div
+                className="absolute -bottom-2 left-0 h-1 rounded-full"
                 style={{
                   backgroundColor: 'var(--color-accent)',
                   width: '180px',
@@ -82,12 +65,7 @@ export function HeroSection() {
             </div>
 
             {/* Japanese subtitle with organic circle */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="flex items-center gap-4 mb-8"
-            >
+            <div className="flex items-center gap-4 mb-8">
               <span
                 className="text-2xl lg:text-3xl font-serif"
                 style={{ color: 'var(--color-textSecondary)' }}
@@ -112,13 +90,10 @@ export function HeroSection() {
                   style={{ color: 'var(--color-accent)' }}
                 />
               </svg>
-            </motion.div>
+            </div>
 
             {/* Description - elegant typography */}
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
+            <p
               className="text-lg lg:text-xl max-w-2xl leading-relaxed font-serif"
               style={{
                 color: 'var(--color-textSecondary)',
@@ -127,19 +102,14 @@ export function HeroSection() {
             >
               An LED-illuminated calendar that brings the ancient Japanese system of 72 microseasons into modern spaces.
               Each season glows with its own carefully curated palette.
-            </motion.p>
+            </p>
           </div>
-        </motion.header>
+        </header>
 
         {/* Main content - elegant single column layout */}
         <div className="space-y-20 lg:space-y-32">
           {/* Featured product showcase */}
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="relative"
-          >
+          <div className="relative">
             {/* Gallery-style presentation */}
             <div className="grid lg:grid-cols-[1.2fr,0.8fr] gap-8 lg:gap-16 items-start">
               {/* Calendar display - elegant frame */}
@@ -183,12 +153,7 @@ export function HeroSection() {
                 </div>
 
                 {/* Handwritten-style annotation */}
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: 1.2 }}
-                  className="mt-6 flex items-center gap-3"
-                >
+                <div className="mt-6 flex items-center gap-3">
                   <svg
                     width="60"
                     height="20"
@@ -210,18 +175,13 @@ export function HeroSection() {
                   >
                     Interactive 3D visualization
                   </span>
-                </motion.div>
+                </div>
               </div>
 
               {/* Current microseason info - elegant card */}
               <div className="space-y-6 lg:sticky lg:top-6">
                 {/* Season label with organic accent */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.8 }}
-                  className="flex items-center gap-3 mb-6"
-                >
+                <div className="flex items-center gap-3 mb-6">
                   <div
                     className="w-1 h-1 rounded-full"
                     style={{
@@ -235,13 +195,10 @@ export function HeroSection() {
                   >
                     Current Microseason
                   </span>
-                </motion.div>
+                </div>
 
                 {/* Main info card */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.9 }}
+                <div
                   className="p-8 lg:p-10 border transition-all duration-500"
                   style={{
                     backgroundColor: 'var(--color-bgSecondary)',
@@ -346,20 +303,15 @@ export function HeroSection() {
                       </div>
                     </div>
                   </div>
-                </motion.div>
+                </div>
               </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Customization section - refined */}
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 1.2, ease: [0.16, 1, 0.3, 1] }}
-            className="max-w-5xl mx-auto"
-          >
+          <div className="max-w-5xl mx-auto">
             <CustomizationPanel />
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

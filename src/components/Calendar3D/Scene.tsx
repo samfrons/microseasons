@@ -1,20 +1,36 @@
 'use client';
 
+import { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Environment, PerspectiveCamera } from '@react-three/drei';
 import { Calendar3D } from './Calendar3D';
 import { useCalendarStore } from '@/store/useCalendarStore';
+
+function SceneLoader() {
+  return (
+    <div className="absolute inset-0 flex items-center justify-center" style={{ backgroundColor: 'var(--color-bgSecondary)' }}>
+      <div className="text-center">
+        <div
+          className="w-8 h-8 border-2 border-t-transparent rounded-full animate-spin mx-auto mb-3"
+          style={{ borderColor: 'var(--color-accent)', borderTopColor: 'transparent' }}
+        />
+        <p className="text-sm" style={{ color: 'var(--color-textSecondary)' }}>Loading 3D view...</p>
+      </div>
+    </div>
+  );
+}
 
 export function Scene() {
   const { darkMode } = useCalendarStore();
 
   return (
     <div className="relative w-full h-full">
-      <Canvas
-        shadows
-        dpr={[1, 2]}
-        gl={{ antialias: true, alpha: true }}
-      >
+      <Suspense fallback={<SceneLoader />}>
+        <Canvas
+          shadows
+          dpr={[1, 2]}
+          gl={{ antialias: true, alpha: true }}
+        >
         <PerspectiveCamera makeDefault position={[0, 5, 10]} fov={50} />
 
         {/* Lighting setup for premium look */}
@@ -54,6 +70,7 @@ export function Scene() {
           minPolarAngle={Math.PI / 6}
         />
       </Canvas>
+      </Suspense>
     </div>
   );
 }
