@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>72 Microseasons Calendar - Technical Blueprint</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #001a33;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Courier New', monospace;
+        }
+        
+        #blueprint {
+            background: #003366;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.5);
+        }
+        
+        .bp-line { stroke: #00d4ff; fill: none; stroke-width: 1.5; }
+        .bp-line-thin { stroke: #00d4ff; fill: none; stroke-width: 0.8; }
+        .bp-line-thick { stroke: #00d4ff; fill: none; stroke-width: 2.5; }
+        .bp-text { fill: #00d4ff; font-family: 'Courier New', monospace; font-size: 9px; letter-spacing: 0.5px; }
+        .bp-text-sm { fill: #00d4ff; font-family: 'Courier New', monospace; font-size: 7px; letter-spacing: 0.3px; }
+        .bp-text-xs { fill: #00d4ff; font-family: 'Courier New', monospace; font-size: 6px; letter-spacing: 0.2px; }
+        .bp-title { fill: #00d4ff; font-family: 'Courier New', monospace; font-size: 14px; font-weight: bold; letter-spacing: 1.5px; }
+        
+        .dim-line { stroke: #00d4ff; fill: none; stroke-width: 0.6; }
+        .dim-arrow { fill: #00d4ff; }
+        .grid-bg { stroke: rgba(0, 212, 255, 0.08); fill: none; stroke-width: 0.5; }
+        
+        /* Hydraulic system */
+        .flow-line { stroke: #00ff88; fill: none; stroke-width: 1.8; }
+        .flow-line-thin { stroke: #00ff88; fill: none; stroke-width: 1; }
+        .flow-port { fill: #00ff88; stroke: #00ff88; stroke-width: 1; }
+        .flow-arrow { fill: #00ff88; }
+        
+        /* Electrical system */
+        .elec-line { stroke: #ffaa00; fill: none; stroke-width: 1.5; }
+        .elec-line-thin { stroke: #ffaa00; fill: none; stroke-width: 0.8; }
+        .elec-positive { stroke: #ff4444; fill: none; stroke-width: 1.5; }
+        .elec-negative { stroke: #4444ff; fill: none; stroke-width: 1.5; }
+        .electrode { fill: #cccccc; stroke: #00d4ff; stroke-width: 0.8; }
+        
+        /* Components */
+        .mfc-cell { stroke: #00d4ff; fill: rgba(0, 200, 100, 0.1); stroke-width: 1.2; }
+        .algae-chamber { fill: rgba(0, 255, 136, 0.12); stroke: #00ff88; stroke-width: 0.8; }
+        .membrane { stroke: #00d4ff; fill: none; stroke-width: 1; stroke-dasharray: 2, 2; }
+        
+        .title-block-bg { fill: rgba(0, 50, 100, 0.3); stroke: #00d4ff; stroke-width: 1.5; }
+    </style>
+</head>
+<body>
+    <svg id="blueprint" width="1600" height="1200" viewBox="0 0 1600 1200" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                <path d="M 20 0 L 0 0 0 20" class="grid-bg"/>
+            </pattern>
+            
+            <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                <path d="M0,0 L0,6 L8,3 z" class="dim-arrow"/>
+            </marker>
+            
+            <marker id="flow-arrow" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto">
+                <path d="M0,0 L0,8 L10,4 z" class="flow-arrow"/>
+            </marker>
+            
+            <!-- MFC cell symbol -->
+            <g id="mfc-symbol">
+                <rect x="-15" y="-20" width="30" height="40" class="mfc-cell"/>
+                <line x1="-10" y1="-20" x2="-10" y2="20" class="electrode"/>
+                <line x1="10" y1="-20" x2="10" y2="20" class="electrode"/>
+                <line x1="-2" y1="-20" x2="-2" y2="20" class="membrane"/>
+                <line x1="2" y1="-20" x2="2" y2="20" class="membrane"/>
+                <text x="-8" y="0" class="bp-text-xs" text-anchor="middle">−</text>
+                <text x="8" y="0" class="bp-text-xs" text-anchor="middle">+</text>
+            </g>
+        </defs>
+        
+        <rect width="1600" height="1200" fill="url(#grid)"/>
+        
+        <!-- Title -->
+        <text x="800" y="35" class="bp-title" text-anchor="middle">72 MICROSEASONS BIOREACTOR ARRAY</text>
+        <text x="800" y="50" class="bp-text" text-anchor="middle">INTEGRATED PHOTOBIOREACTOR + MICROBIAL FUEL CELL SYSTEM</text>
+        
+        <!-- SHEET 1: HYDRAULIC FLOW DIAGRAM -->
+        <g id="hydraulic-diagram" transform="translate(50, 80)">
+            <text x="0" y="0" class="bp-text" text-anchor="start">HYDRAULIC FLOW DIAGRAM</text>
+            <rect x="0" y="5" width="700" height="350" class="bp-line-thin" fill="none"/>
+            
+            <!-- Reservoir -->
+            <rect x="20" y="30" width="100" height="120" class="bp-line-thick"/>
+            <text x="70" y="20" class="bp-text-sm" text-anchor="middle">NUTRIENT RESERVOIR</text>
+            <text x="70" y="85" class="bp-text-xs" text-anchor="middle">BG-11 MEDIUM</text>
+            <text x="70" y="95" class="bp-text-xs" text-anchor="middle">20L CAPACITY</text>
+            <text x="70" y="105" class="bp-text-xs" text-anchor="middle">pH 7.0-7.5</text>
+            <rect x="25" y="35" width="90" height="60" class="algae-chamber"/>
+            
+            <!-- Pump -->
+            <circle cx="200" cy="90" r="30" class="bp-line-thick"/>
+            <path d="M 185,75 L 200,90 L 185,105" class="bp-line" stroke-width="2"/>
+            <text x="200" y="60" class="bp-text-sm" text-anchor="middle">PERISTALTIC PUMP</text>
+            <text x="200" y="135" class="bp-text-xs" text-anchor="middle">50 mL/min</text>
+            <text x="200" y="145" class="bp-text-xs" text-anchor="middle">12V DC</text>
+            
+            <!-- Distribution manifold -->
+            <rect x="280" y="70" width="60" height="40" class="bp-line-thick"/>
+            <text x="310" y="60" class="bp-text-sm" text-anchor="middle">DISTRIBUTION</text>
+            <text x="310" y="125" class="bp-text-xs" text-anchor="middle">1:72 MANIFOLD</text>
+            
+            <!-- Panel array representation (schematic) -->
+            <rect x="380" y="40" width="280" height="140" class="bp-line"/>
+            <text x="520" y="30" class="bp-text-sm" text-anchor="middle">72-PANEL BIOREACTOR ARRAY</text>
+            
+            <!-- Individual panels shown schematically -->
+            <g transform="translate(395, 55)">
+                <rect x="0" y="0" width="35" height="35" class="mfc-cell"/>
+                <rect x="2" y="2" width="31" height="31" class="algae-chamber"/>
+                <text x="17.5" y="20" class="bp-text-xs" text-anchor="middle">P1</text>
+                <circle cx="5" cy="5" r="2" class="flow-port"/>
+                <circle cx="30" cy="30" r="2" class="flow-port"/>
+            </g>
+            <g transform="translate(435, 55)">
+                <rect x="0" y="0" width="35" height="35" class="mfc-cell"/>
+                <rect x="2" y="2" width="31" height="31" class="algae-chamber"/>
+                <text x="17.5" y="20" class="bp-text-xs" text-anchor="middle">P2</text>
+                <circle cx="5" cy="5" r="2" class="flow-port"/>
+                <circle cx="30" cy="30" r="2" class="flow-port"/>
+            </g>
+            <text x="490" y="80" class="bp-text-xs" text-anchor="middle">. . .</text>
+            <g transform="translate(510, 55)">
+                <rect x="0" y="0" width="35" height="35" class="mfc-cell"/>
+                <rect x="2" y="2" width="31" height="31" class="algae-chamber"/>
+                <text x="17.5" y="20" class="bp-text-xs" text-anchor="middle">P8</text>
+                <circle cx="5" cy="5" r="2" class="flow-port"/>
+                <circle cx="30" cy="30" r="2" class="flow-port"/>
+            </g>
+            
+            <!-- Second row -->
+            <g transform="translate(395, 100)">
+                <rect x="0" y="0" width="35" height="35" class="mfc-cell"/>
+                <rect x="2" y="2" width="31" height="31" class="algae-chamber"/>
+                <text x="17.5" y="20" class="bp-text-xs" text-anchor="middle">P9</text>
+            </g>
+            <text x="455" y="120" class="bp-text-xs" text-anchor="middle">. . .</text>
+            <text x="520" y="155" class="bp-text-xs" text-anchor="middle">8×9 ARRAY (72 TOTAL)</text>
+            
+            <!-- Collection manifold -->
+            <rect x="280" y="200" width="60" height="40" class="bp-line-thick"/>
+            <text x="310" y="265" class="bp-text-xs" text-anchor="middle">COLLECTION</text>
+            <text x="310" y="275" class="bp-text-xs" text-anchor="middle">72:1 MANIFOLD</text>
+            
+            <!-- Flow lines -->
+            <path d="M 120,90 L 170,90" class="flow-line" marker-end="url(#flow-arrow)"/>
+            <path d="M 230,90 L 280,90" class="flow-line" marker-end="url(#flow-arrow)"/>
+            <path d="M 340,90 L 380,90" class="flow-line" marker-end="url(#flow-arrow)"/>
+            <text x="355" y="85" class="bp-text-xs">IN</text>
+            
+            <path d="M 380,220 L 340,220" class="flow-line" marker-end="url(#flow-arrow)"/>
+            <text x="355" y="215" class="bp-text-xs">OUT</text>
+            <path d="M 280,220 L 200,220" class="flow-line"/>
+            <path d="M 200,220 L 200,150" class="flow-line" marker-end="url(#flow-arrow)"/>
+            <path d="M 200,150 L 70,150" class="flow-line" marker-end="url(#flow-arrow)"/>
+            
+            <!-- Specifications -->
+            <text x="20" y="185" class="bp-text-xs">FLOW PARAMETERS:</text>
+            <text x="20" y="197" class="bp-text-xs">• Total flow rate: 50 mL/min</text>
+            <text x="20" y="207" class="bp-text-xs">• Flow per panel: 0.69 mL/min</text>
+            <text x="20" y="217" class="bp-text-xs">• Residence time/panel: ~6 min</text>
+            <text x="20" y="227" class="bp-text-xs">• Total loop time: ~7.2 hours</text>
+            <text x="20" y="237" class="bp-text-xs">• Tubing: 6mm ID silicone</text>
+            <text x="20" y="247" class="bp-text-xs">• Operating temp: 20-25°C</text>
+            
+            <text x="20" y="270" class="bp-text-xs">CULTURE MEDIUM (BG-11):</text>
+            <text x="20" y="282" class="bp-text-xs">NaNO₃: 1.5 g/L</text>
+            <text x="90" y="282" class="bp-text-xs">K₂HPO₄: 0.04 g/L</text>
+            <text x="20" y="292" class="bp-text-xs">MgSO₄·7H₂O: 0.075 g/L</text>
+            <text x="90" y="292" class="bp-text-xs">CaCl₂·2H₂O: 0.036 g/L</text>
+            <text x="20" y="302" class="bp-text-xs">+ Trace metals & vitamins</text>
+        </g>
+        
+        <!-- SHEET 2: ELECTRICAL SCHEMATIC -->
+        <g id="electrical-diagram" transform="translate(800, 80)">
+            <text x="0" y="0" class="bp-text" text-anchor="start">ELECTRICAL SCHEMATIC - MFC ARRAY</text>
+            <rect x="0" y="5" width="700" height="500" class="bp-line-thin" fill="none"/>
+            
+            <text x="10" y="25" class="bp-text-sm">PARALLEL CONFIGURATION: 72 MFCs → DC-DC CONVERTER → 12V OUTPUT</text>
+            
+            <!-- Show 3 MFC cells as example of parallel connection -->
+            <g transform="translate(100, 60)">
+                <use href="#mfc-symbol"/>
+                <text x="0" y="35" class="bp-text-xs" text-anchor="middle">MFC 1</text>
+                <text x="0" y="45" class="bp-text-xs" text-anchor="middle">0.5V</text>
+            </g>
+            
+            <g transform="translate(180, 60)">
+                <use href="#mfc-symbol"/>
+                <text x="0" y="35" class="bp-text-xs" text-anchor="middle">MFC 2</text>
+                <text x="0" y="45" class="bp-text-xs" text-anchor="middle">0.5V</text>
+            </g>
+            
+            <g transform="translate(260, 60)">
+                <use href="#mfc-symbol"/>
+                <text x="0" y="35" class="bp-text-xs" text-anchor="middle">MFC 3</text>
+                <text x="0" y="45" class="bp-text-xs" text-anchor="middle">0.5V</text>
+            </g>
+            
+            <text x="320" y="65" class="bp-text-xs">. . .</text>
+            
+            <g transform="translate(380, 60)">
+                <use href="#mfc-symbol"/>
+                <text x="0" y="35" class="bp-text-xs" text-anchor="middle">MFC 72</text>
+                <text x="0" y="45" class="bp-text-xs" text-anchor="middle">0.5V</text>
+            </g>
+            
+            <!-- Common positive bus (anode) -->
+            <line x1="85" y1="40" x2="85" y2="25" class="elec-positive"/>
+            <line x1="85" y1="25" x2="395" y2="25" class="elec-positive"/>
+            <line x1="165" y1="40" x2="165" y2="25" class="elec-positive"/>
+            <line x1="245" y1="40" x2="245" y2="25" class="elec-positive"/>
+            <line x1="395" y1="40" x2="395" y2="25" class="elec-positive"/>
+            
+            <!-- Common negative bus (cathode) -->
+            <line x1="115" y1="80" x2="115" y2="95" class="elec-negative"/>
+            <line x1="115" y1="95" x2="425" y2="95" class="elec-negative"/>
+            <line x1="195" y1="80" x2="195" y2="95" class="elec-negative"/>
+            <line x1="275" y1="80" x2="275" y2="95" class="elec-negative"/>
+            <line x1="425" y1="80" x2="425" y2="95" class="elec-negative"/>
+            
+            <!-- Bus labels -->
+            <text x="450" y="28" class="bp-text-xs">ANODE BUS (+)</text>
+            <text x="450" y="98" class="bp-text-xs">CATHODE BUS (−)</text>
+            
+            <!-- DC-DC converter -->
+            <rect x="500" y="40" width="120" height="80" class="bp-line-thick"/>
+            <text x="560" y="30" class="bp-text-sm" text-anchor="middle">DC-DC BOOST</text>
+            <text x="560" y="38" class="bp-text-sm" text-anchor="middle">CONVERTER</text>
+            <text x="560" y="75" class="bp-text-xs" text-anchor="middle">0.5V → 12V</text>
+            <text x="560" y="85" class="bp-text-xs" text-anchor="middle">η = 85%</text>
+            <text x="560" y="95" class="bp-text-xs" text-anchor="middle">MPPT</text>
+            
+            <!-- Connections to converter -->
+            <line x1="425" y1="25" x2="500" y2="60" class="elec-positive"/>
+            <line x1="425" y1="95" x2="500" y2="100" class="elec-negative"/>
+            
+            <!-- Output -->
+            <line x1="620" y1="60" x2="680" y2="60" class="elec-positive"/>
+            <line x1="620" y1="100" x2="680" y2="100" class="elec-negative"/>
+            <text x="685" y="63" class="bp-text-xs">+12V</text>
+            <text x="685" y="103" class="bp-text-xs">GND</text>
+            
+            <!-- Load (LED array) -->
+            <rect x="640" y="70" width="40" height="20" class="bp-line"/>
+            <text x="660" y="68" class="bp-text-xs" text-anchor="middle">LED ARRAY</text>
+            <text x="660" y="83" class="bp-text-xs" text-anchor="middle">36W MAX</text>
+            
+            <!-- MFC SPECIFICATIONS -->
+            <text x="20" y="160" class="bp-text">SINGLE MFC CELL SPECIFICATIONS:</text>
+            
+            <text x="30" y="180" class="bp-text-xs">ANODE CHAMBER:</text>
+            <text x="35" y="192" class="bp-text-xs">• Material: Graphite felt (20×15cm, 6mm thick)</text>
+            <text x="35" y="202" class="bp-text-xs">• Surface area: ~600 cm²</text>
+            <text x="35" y="212" class="bp-text-xs">• Microbes: Mixed anaerobic consortium</text>
+            <text x="35" y="222" class="bp-text-xs">• Substrate: Algal biomass + acetate</text>
+            <text x="35" y="232" class="bp-text-xs">• Volume: 200 mL</text>
+            
+            <text x="30" y="252" class="bp-text-xs">CATHODE CHAMBER:</text>
+            <text x="35" y="264" class="bp-text-xs">• Material: Pt/C air-breathing electrode</text>
+            <text x="35" y="274" class="bp-text-xs">• Catalyst loading: 0.5 mg Pt/cm²</text>
+            <text x="35" y="284" class="bp-text-xs">• Surface area: 150 cm²</text>
+            <text x="35" y="294" class="bp-text-xs">• O₂ supplied by algae photosynthesis</text>
+            
+            <text x="30" y="314" class="bp-text-xs">MEMBRANE:</text>
+            <text x="35" y="326" class="bp-text-xs">• Type: Nafion® 117</text>
+            <text x="35" y="336" class="bp-text-xs">• Thickness: 183 μm</text>
+            <text x="35" y="346" class="bp-text-xs">• Ion exchange: Proton conducting</text>
+            
+            <text x="350" y="180" class="bp-text-xs">ELECTRICAL PERFORMANCE (PER CELL):</text>
+            <text x="355" y="192" class="bp-text-xs">• Open circuit voltage (OCV): 0.6-0.7 V</text>
+            <text x="355" y="202" class="bp-text-xs">• Operating voltage: 0.4-0.5 V</text>
+            <text x="355" y="212" class="bp-text-xs">• Current density: 0.5-1.0 mA/cm²</text>
+            <text x="355" y="222" class="bp-text-xs">• Power density: 0.2-0.4 mW/cm²</text>
+            <text x="355" y="232" class="bp-text-xs">• Power output: 0.1-0.15 W</text>
+            <text x="355" y="242" class="bp-text-xs">• Internal resistance: 50-100 Ω</text>
+            <text x="355" y="252" class="bp-text-xs">• Coulombic efficiency: 15-25%</text>
+            
+            <text x="350" y="272" class="bp-text-xs">ARRAY PERFORMANCE (72 CELLS PARALLEL):</text>
+            <text x="355" y="284" class="bp-text-xs">• Total current: 18-28 A (@ 0.5V)</text>
+            <text x="355" y="294" class="bp-text-xs">• Total power: 7-11 W (raw)</text>
+            <text x="355" y="304" class="bp-text-xs">• Converted power: 6-9 W (@ 12V, 85% η)</text>
+            <text x="355" y="314" class="bp-text-xs">• LED load coverage: 17-25%</text>
+            <text x="355" y="324" class="bp-text-xs">• Grid supplement: 27-30 W</text>
+            
+            <text x="20" y="370" class="bp-text-xs">OPERATING CONDITIONS:</text>
+            <text x="25" y="382" class="bp-text-xs">• Temperature: 20-25°C (ambient)</text>
+            <text x="25" y="392" class="bp-text-xs">• pH (anode): 6.5-7.5</text>
+            <text x="25" y="402" class="bp-text-xs">• pH (cathode): 7.0-8.0</text>
+            <text x="25" y="412" class="bp-text-xs">• Conductivity: 5-15 mS/cm</text>
+            <text x="25" y="422" class="bp-text-xs">• Biomass refresh: 90-day cycle</text>
+        </g>
+        
+        <!-- PANEL DETAIL -->
+        <g id="panel-detail" transform="translate(50, 600)">
+            <text x="0" y="0" class="bp-text">SINGLE PANEL ASSEMBLY - SECTION VIEW</text>
+            <rect x="0" y="5" width="700" height="280" class="bp-line-thin" fill="none"/>
+            
+            <!-- Cross-section drawing -->
+            <g transform="translate(50, 40)">
+                <!-- Frame -->
+                <rect x="0" y="0" width="20" height="200" class="bp-line-thick" fill="rgba(100,100,100,0.1)"/>
+                <text x="10" y="-5" class="bp-text-xs" text-anchor="middle">FRAME</text>
+                <text x="10" y="210" class="bp-text-xs" text-anchor="middle">6061-T6 AL</text>
+                
+                <!-- Anode chamber -->
+                <rect x="20" y="10" width="80" height="180" class="mfc-cell"/>
+                <text x="60" y="5" class="bp-text-xs" text-anchor="middle">ANODE CHAMBER</text>
+                <rect x="25" y="15" width="70" height="170" fill="rgba(100,100,100,0.2)" stroke="none"/>
+                <text x="60" y="100" class="bp-text-xs" text-anchor="middle">GRAPHITE</text>
+                <text x="60" y="110" class="bp-text-xs" text-anchor="middle">FELT</text>
+                
+                <!-- Membrane -->
+                <line x1="100" y1="10" x2="100" y2="190" class="membrane" stroke-width="2"/>
+                <text x="100" y="5" class="bp-text-xs" text-anchor="middle">PEM</text>
+                
+                <!-- Algae chamber (also cathode chamber) -->
+                <rect x="100" y="10" width="100" height="180" class="algae-chamber"/>
+                <text x="150" y="5" class="bp-text-xs" text-anchor="middle">PHOTOBIOREACTOR</text>
+                <text x="150" y="215" class="bp-text-xs" text-anchor="middle">+ AIR CATHODE</text>
+                
+                <!-- Air cathode on back -->
+                <rect x="200" y="10" width="5" height="180" fill="rgba(200,200,200,0.3)" stroke="#00d4ff" stroke-width="0.8"/>
+                <text x="207" y="100" class="bp-text-xs">Pt/C</text>
+                
+                <!-- Back plate -->
+                <rect x="205" y="0" width="15" height="200" class="bp-line-thick" fill="rgba(100,100,100,0.1)"/>
+                <text x="212" y="-5" class="bp-text-xs" text-anchor="middle">BACK</text>
+                
+                <!-- Dimensions -->
+                <line x1="230" y1="0" x2="230" y2="200" class="dim-line" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+                <text x="238" y="105" class="bp-text-xs">200mm</text>
+                
+                <line x1="0" y1="220" x2="220" y2="220" class="dim-line" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+                <text x="110" y="232" class="bp-text-xs" text-anchor="middle">220mm</text>
+                
+                <!-- Flow ports -->
+                <circle cx="60" cy="5" r="4" class="flow-port"/>
+                <text x="60" y="-8" class="bp-text-xs" text-anchor="middle">INLET</text>
+                <circle cx="150" cy="195" r="4" class="flow-port"/>
+                <text x="150" y="210" class="bp-text-xs" text-anchor="middle">OUTLET</text>
+                
+                <!-- Electrodes -->
+                <circle cx="60" cy="200" r="3" fill="#cccccc" stroke="#00d4ff"/>
+                <line x1="60" y1="200" x2="60" y2="230" class="elec-negative"/>
+                <text x="65" y="235" class="bp-text-xs">ANODE (−)</text>
+                
+                <circle cx="202" cy="200" r="3" fill="#cccccc" stroke="#00d4ff"/>
+                <line x1="202" y1="200" x2="202" y2="230" class="elec-positive"/>
+                <text x="207" y="235" class="bp-text-xs">CATHODE (+)</text>
+            </g>
+            
+            <!-- Specifications -->
+            <text x="350" y="40" class="bp-text-xs">PANEL SPECIFICATIONS:</text>
+            <text x="355" y="55" class="bp-text-xs">Overall dimensions: 220×200×95mm (W×H×D)</text>
+            <text x="355" y="67" class="bp-text-xs">Weight (dry): 1.2 kg</text>
+            <text x="355" y="79" class="bp-text-xs">Weight (wet): 1.6 kg</text>
+            
+            <text x="355" y="97" class="bp-text-xs">Anode chamber: 200 mL</text>
+            <text x="355" y="109" class="bp-text-xs">Cathode/algae chamber: 250 mL</text>
+            <text x="355" y="121" class="bp-text-xs">Total liquid volume: 450 mL/panel</text>
+            
+            <text x="355" y="139" class="bp-text-xs">Membrane area: 300 cm²</text>
+            <text x="355" y="151" class="bp-text-xs">Anode surface: 600 cm²</text>
+            <text x="355" y="163" class="bp-text-xs">Cathode surface: 150 cm²</text>
+            
+            <text x="355" y="181" class="bp-text-xs">Frame: Anodized 6061-T6 aluminum</text>
+            <text x="355" y="193" class="bp-text-xs">Gaskets: EPDM rubber</text>
+            <text x="355" y="205" class="bp-text-xs">Chamber walls: Borosilicate glass 3.3</text>
+            <text x="355" y="217" class="bp-text-xs">Ports: 6mm barbed fittings</text>
+        </g>
+        
+        <!-- Title Block -->
+        <g id="title-block" transform="translate(1150, 1020)">
+            <rect x="0" y="0" width="420" height="150" class="title-block-bg"/>
+            
+            <text x="210" y="25" class="bp-title" text-anchor="middle">72 MICROSEASONS</text>
+            <text x="210" y="42" class="bp-title" text-anchor="middle">BIOREACTOR CALENDAR</text>
+            
+            <line x1="10" y1="52" x2="410" y2="52" class="bp-line-thin"/>
+            
+            <text x="10" y="68" class="bp-text-xs">SYSTEM: PHOTOBIOREACTOR + MFC ARRAY</text>
+            <text x="10" y="80" class="bp-text-xs">ORGANISM: CHLORELLA VULGARIS (UTEX 265)</text>
+            <text x="10" y="92" class="bp-text-xs">CONFIGURATION: 72 PANELS (8×9 GRID)</text>
+            <text x="10" y="104" class="bp-text-xs">POWER OUTPUT: 6-9W @ 12V DC</text>
+            <text x="10" y="116" class="bp-text-xs">DRAWING SCALE: NTS (SCHEMATIC)</text>
+            <text x="10" y="128" class="bp-text-xs">DRAWING NO: MS-SYS-001  REV: A</text>
+            <text x="10" y="140" class="bp-text-xs">DATE: 2025-12-18  |  UNITS: SI (mm, mL, V, W)</text>
+            
+            <text x="290" y="68" class="bp-text-xs">DRAWN BY:</text>
+            <text x="290" y="80" class="bp-text-xs">BIO ENG:</text>
+            <text x="290" y="92" class="bp-text-xs">ELEC ENG:</text>
+            <text x="290" y="104" class="bp-text-xs">CHECKED:</text>
+            <text x="290" y="116" class="bp-text-xs">APPROVED:</text>
+            
+            <line x1="280" y1="58" x2="280" y2="145" class="bp-line-thin"/>
+        </g>
+        
+        <!-- Notes -->
+        <g id="notes" transform="translate(50, 1020)">
+            <text x="0" y="0" class="bp-text">NOTES:</text>
+            <text x="0" y="15" class="bp-text-xs">1. All electrical connections per IEEE Std 315 (graphic symbols)</text>
+            <text x="0" y="27" class="bp-text-xs">2. MFC design based on Logan et al. (2006) dual-chamber architecture</text>
+            <text x="0" y="39" class="bp-text-xs">3. Algae O₂ production supports cathode reaction: O₂ + 4H⁺ + 4e⁻ → 2H₂O</text>
+            <text x="0" y="51" class="bp-text-xs">4. Anode reaction: CH₃COO⁻ + 2H₂O → 2CO₂ + 7H⁺ + 8e⁻</text>
+            <text x="0" y="63" class="bp-text-xs">5. Parallel configuration maintains voltage ~0.5V, sums current</text>
+            <text x="0" y="75" class="bp-text-xs">6. MPPT: Maximum Power Point Tracking for optimal MFC efficiency</text>
+            <text x="0" y="87" class="bp-text-xs">7. System operates continuously; biomass refresh every 90 days</text>
+            <text x="0" y="99" class="bp-text-xs">8. Safety: Low voltage system (<1V DC), non-toxic materials</text>
+            <text x="0" y="111" class="bp-text-xs">9. References: Logan (2008), Rabaey & Verstraete (2005), BG-11 medium spec</text>
+        </g>
+    </svg>
+</body>
+</html>

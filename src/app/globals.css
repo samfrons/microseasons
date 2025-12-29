@@ -30,6 +30,32 @@
   --color-cream: #f9f3eb;
   --color-charcoal: #3d3935;
   --color-blush: #f5dcd6;
+
+  /* Living Algae Bioreactor Colors */
+  --color-algae-lightest: #e8f5e9;
+  --color-algae-light: #c8e6c9;
+  --color-algae-mid: #81c784;
+  --color-algae-dark: #388e3c;
+  --color-algae-deepest: #1b5e20;
+  --color-algae-glow: rgba(165, 214, 167, 0.4);
+  --color-algae-backlight: rgba(200, 230, 201, 0.6);
+
+  /* Premium Materials */
+  --color-brass: #d4a574;
+  --color-brass-light: #e8c9a8;
+  --color-brass-dark: #a67c4a;
+  --color-walnut: #5d4037;
+  --color-maple: #deb887;
+  --color-oak: #8b7355;
+
+  /* LED Indicator Colors */
+  --color-led-cyan: #00bcd4;
+  --color-led-amber: #ffb300;
+  --color-led-magenta: #e91e63;
+  --color-led-green: #4caf50;
+  --color-led-purple: #9c27b0;
+  --color-led-warm: #ff9800;
+  --color-led-glow: rgba(0, 188, 212, 0.5);
 }
 
 @layer base {
@@ -172,6 +198,106 @@
       opacity: 1;
       filter: brightness(1.1);
     }
+  }
+
+  /* Living Algae Bioreactor Animations */
+
+  /* Algae breathing - subtle organic movement */
+  @keyframes algae-breathe {
+    0%, 100% {
+      opacity: 0.85;
+      filter: brightness(1) saturate(1);
+      transform: scale(1);
+    }
+    25% {
+      opacity: 0.9;
+      filter: brightness(1.05) saturate(1.1);
+    }
+    50% {
+      opacity: 1;
+      filter: brightness(1.1) saturate(1.15);
+      transform: scale(1.01);
+    }
+    75% {
+      opacity: 0.92;
+      filter: brightness(1.03) saturate(1.05);
+    }
+  }
+
+  .algae-breathe {
+    animation: algae-breathe 8s ease-in-out infinite;
+  }
+
+  /* LED pulse for indicators */
+  @keyframes led-pulse {
+    0%, 100% {
+      opacity: 0.7;
+      box-shadow: 0 0 4px currentColor;
+    }
+    50% {
+      opacity: 1;
+      box-shadow: 0 0 12px currentColor, 0 0 20px currentColor;
+    }
+  }
+
+  .led-pulse {
+    animation: led-pulse 2s ease-in-out infinite;
+  }
+
+  /* Panel backlight glow */
+  @keyframes panel-glow {
+    0%, 100% {
+      box-shadow:
+        inset 0 0 30px var(--color-algae-glow),
+        0 0 20px var(--color-algae-backlight);
+    }
+    50% {
+      box-shadow:
+        inset 0 0 50px var(--color-algae-glow),
+        0 0 35px var(--color-algae-backlight);
+    }
+  }
+
+  .panel-glow {
+    animation: panel-glow 6s ease-in-out infinite;
+  }
+
+  /* Color shift for algae panels - simulates living growth */
+  @keyframes algae-color-shift {
+    0%, 100% {
+      background-color: var(--color-algae-mid);
+    }
+    33% {
+      background-color: var(--color-algae-dark);
+    }
+    66% {
+      background-color: var(--color-algae-light);
+    }
+  }
+
+  .algae-color-shift {
+    animation: algae-color-shift 12s ease-in-out infinite;
+  }
+
+  /* Brass frame shimmer */
+  @keyframes brass-shimmer {
+    0% {
+      background-position: -200% center;
+    }
+    100% {
+      background-position: 200% center;
+    }
+  }
+
+  .brass-shimmer {
+    background: linear-gradient(
+      90deg,
+      var(--color-brass) 0%,
+      var(--color-brass-light) 50%,
+      var(--color-brass) 100%
+    );
+    background-size: 200% 100%;
+    animation: brass-shimmer 3s ease-in-out infinite;
   }
 
   /* Elegant hover lift */

@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>72 Microseasons Calendar - Bioreactor System Blueprint</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #001a33;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Courier New', monospace;
+        }
+        
+        #blueprint {
+            background: #003366;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.5);
+        }
+        
+        .blueprint-line {
+            stroke: #00d4ff;
+            fill: none;
+            stroke-width: 1.5;
+        }
+        
+        .blueprint-line-thin {
+            stroke: #00d4ff;
+            fill: none;
+            stroke-width: 0.8;
+        }
+        
+        .blueprint-line-thick {
+            stroke: #00d4ff;
+            fill: none;
+            stroke-width: 2.5;
+        }
+        
+        .blueprint-text {
+            fill: #00d4ff;
+            font-family: 'Courier New', monospace;
+            font-size: 10px;
+            letter-spacing: 0.8px;
+        }
+        
+        .blueprint-text-small {
+            fill: #00d4ff;
+            font-family: 'Courier New', monospace;
+            font-size: 7.5px;
+            letter-spacing: 0.4px;
+        }
+        
+        .blueprint-text-tiny {
+            fill: #00d4ff;
+            font-family: 'Courier New', monospace;
+            font-size: 6.5px;
+            letter-spacing: 0.2px;
+        }
+        
+        .blueprint-text-title {
+            fill: #00d4ff;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+        
+        .dimension-line {
+            stroke: #00d4ff;
+            fill: none;
+            stroke-width: 0.8;
+        }
+        
+        .dimension-arrow {
+            fill: #00d4ff;
+        }
+        
+        .grid-background {
+            stroke: rgba(0, 212, 255, 0.1);
+            fill: none;
+            stroke-width: 0.5;
+        }
+        
+        .panel-frame {
+            stroke: #00d4ff;
+            fill: none;
+            stroke-width: 1.2;
+        }
+        
+        .tubing {
+            stroke: #00ffaa;
+            fill: none;
+            stroke-width: 2;
+            opacity: 0.8;
+        }
+        
+        .tubing-thin {
+            stroke: #00ffaa;
+            fill: none;
+            stroke-width: 1.2;
+            opacity: 0.7;
+        }
+        
+        .algae-culture {
+            fill: rgba(0, 255, 170, 0.15);
+            stroke: #00ffaa;
+            stroke-width: 0.8;
+        }
+        
+        .led-indicator {
+            fill: #ffaa00;
+            opacity: 0.7;
+        }
+        
+        .flow-arrow {
+            fill: #00ffaa;
+        }
+        
+        .connector-node {
+            fill: #00d4ff;
+        }
+        
+        .title-block-bg {
+            fill: rgba(0, 50, 100, 0.3);
+            stroke: #00d4ff;
+            stroke-width: 1.5;
+        }
+        
+        .highlight-component {
+            stroke: #ffaa00;
+            fill: none;
+            stroke-width: 2;
+            stroke-dasharray: 4, 4;
+        }
+    </style>
+</head>
+<body>
+    <svg id="blueprint" width="1600" height="1100" viewBox="0 0 1600 1100" xmlns="http://www.w3.org/2000/svg">
+        <!-- Grid Background -->
+        <defs>
+            <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                <path d="M 20 0 L 0 0 0 20" class="grid-background"/>
+            </pattern>
+            
+            <!-- Arrow markers -->
+            <marker id="arrow" markerWidth="10" markerHeight="10" refX="5" refY="3" orient="auto" markerUnits="strokeWidth">
+                <path d="M0,0 L0,6 L9,3 z" class="dimension-arrow"/>
+            </marker>
+            
+            <marker id="flow-arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                <path d="M0,0 L0,6 L8,3 z" class="flow-arrow"/>
+            </marker>
+        </defs>
+        
+        <rect width="1600" height="1100" fill="url(#grid)"/>
+        
+        <!-- Main Title -->
+        <text x="800" y="40" class="blueprint-text-title" text-anchor="middle">72 MICROSEASONS PERPETUAL CALENDAR</text>
+        <text x="800" y="60" class="blueprint-text" text-anchor="middle">INTEGRATED PHOTOBIOREACTOR & MICROBIAL FUEL CELL SYSTEM</text>
+        
+        <!-- Main System View with Interconnected Tubing -->
+        <g id="main-system" transform="translate(50, 100)">
+            <text x="300" y="-10" class="blueprint-text" text-anchor="middle">FRONT VIEW - BIOREACTOR NETWORK (3×5 SECTION SHOWN)</text>
+            
+            <!-- Horizontal support rails -->
+            <rect x="0" y="0" width="600" height="15" class="blueprint-line" fill="rgba(0,212,255,0.1)"/>
+            <rect x="0" y="135" width="600" height="15" class="blueprint-line" fill="rgba(0,212,255,0.1)"/>
+            <rect x="0" y="270" width="600" height="15" class="blueprint-line" fill="rgba(0,212,255,0.1)"/>
+            <rect x="0" y="405" width="600" height="15" class="blueprint-line" fill="rgba(0,212,255,0.1)"/>
+            <rect x="0" y="540" width="600" height="15" class="blueprint-line" fill="rgba(0,212,255,0.1)"/>
+            <rect x="0" y="675" width="600" height="15" class="blueprint-line" fill="rgba(0,212,255,0.1)"/>
+            
+            <!-- Vertical support connectors -->
+            <rect x="-10" y="0" width="20" height="690" class="blueprint-line-thin" fill="rgba(0,212,255,0.05)"/>
+            <rect x="590" y="0" width="20" height="690" class="blueprint-line-thin" fill="rgba(0,212,255,0.05)"/>
+            
+            <!-- Row 1 -->
+            <g id="row-1">
+                <!-- Panel 1 -->
+                <rect x="15" y="20" width="110" height="110" rx="2" class="panel-frame"/>
+                <rect x="20" y="25" width="100" height="100" class="algae-culture"/>
+                <text x="70" y="75" class="blueprint-text-tiny" text-anchor="middle">PANEL 01</text>
+                <!-- Inlet/Outlet ports -->
+                <circle cx="25" cy="30" r="3" class="tubing" fill="#00ffaa"/>
+                <circle cx="115" cy="115" r="3" class="tubing" fill="#00ffaa"/>
+                <!-- Electrodes -->
+                <line x1="110" y1="28" x2="118" y2="28" class="blueprint-line" stroke-width="2"/>
+                <text x="122" y="30" class="blueprint-text-tiny">+</text>
+                <line x1="110" y1="38" x2="118" y2="38" class="blueprint-line" stroke-width="2"/>
+                <text x="122" y="40" class="blueprint-text-tiny">−</text>
+                <!-- LED indicators -->
+                <circle cx="30" cy="120" r="2.5" class="led-indicator"/>
+                <circle cx="45" cy="120" r="2.5" class="led-indicator"/>
+                <circle cx="60" cy="120" r="2.5" class="led-indicator"/>
+                <circle cx="75" cy="120" r="2.5" class="led-indicator"/>
+                <circle cx="90" cy="120" r="2.5" class="led-indicator"/>
+                
+                <!-- Panel 2 -->
+                <rect x="215" y="20" width="110" height="110" rx="2" class="panel-frame"/>
+                <rect x="220" y="25" width="100" height="100" class="algae-culture"/>
+                <text x="270" y="75" class="blueprint-text-tiny" text-anchor="middle">PANEL 02</text>
+                <circle cx="225" cy="30" r="3" class="tubing" fill="#00ffaa"/>
+                <circle cx="315" cy="115" r="3" class="tubing" fill="#00ffaa"/>
+                <line x1="310" y1="28" x2="318" y2="28" class="blueprint-line" stroke-width="2"/>
+                <text x="322" y="30" class="blueprint-text-tiny">+</text>
+                <line x1="310" y1="38" x2="318" y2="38" class="blueprint-line" stroke-width="2"/>
+                <text x="322" y="40" class="blueprint-text-tiny">−</text>
+                <circle cx="230" cy="120" r="2.5" class="led-indicator"/>
+                <circle cx="245" cy="120" r="2.5" class="led-indicator"/>
+                <circle cx="260" cy="120" r="2.5" class="led-indicator"/>
+                <circle cx="275" cy="120" r="2.5" class="led-indicator"/>
+                <circle cx="290" cy="120" r="2.5" class="led-indicator"/>
+                
+                <!-- Panel 3 -->
+                <rect x="415" y="20" width="110" height="110" rx="2" class="panel-frame"/>
+                <rect x="420" y="25" width="100" height="100" class="algae-culture"/>
+                <text x="470" y="75" class="blueprint-text-tiny" text-anchor="middle">PANEL 03</text>
+                <circle cx="425" cy="30" r="3" class="tubing" fill="#00ffaa"/>
+                <circle cx="515" cy="115" r="3" class="tubing" fill="#00ffaa"/>
+                <line x1="510" y1="28" x2="518" y2="28" class="blueprint-line" stroke-width="2"/>
+                <text x="522" y="30" class="blueprint-text-tiny">+</text>
+                <line x1="510" y1="38" x2="518" y2="38" class="blueprint-line" stroke-width="2"/>
+                <text x="522" y="40" class="blueprint-text-tiny">−</text>
+                <circle cx="430" cy="120" r="2.5" class="led-indicator"/>
+                <circle cx="445" cy="120" r="2.5" class="led-indicator"/>
+                <circle cx="460" cy="120" r="2.5" class="led-indicator"/>
+                <circle cx="475" cy="120" r="2.5" class="led-indicator"/>
+                <circle cx="490" cy="120" r="2.5" class="led-indicator"/>
+                
+                <!-- Horizontal tubing connections Row 1 -->
+                <path d="M 118,115 L 215,115" class="tubing"/>
+                <path d="M 318,115 L 415,115" class="tubing"/>
+                
+                <!-- Electrical bus connections (parallel) -->
+                <line x1="118" y1="28" x2="210" y2="28" class="blueprint-line-thin" stroke="#ffaa00" stroke-dasharray="2,2"/>
+                <line x1="318" y1="28" x2="410" y2="28" class="blueprint-line-thin" stroke="#ffaa00" stroke-dasharray="2,2"/>
+                <line x1="118" y1="38" x2="210" y2="38" class="blueprint-line-thin" stroke="#ffaa00" stroke-dasharray="2,2"/>
+                <line x1="318" y1="38" x2="410" y2="38" class="blueprint-line-thin" stroke="#ffaa00" stroke-dasharray="2,2"/>
+                
+                <!-- Connector nodes -->
+                <circle cx="170" cy="115" r="4" class="connector-node"/>
+                <circle cx="370" cy="115" r="4" class="connector-node"/>
+            </g>
+            
+            <!-- Row 2 -->
+            <g id="row-2">
+                <!-- Panel 4 -->
+                <rect x="15" y="155" width="110" height="110" rx="2" class="panel-frame"/>
+                <rect x="20" y="160" width="100" height="100" class="algae-culture"/>
+                <text x="70" y="210" class="blueprint-text-tiny" text-anchor="middle">PANEL 04</text>
+                <circle cx="25" cy="165" r="3" class="tubing" fill="#00ffaa"/>
+                <circle cx="115" cy="250" r="3" class="tubing" fill="#00ffaa"/>
+                <line x1="110" y1="163" x2="118" y2="163" class="blueprint-line" stroke-width="2"/>
+                <text x="122" y="165" class="blueprint-text-tiny">+</text>
+                <line x1="110" y1="173" x2="118" y2="173" class="blueprint-line" stroke-width="2"/>
+                <text x="122" y="175" class="blueprint-text-tiny">−</text>
+                <circle cx="30" cy="255" r="2.5" class="led-indicator"/>
+                <circle cx="45" cy="255" r="2.5" class="led-indicator"/>
+                <circle cx="60" cy="255" r="2.5" class="led-indicator"/>
+                <circle cx="75" cy="255" r="2.5" class="led-indicator"/>
+                <circle cx="90" cy="255" r="2.5" class="led-indicator"/>
+                
+                <!-- Panel 5 -->
+                <rect x="215" y="155" width="110" height="110" rx="2" class="panel-frame"/>
+                <rect x="220" y="160" width="100" height="100" class="algae-culture"/>
+                <text x="270" y="210" class="blueprint-text-tiny" text-anchor="middle">PANEL 05</text>
+                <circle cx="225" cy="165" r="3" class="tubing" fill="#00ffaa"/>
+                <circle cx="315" cy="250" r="3" class="tubing" fill="#00ffaa"/>
+                <line x1="310" y1="163" x2="318" y2="163" class="blueprint-line" stroke-width="2"/>
+                <text x="322" y="165" class="blueprint-text-tiny">+</text>
+                <line x1="310" y1="173" x2="318" y2="173" class="blueprint-line" stroke-width="2"/>
+                <text x="322" y="175" class="blueprint-text-tiny">−</text>
+                <circle cx="230" cy="255" r="2.5" class="led-indicator"/>
+                <circle cx="245" cy="255" r="2.5" class="led-indicator"/>
+                <circle cx="260" cy="255" r="2.5" class="led-indicator"/>
+                <circle cx="275" cy="255" r="2.5" class="led-indicator"/>
+                <circle cx="290" cy="255" r="2.5" class="led-indicator"/>
+                
+                <!-- Panel 6 -->
+                <rect x="415" y="155" width="110" height="110" rx="2" class="panel-frame"/>
+                <rect x="420" y="160" width="100" height="100" class="algae-culture"/>
+                <text x="470" y="210" class="blueprint-text-tiny" text-anchor="middle">PANEL 06</text>
+                <circle cx="425" cy="165" r="3" class="tubing" fill="#00ffaa"/>
+                <circle cx="515" cy="250" r="3" class="tubing" fill="#00ffaa"/>
+                <line x1="510" y1="163" x2="518" y2="163" class="blueprint-line" stroke-width="2"/>
+                <text x="522" y="165" class="blueprint-text-tiny">+</text>
+                <line x1="510" y1="173" x2="518" y2="173" class="blueprint-line" stroke-width="2"/>
+                <text x="522" y="175" class="blueprint-text-tiny">−</text>
+                <circle cx="430" cy="255" r="2.5" class="led-indicator"/>
+                <circle cx="445" cy="255" r="2.5" class="led-indicator"/>
+                <circle cx="460" cy="255" r="2.5" class="led-indicator"/>
+                <circle cx="475" cy="255" r="2.5" class="led-indicator"/>
+                <circle cx="490" cy="255" r="2.5" class="led-indicator"/>
+                
+                <!-- Horizontal tubing Row 2 -->
+                <path d="M 118,250 L 215,250" class="tubing"/>
+                <path d="M 318,250 L 415,250" class="tubing"/>
+                
+                <!-- Electrical bus -->
+                <line x1="118" y1="163" x2="210" y2="163" class="blueprint-line-thin" stroke="#ffaa00" stroke-dasharray="2,2"/>
+                <line x1="318" y1="163" x2="410" y2="163" class="blueprint-line-thin" stroke="#ffaa00" stroke-dasharray="2,2"/>
+                <line x1="118" y1="173" x2="210" y2="173" class="blueprint-line-thin" stroke="#ffaa00" stroke-dasharray="2,2"/>
+                <line x1="318" y1="173" x2="410" y2="173" class="blueprint-line-thin" stroke="#ffaa00" stroke-dasharray="2,2"/>
+                
+                <circle cx="170" cy="250" r="4" class="connector-node"/>
+                <circle cx="370" cy="250" r="4" class="connector-node"/>
+            </g>
+            
+            <!-- Row 3 -->
+            <g id="row-3">
+                <!-- Panel 7 -->
+                <rect x="15" y="290" width="110" height="110" rx="2" class="panel-frame"/>
+                <rect x="20" y="295" width="100" height="100" class="algae-culture"/>
+                <text x="70" y="345" class="blueprint-text-tiny" text-anchor="middle">PANEL 07</text>
+                <circle cx="25" cy="300" r="3" class="tubing" fill="#00ffaa"/>
+                <circle cx="115" cy="385" r="3" class="tubing" fill="#00ffaa"/>
+                <line x1="110" y1="298" x2="118" y2="298" class="blueprint-line" stroke-width="2"/>
+                <text x="122" y="300" class="blueprint-text-tiny">+</text>
+                <line x1="110" y1="308" x2="118" y2="308" class="blueprint-line" stroke-width="2"/>
+                <text x="122" y="310" class="blueprint-text-tiny">−</text>
+                <circle cx="30" cy="390" r="2.5" class="led-indicator"/>
+                <circle cx="45" cy="390" r="2.5" class="led-indicator"/>
+                <circle cx="60" cy="390" r="2.5" class="led-indicator"/>
+                <circle cx="75" cy="390" r="2.5" class="led-indicator"/>
+                <circle cx="90" cy="390" r="2.5" class="led-indicator"/>
+                
+                <!-- Panel 8 -->
+                <rect x="215" y="290" width="110" height="110" rx="2" class="panel-frame"/>
+                <rect x="220" y="295" width="100" height="100" class="algae-culture"/>
+                <text x="270" y="345" class="blueprint-text-tiny" text-anchor="middle">PANEL 08</text>
+                <circle cx="225" cy="300" r="3" class="tubing" fill="#00ffaa"/>
+                <circle cx="315" cy="385" r="3" class="tubing" fill="#00ffaa"/>
+                <line x1="310" y1="298" x2="318" y2="298" class="blueprint-line" stroke-width="2"/>
+                <text x="322" y="300" class="blueprint-text-tiny">+</text>
+                <line x1="310" y1="308" x2="318" y2="308" class="blueprint-line" stroke-width="2"/>
+                <text x="322" y="310" class="blueprint-text-tiny">−</text>
+                <circle cx="230" cy="390" r="2.5" class="led-indicator"/>
+                <circle cx="245" cy="390" r="2.5" class="led-indicator"/>
+                <circle cx="260" cy="390" r="2.5" class="led-indicator"/>
+                <circle cx="275" cy="390" r="2.5" class="led-indicator"/>
+                <circle cx="290" cy="390" r="2.5" class="led-indicator"/>
+                
+                <!-- Panel 9 -->
+                <rect x="415" y="290" width="110" height="110" rx="2" class="panel-frame"/>
+                <rect x="420" y="295" width="100" height="100" class="algae-culture"/>
+                <text x="470" y="345" class="blueprint-text-tiny" text-anchor="middle">PANEL 09</text>
+                <circle cx="425" cy="300" r="3" class="tubing" fill="#00ffaa"/>
+                <circle cx="515" cy="385" r="3" class="tubing" fill="#00ffaa"/>
+                <line x1="510" y1="298" x2="518" y2="298" class="blueprint-line" stroke-width="2"/>
+                <text x="522" y="300" class="blueprint-text-tiny">+</text>
+                <line x1="510" y1="308" x2="518" y2="308" class="blueprint-line" stroke-width="2"/>
+                <text x="522" y="310" class="blueprint-text-tiny">−</text>
+                <circle cx="430" cy="390" r="2.5" class="led-indicator"/>
+                <circle cx="445" cy="390" r="2.5" class="led-indicator"/>
+                <circle cx="460" cy="390" r="2.5" class="led-indicator"/>
+                <circle cx="475" cy="390" r="2.5" class="led-indicator"/>
+                <circle cx="490" cy="390" r="2.5" class="led-indicator"/>
+                
+                <!-- Horizontal tubing Row 3 -->
+                <path d="M 118,385 L 215,385" class="tubing"/>
+                <path d="M 318,385 L 415,385" class="tubing"/>
+                
+                <!-- Electrical bus -->
+                <line x1="118" y1="298" x2="210" y2="298" class="blueprint-line-thin" stroke="#ffaa00" stroke-dasharray="2,2"/>
+                <line x1="318" y1="298" x2="410" y2="298" class="blueprint-line-thin" stroke="#ffaa00" stroke-dasharray="2,2"/>
+                <line x1="118" y1="308" x2="210" y2="308" class="blueprint-line-thin" stroke="#ffaa00" stroke-dasharray="2,2"/>
+                <line x1="318" y1="308" x2="410" y2="308" class="blueprint-line-thin" stroke="#ffaa00" stroke-dasharray="2,2"/>
+                
+                <circle cx="170" cy="385" r="4" class="connector-node"/>
+                <circle cx="370" cy="385" r="4" class="connector-node"/>
+            </g>
+            
+            <!-- Row 4 -->
+            <g id="row-4">
+                <rect x="15" y="425" width="110" height="110" rx="2" class="panel-frame"/>
+                <rect x="20" y="430" width="100" height="100" class="algae-culture"/>
+                <text x="70" y="480" class="blueprint-text-tiny" text-anchor="middle">PANEL 10</text>
+                <circle cx="25" cy="435" r="3" class="tubing" fill="#00ffaa"/>
+                <circle cx="115" cy="520" r="3" class="tubing" fill="#00ffaa"/>
+                <line x1="110" y1="433" x2="118" y2="433" class="blueprint-line" stroke-width="2"/>
+                <line x1="110" y1="443" x2="118" y2="443" class="blueprint-line" stroke-width="2"/>
+                
+                <rect x="215" y="425" width="110" height="110" rx="2" class="panel-frame"/>
+                <rect x="220" y="430" width="100" height="100" class="algae-culture"/>
+                <text x="270" y="480" class="blueprint-text-tiny" text-anchor="middle">PANEL 11</text>
+                <circle cx="225" cy="435" r="3" class="tubing" fill="#00ffaa"/>
+                <circle cx="315" cy="520" r="3" class="tubing" fill="#00ffaa"/>
+                <line x1="310" y1="433" x2="318" y2="433" class="blueprint-line" stroke-width="2"/>
+                <line x1="310" y1="443" x2="318" y2="443" class="blueprint-line" stroke-width="2"/>
+                
+                <rect x="415" y="425" width="110" height="110" rx="2" class="panel-frame"/>
+                <rect x="420" y="430" width="100" height="100" class="algae-culture"/>
+                <text x="470" y="480" class="blueprint-text-tiny" text-anchor="middle">PANEL 12</text>
+                <circle cx="425" cy="435" r="3" class="tubing" fill="#00ffaa"/>
+                <circle cx="515" cy="520" r="3" class="tubing" fill="#00ffaa"/>
+                <line x1="510" y1="433" x2="518" y2="433" class="blueprint-line" stroke-width="2"/>
+                <line x1="510" y1="443" x2="518" y2="443" class="blueprint-line" stroke-width="2"/>
+                
+                <path d="M 118,520 L 215,520" class="tubing"/>
+                <path d="M 318,520 L 415,520" class="tubing"/>
+                
+                <line x1="118" y1="433" x2="210" y2="433" class="blueprint-line-thin" stroke="#ffaa00" stroke-dasharray="2,2"/>
+                <line x1="318" y1="433" x2="410" y2="433" class="blueprint-line-thin" stroke="#ffaa00" stroke-dasharray="2,2"/>
+                <line x1="118" y1="443" x2="210" y2="443" class="blueprint-line-thin" stroke="#ffaa00" stroke-dasharray="2,2"/>
+                <line x1="318" y1="443" x2="410" y2="443" class="blueprint-line-thin" stroke="#ffaa00" stroke-dasharray="2,2"/>
+                
+                <circle cx="170" cy="520" r="4" class="connector-node"/>
+                <circle cx="370" cy="520" r="4" class="connector-node"/>
+            </g>
+            
+            <!-- Row 5 -->
+            <g id="row-5">
+                <rect x="15" y="560" width="110" height="110" rx="2" class="panel-frame"/>
+                <rect x="20" y="565" width="100" height="100" class="algae-culture"/>
+                <text x="70" y="615" class="blueprint-text-tiny" text-anchor="middle">PANEL 13</text>
+                <circle cx="25" cy="570" r="3" class="tubing" fill="#00ffaa"/>
+                <circle cx="115" cy="655" r="3" class="tubing" fill="#00ffaa"/>
+                <line x1="110" y1="568" x2="118" y2="568" class="blueprint-line" stroke-width="2"/>
+                <line x1="110" y1="578" x2="118" y2="578" class="blueprint-line" stroke-width="2"/>
+                
+                <rect x="215" y="560" width="110" height="110" rx="2" class="panel-frame"/>
+                <rect x="220" y="565" width="100" height="100" class="algae-culture"/>
+                <text x="270" y="615" class="blueprint-text-tiny" text-anchor="middle">PANEL 14</text>
+                <circle cx="225" cy="570" r="3" class="tubing" fill="#00ffaa"/>
+                <circle cx="315" cy="655" r="3" class="tubing" fill="#00ffaa"/>
+                <line x1="310" y1="568" x2="318" y2="568" class="blueprint-line" stroke-width="2"/>
+                <line x1="310" y1="578" x2="318" y2="578" class="blueprint-line" stroke-width="2"/>
+                
+                <rect x="415" y="560" width="110" height="110" rx="2" class="panel-frame"/>
+                <rect x="420" y="565" width="100" height="100" class="algae-culture"/>
+                <text x="470" y="615" class="blueprint-text-tiny" text-anchor="middle">PANEL 15</text>
+                <circle cx="425" cy="570" r="3" class="tubing" fill="#00ffaa"/>
+                <circle cx="515" cy="655" r="3" class="tubing" fill="#00ffaa"/>
+                <line x1="510" y1="568" x2="518" y2="568" class="blueprint-line" stroke-width="2"/>
+                <line x1="510" y1="578" x2="518" y2="578" class="blueprint-line" stroke-width="2"/>
+                
+                <path d="M 118,655 L 215,655" class="tubing"/>
+                <path d="M 318,655 L 415,655" class="tubing"/>
+                
+                <line x1="118" y1="568" x2="210" y2="568" class="blueprint-line-thin" stroke="#ffaa00" stroke-dasharray="2,2"/>
+                <line x1="318" y1="568" x2="410" y2="568" class="blueprint-line-thin" stroke="#ffaa00" stroke-dasharray="2,2"/>
+                <line x1="118" y1="578" x2="210" y2="578" class="blueprint-line-thin" stroke="#ffaa00" stroke-dasharray="2,2"/>
+                <line x1="318" y1="578" x2="410" y2="578" class="blueprint-line-thin" stroke="#ffaa00" stroke-dasharray="2,2"/>
+                
+                <circle cx="170" cy="655" r="4" class="connector-node"/>
+                <circle cx="370" cy="655" r="4" class="connector-node"/>
+            </g>
+            
+            <!-- Vertical tubing connections -->
+            <path d="M 70,130 L 70,155" class="tubing-thin"/>
+            <path d="M 70,265 L 70,290" class="tubing-thin"/>
+            <path d="M 70,400 L 70,425" class="tubing-thin"/>
+            <path d="M 70,535 L 70,560" class="tubing-thin"/>
+            
+            <path d="M 270,130 L 270,155" class="tubing-thin"/>
+            <path d="M 270,265 L 270,290" class="tubing-thin"/>
+            <path d="M 270,400 L 270,425" class="tubing-thin"/>
+            <path d="M 270,535 L 270,560" class="tubing-thin"/>
+            
+            <path d="M 470,130 L 470,155" class="tubing-thin"/>
+            <path d="M 470,265 L 470,290" class="tubing-thin"/>
+            <path d="M 470,400 L 470,425" class="tubing-thin"/>
+            <path d="M 470,535 L 470,560" class="tubing-thin"/>
+            
+            <!-- Vertical electrical buses (parallel configuration) -->
+            <line x1="530" y1="28" x2="530" y2="578" class="blueprint-line-thin" stroke="#ffaa00" stroke-dasharray="2,2"/>
+            <text x="535" y="300" class="blueprint-text-tiny">+12V BUS</text>
+            <line x1="540" y1="38" x2="540" y2="588" class="blueprint-line-thin" stroke="#ffaa00" stroke-dasharray="2,2"/>
+            <text x="545" y="310" class="blueprint-text-tiny">GND BUS</text>
+            
+            <!-- Main circulation loop callout -->
+            <text x="550" y="350" class="blueprint-text-tiny">HYDRAULIC</text>
+            <text x="550" y="360" class="blueprint-text-tiny">LOOP</text>
+            <line x1="545" y1="350" x2="515" y2="345" class="dimension-line" marker-end="url(#arrow)"/>
+        </g>
+        
+        <!-- Single Panel Detail with Bioreactor Layers -->
+        <g id="panel-detail" transform="translate(720, 100)">
+            <text x="150" y="-10" class="blueprint-text" text-anchor="middle">EXPLODED ASSEMBLY - BIOREACTOR PANEL</text>
+            
+            <!-- Front frame -->
+            <rect x="50" y="20" width="200" height="160" rx="3" class="blueprint-line-thick"/>
+            <text x="150" y="10" class="blueprint-text-tiny" text-anchor="middle">ANODIZED ALUMINUM FRAME</text>
+            <text x="150" y="18" class="blueprint-text-tiny" text-anchor="middle">6mm WALL THICKNESS</text>
+            
+            <!-- Spacer indication -->
+            <line x1="150" y1="190" x2="150" y2="210" class="dimension-line" stroke-dasharray="3,3"/>
+            <text x="165" y="202" class="blueprint-text-tiny">15mm GAP</text>
+            
+            <!-- Algae chamber (main photobioreactor) -->
+            <rect x="65" y="220" width="170" height="130" class="blueprint-line"/>
+            <rect x="70" y="225" width="160" height="120" class="algae-culture"/>
+            <text x="150" y="212" class="blueprint-text-tiny" text-anchor="middle">PHOTOBIOREACTOR CHAMBER</text>
+            <text x="150" y="285" class="blueprint-text-tiny" text-anchor="middle">CHLORELLA VULGARIS SUSPENSION</text>
+            <text x="150" y="295" class="blueprint-text-tiny" text-anchor="middle">250mL @ 2×10⁶ cells/mL</text>
+            
+            <!-- Tubing ports -->
+            <circle cx="75" cy="230" r="5" class="tubing" fill="#00ffaa"/>
+            <text x="50" y="233" class="blueprint-text-tiny">IN: 6mm</text>
+            <circle cx="225" cy="340" r="5" class="tubing" fill="#00ffaa"/>
+            <text x="175" y="358" class="blueprint-text-tiny">OUT: 6mm</text>
+            
+            <!-- Flow arrows -->
+            <path d="M 80,230 L 100,250" class="tubing-thin" marker-end="url(#flow-arrow)"/>
+            <path d="M 200,320 L 220,335" class="tubing-thin" marker-end="url(#flow-arrow)"/>
+            
+            <!-- Spacer -->
+            <line x1="150" y1="360" x2="150" y2="380" class="dimension-line" stroke-dasharray="3,3"/>
+            <text x="165" y="372" class="blueprint-text-tiny">10mm GAP</text>
+            
+            <!-- LED layer -->
+            <rect x="80" y="390" width="140" height="40" class="blueprint-line"/>
+            <text x="150" y="382" class="blueprint-text-tiny" text-anchor="middle">LED ARRAY - 12V DC</text>
+            <text x="150" y="390" class="blueprint-text-tiny" text-anchor="middle">2700K WARM WHITE, 0.5W/PANEL</text>
+            <circle cx="95" cy="410" r="3.5" class="led-indicator"/>
+            <circle cx="115" cy="410" r="3.5" class="led-indicator"/>
+            <circle cx="135" cy="410" r="3.5" class="led-indicator"/>
+            <circle cx="155" cy="410" r="3.5" class="led-indicator"/>
+            <circle cx="175" cy="410" r="3.5" class="led-indicator"/>
+            <circle cx="195" cy="410" r="3.5" class="led-indicator"/>
+            <circle cx="205" cy="410" r="3.5" class="led-indicator"/>
+            
+            <!-- Spacer -->
+            <line x1="150" y1="440" x2="150" y2="460" class="dimension-line" stroke-dasharray="3,3"/>
+            <text x="165" y="452" class="blueprint-text-tiny">8mm GAP</text>
+            
+            <!-- Back plate with MFC -->
+            <rect x="50" y="470" width="200" height="80" class="blueprint-line-thick"/>
+            <text x="150" y="462" class="blueprint-text-tiny" text-anchor="middle">MICROBIAL FUEL CELL ASSEMBLY</text>
+            <rect x="60" y="480" width="180" height="60" class="blueprint-line" stroke-dasharray="4,4"/>
+            <text x="150" y="505" class="blueprint-text-tiny" text-anchor="middle">GRAPHITE FELT ANODE (20×15cm)</text>
+            <text x="150" y="515" class="blueprint-text-tiny" text-anchor="middle">CARBON CLOTH CATHODE</text>
+            <text x="150" y="525" class="blueprint-text-tiny" text-anchor="middle">NAFION® 117 MEMBRANE</text>
+            <text x="150" y="535" class="blueprint-text-tiny" text-anchor="middle">OUTPUT: 0.1-0.15W @ 0.5V</text>
+            
+            <!-- Dimensions -->
+            <line x1="260" y1="20" x2="260" y2="180" class="dimension-line" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+            <text x="268" y="105" class="blueprint-text-tiny">160mm</text>
+            
+            <line x1="50" y1="560" x2="250" y2="560" class="dimension-line" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+            <text x="150" y="575" class="blueprint-text-tiny" text-anchor="middle">200mm</text>
+            
+            <line x1="40" y1="20" x2="40" y2="550" class="dimension-line" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+            <text x="20" y="290" class="blueprint-text-tiny" transform="rotate(-90, 20, 290)">530mm TOTAL</text>
+        </g>
+        
+        <!-- Circulation System Schematic -->
+        <g id="circulation-system" transform="translate(720, 650)">
+            <text x="200" y="-10" class="blueprint-text" text-anchor="middle">HYDRAULIC & ELECTRICAL SCHEMATIC</text>
+            
+            <!-- Main reservoir -->
+            <rect x="20" y="20" width="100" height="80" class="blueprint-line-thick"/>
+            <text x="70" y="50" class="blueprint-text-tiny" text-anchor="middle">NUTRIENT</text>
+            <text x="70" y="60" class="blueprint-text-tiny" text-anchor="middle">RESERVOIR</text>
+            <text x="70" y="70" class="blueprint-text-tiny" text-anchor="middle">20L CAPACITY</text>
+            <rect x="25" y="25" width="90" height="50" class="algae-culture"/>
+            
+            <!-- Pump -->
+            <circle cx="180" cy="60" r="25" class="blueprint-line"/>
+            <text x="180" y="60" class="blueprint-text-tiny" text-anchor="middle">PERISTALTIC</text>
+            <text x="180" y="70" class="blueprint-text-tiny" text-anchor="middle">PUMP</text>
+            <text x="180" y="95" class="blueprint-text-tiny" text-anchor="middle">50mL/min</text>
+            <path d="M 170,50 L 180,60 L 170,70" class="blueprint-line-thin"/>
+            
+            <!-- Panel network -->
+            <rect x="250" y="20" width="40" height="30" class="panel-frame"/>
+            <rect x="295" y="20" width="40" height="30" class="panel-frame"/>
+            <rect x="340" y="20" width="40" height="30" class="panel-frame"/>
+            <text x="315" y="8" class="blueprint-text-tiny" text-anchor="middle">PANEL ARRAY</text>
+            <text x="315" y="16" class="blueprint-text-tiny" text-anchor="middle">72 UNITS</text>
+            
+            <rect x="250" y="55" width="40" height="30" class="panel-frame"/>
+            <rect x="295" y="55" width="40" height="30" class="panel-frame"/>
+            <rect x="340" y="55" width="40" height="30" class="panel-frame"/>
+            
+            <rect x="250" y="90" width="40" height="30" class="panel-frame"/>
+            <rect x="295" y="90" width="40" height="30" class="panel-frame"/>
+            <rect x="340" y="90" width="40" height="30" class="panel-frame"/>
+            
+            <!-- Flow lines -->
+            <path d="M 120,60 L 155,60" class="tubing" marker-end="url(#flow-arrow)"/>
+            <text x="135" y="55" class="blueprint-text-tiny">FEED</text>
+            <path d="M 205,60 L 250,35" class="tubing" marker-end="url(#flow-arrow)"/>
+            <path d="M 380,35 L 420,60" class="tubing" marker-end="url(#flow-arrow)"/>
+            <path d="M 420,60 L 420,140 L 70,140 L 70,100" class="tubing" marker-end="url(#flow-arrow)"/>
+            <text x="425" y="100" class="blueprint-text-tiny">RETURN</text>
+            
+            <!-- MFC connection -->
+            <rect x="250" y="150" width="130" height="70" class="blueprint-line-thick"/>
+            <text x="315" y="167" class="blueprint-text-tiny" text-anchor="middle">MICROBIAL FUEL CELL STACK</text>
+            <text x="315" y="177" class="blueprint-text-tiny" text-anchor="middle">72 CELLS IN PARALLEL</text>
+            <text x="315" y="187" class="blueprint-text-tiny" text-anchor="middle">ANODE: GRAPHITE FELT</text>
+            <text x="315" y="197" class="blueprint-text-tiny" text-anchor="middle">CATHODE: Pt/C AIR-BREATHING</text>
+            <text x="315" y="207" class="blueprint-text-tiny" text-anchor="middle">TOTAL OUTPUT: 7-11W @ 12V</text>
+            
+            <!-- Electrical output -->
+            <line x1="380" y1="175" x2="440" y2="175" class="blueprint-line" stroke-width="2"/>
+            <text x="445" y="172" class="blueprint-text-tiny">+12V</text>
+            <text x="445" y="180" class="blueprint-text-tiny">(7-11W)</text>
+            <line x1="380" y1="190" x2="440" y2="190" class="blueprint-line" stroke-width="2"/>
+            <text x="445" y="194" class="blueprint-text-tiny">GND</text>
+            
+            <!-- Power to LEDs -->
+            <path d="M 430,175 L 430,245 L 295,245 L 295,125" class="blueprint-line-thin" stroke-dasharray="2,2"/>
+            <text x="300" y="250" class="blueprint-text-tiny">LED POWER BUS</text>
+            <text x="300" y="258" class="blueprint-text-tiny">TOTAL LOAD: 36W</text>
+            <text x="300" y="266" class="blueprint-text-tiny">MFC CONTRIB: 20-30%</text>
+        </g>
+        
+        <!-- Cross-section detail -->
+        <g id="cross-section" transform="translate(1100, 100)">
+            <text x="150" y="-10" class="blueprint-text" text-anchor="middle">SECTION A-A</text>
+            <text x="150" y="2" class="blueprint-text-tiny" text-anchor="middle">WALL-MOUNTED PANEL DETAIL</text>
+            
+            <!-- Wall -->
+            <rect x="10" y="30" width="20" height="200" fill="rgba(100,100,100,0.3)" stroke="#00d4ff" stroke-width="1"/>
+            <text x="5" y="130" class="blueprint-text-tiny" transform="rotate(-90, 5, 130)">WALL</text>
+            
+            <!-- Mounting bracket -->
+            <path d="M 30,80 L 50,80 L 50,90 L 40,100 L 40,110 L 50,120 L 50,130 L 30,130" class="blueprint-line-thick"/>
+            
+            <!-- Frame -->
+            <rect x="50" y="70" width="15" height="130" class="blueprint-line-thick" fill="rgba(139,90,43,0.2)"/>
+            <text x="57" y="140" class="blueprint-text-tiny" transform="rotate(-90, 57, 140)">FRAME</text>
+            
+            <!-- Algae chamber -->
+            <rect x="65" y="80" width="40" height="110" class="blueprint-line"/>
+            <rect x="67" y="82" width="36" height="106" class="algae-culture"/>
+            <text x="85" y="137" class="blueprint-text-tiny" transform="rotate(-90, 85, 137)">ALGAE</text>
+            
+            <!-- LED -->
+            <rect x="105" y="90" width="30" height="90" class="blueprint-line" fill="rgba(255,170,0,0.1)"/>
+            <circle cx="115" cy="110" r="3" class="led-indicator"/>
+            <circle cx="115" cy="135" r="3" class="led-indicator"/>
+            <circle cx="115" cy="160" r="3" class="led-indicator"/>
+            
+            <!-- MFC backing -->
+            <rect x="135" y="80" width="10" height="110" class="blueprint-line-thick" fill="rgba(50,50,50,0.3)"/>
+            <text x="140" y="137" class="blueprint-text-tiny" transform="rotate(-90, 140, 137)">MFC</text>
+            
+            <!-- Dimensions -->
+            <line x1="50" y1="210" x2="145" y2="210" class="dimension-line" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+            <text x="97" y="225" class="blueprint-text-tiny" text-anchor="middle">95mm</text>
+            
+            <line x1="155" y1="70" x2="155" y2="200" class="dimension-line" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+            <text x="165" y="140" class="blueprint-text-tiny">130mm</text>
+            
+            <!-- Tubing detail -->
+            <circle cx="70" cy="75" r="4" class="tubing" fill="#00ffaa"/>
+            <text x="80" cy="78" class="blueprint-text-tiny">INLET</text>
+            <circle cx="100" cy="195" r="4" class="tubing" fill="#00ffaa"/>
+            <text x="75" cy="208" class="blueprint-text-tiny">OUTLET</text>
+        </g>
+        
+        <!-- Technical specifications -->
+        <g id="specifications" transform="translate(1100, 400)">
+            <text x="0" y="0" class="blueprint-text">TECHNICAL SPECIFICATIONS</text>
+            
+            <text x="0" y="22" class="blueprint-text-tiny">PHOTOBIOREACTOR PARAMETERS:</text>
+            <text x="5" y="33" class="blueprint-text-tiny">• ORGANISM: CHLORELLA VULGARIS (UTEX 265)</text>
+            <text x="5" y="43" class="blueprint-text-tiny">• CELL DENSITY: 2×10⁶ cells/mL</text>
+            <text x="5" y="53" class="blueprint-text-tiny">• VOLUME/PANEL: 250mL</text>
+            <text x="5" y="63" class="blueprint-text-tiny">• TOTAL CULTURE VOLUME: 18L (72 PANELS)</text>
+            <text x="5" y="73" class="blueprint-text-tiny">• MEDIUM: MODIFIED BG-11</text>
+            <text x="5" y="83" class="blueprint-text-tiny">• FLOW RATE: 50mL/min (PERISTALTIC PUMP)</text>
+            <text x="5" y="93" class="blueprint-text-tiny">• RESIDENCE TIME: ~5min/PANEL</text>
+            <text x="5" y="103" class="blueprint-text-tiny">• pH: 7.0-7.5 | TEMP: 20-25°C</text>
+            
+            <text x="0" y="125" class="blueprint-text-tiny">MICROBIAL FUEL CELL ARRAY:</text>
+            <text x="5" y="136" class="blueprint-text-tiny">• CONFIGURATION: 72 CELLS, PARALLEL</text>
+            <text x="5" y="146" class="blueprint-text-tiny">• ANODE: GRAPHITE FELT (20×15cm, 6mm)</text>
+            <text x="5" y="156" class="blueprint-text-tiny">• CATHODE: Pt/C AIR-BREATHING ELECTRODE</text>
+            <text x="5" y="166" class="blueprint-text-tiny">• MEMBRANE: NAFION® 117 (183μm)</text>
+            <text x="5" y="176" class="blueprint-text-tiny">• OUTPUT/CELL: 0.1-0.15W @ 0.5V</text>
+            <text x="5" y="186" class="blueprint-text-tiny">• TOTAL SYSTEM: 7-11W @ 12V (REGULATED)</text>
+            <text x="5" y="196" class="blueprint-text-tiny">• COULOMBIC EFFICIENCY: 15-25%</text>
+            
+            <text x="0" y="218" class="blueprint-text-tiny">LED ILLUMINATION SYSTEM:</text>
+            <text x="5" y="229" class="blueprint-text-tiny">• TYPE: SMD5050 WARM WHITE (2700K)</text>
+            <text x="5" y="239" class="blueprint-text-tiny">• POWER/PANEL: 0.5W (36W TOTAL)</text>
+            <text x="5" y="249" class="blueprint-text-tiny">• VOLTAGE: 12V DC (REGULATED)</text>
+            <text x="5" y="259" class="blueprint-text-tiny">• CONTROL: PWM DIMMING, HABIT TRACKING</text>
+            <text x="5" y="269" class="blueprint-text-tiny">• MFC CONTRIBUTION: 20-30% OF LOAD</text>
+            <text x="5" y="279" class="blueprint-text-tiny">• GRID SUPPLEMENT: 25-29W</text>
+            
+            <text x="0" y="301" class="blueprint-text-tiny">MATERIALS & CONSTRUCTION:</text>
+            <text x="5" y="312" class="blueprint-text-tiny">• FRAME: 6061-T6 ALUMINUM (ANODIZED)</text>
+            <text x="5" y="322" class="blueprint-text-tiny">• CHAMBER: BOROSILICATE GLASS 3.3</text>
+            <text x="5" y="332" class="blueprint-text-tiny">• TUBING: MEDICAL SILICONE (6mm ID)</text>
+            <text x="5" y="342" class="blueprint-text-tiny">• RAILS: ALUMINUM EXTRUSION 40×40mm</text>
+            <text x="5" y="352" class="blueprint-text-tiny">• GASKETS: EPDM RUBBER</text>
+            <text x="5" y="362" class="blueprint-text-tiny">• FINISH: CLEAR ANODIZED / NATURAL</text>
+        </g>
+        
+        <!-- Notes -->
+        <g id="notes" transform="translate(50, 890)">
+            <text x="0" y="0" class="blueprint-text">DESIGN NOTES:</text>
+            <text x="0" y="16" class="blueprint-text-tiny">1. ALL DIMENSIONS IN MILLIMETERS UNLESS OTHERWISE SPECIFIED</text>
+            <text x="0" y="28" class="blueprint-text-tiny">2. TUBING NETWORK VISIBLE AS INTEGRATED DESIGN ELEMENT</text>
+            <text x="0" y="40" class="blueprint-text-tiny">3. CULTURE REFRESH CYCLE: 90 DAYS (QUARTERLY MAINTENANCE)</text>
+            <text x="0" y="52" class="blueprint-text-tiny">4. MFC PROVIDES 20-30% SUPPLEMENTAL LED POWER</text>
+            <text x="0" y="64" class="blueprint-text-tiny">5. EACH PANEL = ONE MICROSEASON (5-DAY PERIOD)</text>
+            <text x="0" y="76" class="blueprint-text-tiny">6. LED ARRAY ENABLES DAILY HABIT COMPLETION TRACKING</text>
+            <text x="0" y="88" class="blueprint-text-tiny">7. LIVING ALGAE CREATES DYNAMIC SEASONAL COLOR VARIATION</text>
+            <text x="0" y="100" class="blueprint-text-tiny">8. SYSTEM INTEGRATES PHOTOBIOREACTOR + BIOELECTROCHEMICAL POWER GEN.</text>
+            <text x="0" y="112" class="blueprint-text-tiny">9. ALGAE PHOTOSYNTHESIS PROVIDES O₂ FOR MFC CATHODE</text>
+            <text x="0" y="124" class="blueprint-text-tiny">10. TEMPERATURE CONTROL VIA AMBIENT (20-25°C OPTIMAL)</text>
+        </g>
+        
+        <!-- Title block -->
+        <g id="title-block" transform="translate(1200, 930)">
+            <rect x="0" y="0" width="370" height="140" class="title-block-bg"/>
+            
+            <text x="185" y="25" class="blueprint-text-title" text-anchor="middle">72 MICROSEASONS</text>
+            <text x="185" y="45" class="blueprint-text-title" text-anchor="middle">BIOREACTOR CALENDAR</text>
+            
+            <line x1="10" y1="55" x2="360" y2="55" class="blueprint-line-thin"/>
+            
+            <text x="10" y="70" class="blueprint-text-tiny">PROJECT: LOCATION-SPECIFIC PHENOLOGICAL CALENDAR</text>
+            <text x="10" y="81" class="blueprint-text-tiny">SYSTEM TYPE: INTEGRATED PHOTOBIOREACTOR + MFC</text>
+            <text x="10" y="92" class="blueprint-text-tiny">DRAWING SCALE: 1:5</text>
+            <text x="10" y="103" class="blueprint-text-tiny">DRAWING NO: MS-BIO-001  REV: A</text>
+            <text x="10" y="114" class="blueprint-text-tiny">DATE: 2025-12-18</text>
+            <text x="10" y="125" class="blueprint-text-tiny">UNITS: METRIC (mm)</text>
+            
+            <text x="250" y="70" class="blueprint-text-tiny">DESIGNER:</text>
+            <text x="250" y="81" class="blueprint-text-tiny">BIO ENGINEER:</text>
+            <text x="250" y="92" class="blueprint-text-tiny">ELEC ENGINEER:</text>
+            <text x="250" y="103" class="blueprint-text-tiny">APPROVED:</text>
+            
+            <line x1="240" y1="60" x2="240" y2="135" class="blueprint-line-thin"/>
+        </g>
+        
+        <!-- Legend -->
+        <g id="legend" transform="translate(50, 950)">
+            <text x="0" y="0" class="blueprint-text-tiny">LEGEND:</text>
+            
+            <!-- Hydraulic -->
+            <line x1="0" y1="10" x2="30" y2="10" class="tubing"/>
+            <text x="35" y="13" class="blueprint-text-tiny">NUTRIENT CIRCULATION</text>
+            <circle cx="15" cy="25" r="3" class="tubing" fill="#00ffaa"/>
+            <text x="25" y="28" class="blueprint-text-tiny">INLET/OUTLET PORT (6mm)</text>
+            <circle cx="15" cy="40" r="4" class="connector-node"/>
+            <text x="25" y="43" class="blueprint-text-tiny">FLOW JUNCTION NODE</text>
+            
+            <!-- Bioreactor -->
+            <rect x="5" y="50" width="15" height="10" class="algae-culture"/>
+            <text x="25" y="58" class="blueprint-text-tiny">ALGAE PHOTOBIOREACTOR</text>
+            <circle cx="15" cy="72" r="2.5" class="led-indicator"/>
+            <text x="25" y="75" class="blueprint-text-tiny">LED STATUS INDICATOR</text>
+            
+            <!-- Electrical -->
+            <line x1="0" y1="85" x2="20" y2="85" class="blueprint-line" stroke-width="2"/>
+            <text x="25" y="88" class="blueprint-text-tiny">MFC ELECTRODE CONNECTION</text>
+            <line x1="0" y1="95" x2="30" y2="95" class="blueprint-line-thin" stroke="#ffaa00" stroke-dasharray="2,2"/>
+            <text x="35" y="98" class="blueprint-text-tiny">ELECTRICAL BUS (PARALLEL)</text>
+            
+            <text x="0" y="115" class="blueprint-text-tiny">CIRCUIT: 72 MFCs IN PARALLEL → 12V REGULATED</text>
+        </g>
+    </svg>
+</body>
+</html>

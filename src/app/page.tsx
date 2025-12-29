@@ -1,7 +1,10 @@
 'use client';
 
 import { HeroSection } from '@/components/HeroSection/HeroSection';
+import ConvergenceSection from '@/components/ConvergenceSection';
+import LocationSpecificSection from '@/components/LocationSpecificSection';
 import { MicroseasonsSection } from '@/components/MicroseasonsSection/MicroseasonsSection';
+import CommunityObservationsSection from '@/components/CommunityObservationsSection';
 import { PhysicalCalendarSection } from '@/components/PhysicalCalendarSection/PhysicalCalendarSection';
 import { Footer } from '@/components/Footer/Footer';
 import { ThemeProvider } from '@/components/ThemeProvider/ThemeProvider';
@@ -26,9 +29,24 @@ export default function Home() {
         className="min-h-screen transition-colors duration-500"
         style={{ backgroundColor: 'var(--color-bgPrimary)' }}
       >
+        {/* New bioreactor-focused hero */}
         <HeroSection />
+
+        {/* The Convergence - bioelectrochemistry meets daily ritual */}
+        <ConvergenceSection />
+
+        {/* Location-specific microseasons */}
+        <LocationSpecificSection />
+
+        {/* 72 Microseasons showcase */}
         <MicroseasonsSection />
+
+        {/* Community observations platform */}
+        <CommunityObservationsSection />
+
+        {/* Physical product showcase */}
         <PhysicalCalendarSection />
+
         <Footer />
       </main>
     </ThemeProvider>

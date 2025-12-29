@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>72 Microseasons Bioreactor Calendar - Technical Blueprint</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #001a33;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Courier New', monospace;
+        }
+        
+        #blueprint {
+            background: #003366;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.5);
+        }
+        
+        .bp-line { stroke: #00d4ff; fill: none; stroke-width: 1; }
+        .bp-line-thin { stroke: #00d4ff; fill: none; stroke-width: 0.5; }
+        .bp-line-thick { stroke: #00d4ff; fill: none; stroke-width: 1.8; }
+        .bp-text { fill: #00d4ff; font-family: 'Courier New', monospace; font-size: 7px; letter-spacing: 0.3px; }
+        .bp-text-sm { fill: #00d4ff; font-family: 'Courier New', monospace; font-size: 5.5px; letter-spacing: 0.2px; }
+        .bp-text-xs { fill: #00d4ff; font-family: 'Courier New', monospace; font-size: 4.5px; letter-spacing: 0.1px; }
+        .bp-title { fill: #00d4ff; font-family: 'Courier New', monospace; font-size: 11px; font-weight: bold; letter-spacing: 1px; }
+        
+        .dim-arrow { fill: #00d4ff; }
+        .grid-bg { stroke: rgba(0, 212, 255, 0.06); fill: none; stroke-width: 0.5; }
+        
+        /* Hydraulic - green */
+        .flow-line { stroke: #00ff88; fill: none; stroke-width: 1.8; }
+        .flow-thin { stroke: #00ff88; fill: none; stroke-width: 0.8; }
+        .flow-port { fill: #00ff88; }
+        
+        /* Electrical - red/blue */
+        .elec-pos { stroke: #ff5555; fill: none; stroke-width: 1; }
+        .elec-neg { stroke: #5555ff; fill: none; stroke-width: 1; }
+        .elec-bus { stroke: #ffaa00; fill: none; stroke-width: 0.8; stroke-dasharray: 2, 1; }
+        
+        /* Structure */
+        .rail { fill: rgba(139, 90, 43, 0.2); stroke: #00d4ff; stroke-width: 0.8; }
+        .panel { stroke: #00d4ff; fill: none; stroke-width: 0.8; }
+        .algae { fill: rgba(0, 255, 136, 0.12); }
+        .led { fill: #ffaa00; opacity: 0.6; }
+        
+        .title-bg { fill: rgba(0, 50, 100, 0.3); stroke: #00d4ff; stroke-width: 1.2; }
+    </style>
+</head>
+<body>
+    <svg id="blueprint" width="1600" height="2000" viewBox="0 0 1600 2000" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                <path d="M 20 0 L 0 0 0 20" class="grid-bg"/>
+            </pattern>
+            
+            <marker id="arrow" markerWidth="6" markerHeight="6" refX="5" refY="2.5" orient="auto">
+                <path d="M0,0 L0,5 L6,2.5 z" class="dim-arrow"/>
+            </marker>
+            
+            <marker id="flow-arrow" markerWidth="7" markerHeight="7" refX="6" refY="2.5" orient="auto">
+                <path d="M0,0 L0,5 L7,2.5 z" fill="#00ff88"/>
+            </marker>
+        </defs>
+        
+        <rect width="1600" height="2000" fill="url(#grid)"/>
+        
+        <!-- Title -->
+        <text x="800" y="25" class="bp-title" text-anchor="middle">72 MICROSEASONS BIOREACTOR CALENDAR</text>
+        <text x="800" y="38" class="bp-text-sm" text-anchor="middle">6 COLUMNS × 12 ROWS  |  DUAL-CHAMBER MFC + PHOTOBIOREACTOR ARRAY</text>
+        
+        <!-- Main Calendar Grid: 6 columns × 12 rows = 72 panels -->
+        <g id="calendar-array" transform="translate(80, 60)">
+            <text x="300" y="-8" class="bp-text" text-anchor="middle">MICROSEASONS CALENDAR GRID (600×1200mm)</text>
+            
+            <!-- Vertical support rails (left and right) -->
+            <rect x="-15" y="0" width="10" height="1200" class="rail"/>
+            <rect x="605" y="0" width="10" height="1200" class="rail"/>
+            <text x="-20" y="600" class="bp-text-xs" transform="rotate(-90, -20, 600)">VERTICAL RAIL</text>
+            
+            <!-- Generate 12 rows × 6 columns -->
+            <g id="spring-section">
+                <text x="-25" y="150" class="bp-text" transform="rotate(-90, -25, 150)">SPRING</text>
+                
+                <!-- ROW 1: Risshun + Usui (Panels 1-6) -->
+                <rect x="-10" y="0" width="620" height="8" class="rail"/>
+                <rect x="0" y="10" width="100" height="90" class="panel"/>
+                <rect x="2" y="12" width="96" height="86" class="algae"/>
+                <text x="50" y="52" class="bp-text-xs" text-anchor="middle">RISSHUN</text>
+                <text x="50" y="60" class="bp-text-xs" text-anchor="middle">FEB 4</text>
+                <circle cx="6" cy="16" r="2" class="flow-port"/>
+                <circle cx="94" cy="94" r="2" class="flow-port"/>
+                <circle cx="96" cy="30" r="1" fill="#888"/>
+                <circle cx="96" cy="38" r="1" fill="#888"/>
+                <circle cx="30" cy="97" r="1.5" class="led"/>
+                <circle cx="42" cy="97" r="1.5" class="led"/>
+                <circle cx="54" cy="97" r="1.5" class="led"/>
+                <circle cx="66" cy="97" r="1.5" class="led"/>
+                <circle cx="78" cy="97" r="1.5" class="led"/>
+                
+                <rect x="100" y="10" width="100" height="90" class="panel"/>
+                <rect x="102" y="12" width="96" height="86" class="algae"/>
+                <text x="150" y="55" class="bp-text-xs" text-anchor="middle">USUI (1/3)</text>
+                <circle cx="106" cy="16" r="2" class="flow-port"/>
+                <circle cx="194" cy="94" r="2" class="flow-port"/>
+                <circle cx="196" cy="30" r="1" fill="#888"/>
+                <circle cx="196" cy="38" r="1" fill="#888"/>
+                
+                <rect x="200" y="10" width="100" height="90" class="panel"/>
+                <rect x="202" y="12" width="96" height="86" class="algae"/>
+                <text x="250" y="55" class="bp-text-xs" text-anchor="middle">USUI (2/3)</text>
+                <circle cx="206" cy="16" r="2" class="flow-port"/>
+                <circle cx="294" cy="94" r="2" class="flow-port"/>
+                
+                <rect x="300" y="10" width="100" height="90" class="panel"/>
+                <rect x="302" y="12" width="96" height="86" class="algae"/>
+                <text x="350" y="55" class="bp-text-xs" text-anchor="middle">USUI (3/3)</text>
+                <circle cx="306" cy="16" r="2" class="flow-port"/>
+                <circle cx="394" cy="94" r="2" class="flow-port"/>
+                
+                <rect x="400" y="10" width="100" height="90" class="panel"/>
+                <rect x="402" y="12" width="96" height="86" class="algae"/>
+                <text x="450" y="55" class="bp-text-xs" text-anchor="middle">KEICHITSU (1/3)</text>
+                <circle cx="406" cy="16" r="2" class="flow-port"/>
+                <circle cx="494" cy="94" r="2" class="flow-port"/>
+                
+                <rect x="500" y="10" width="100" height="90" class="panel"/>
+                <rect x="502" y="12" width="96" height="86" class="algae"/>
+                <text x="550" y="55" class="bp-text-xs" text-anchor="middle">KEICHITSU (2/3)</text>
+                <circle cx="506" cy="16" r="2" class="flow-port"/>
+                <circle cx="594" cy="94" r="2" class="flow-port"/>
+                
+                <!-- ROW 2: Keichitsu + Shunbun (Panels 7-12) -->
+                <rect x="-10" y="100" width="620" height="8" class="rail"/>
+                <rect x="0" y="110" width="100" height="90" class="panel"/>
+                <rect x="2" y="112" width="96" height="86" class="algae"/>
+                <text x="50" y="155" class="bp-text-xs" text-anchor="middle">KEICHITSU (3/3)</text>
+                <circle cx="6" cy="116" r="2" class="flow-port"/>
+                <circle cx="94" cy="194" r="2" class="flow-port"/>
+                
+                <text x="300" y="155" class="bp-text-xs" text-anchor="middle">PANELS 8-12: SHUNBUN SERIES</text>
+                
+                <!-- Simplified for remaining rows - pattern continues -->
+                <!-- ROW 3-4: Spring continues (Seimei, Kokuu) -->
+                <rect x="-10" y="200" width="620" height="8" class="rail"/>
+                <text x="300" y="255" class="bp-text-xs" text-anchor="middle">ROWS 3-4: SEIMEI + KOKUU</text>
+                
+                <rect x="-10" y="300" width="620" height="8" class="rail"/>
+            </g>
+            
+            <g id="summer-section">
+                <text x="-25" y="550" class="bp-text" transform="rotate(-90, -25, 550)">SUMMER</text>
+                <rect x="-10" y="400" width="620" height="8" class="rail"/>
+                <text x="300" y="455" class="bp-text-xs" text-anchor="middle">ROWS 5-8: RIKKA, SHOMAN, BOSHU, GESHI, SHOSHO, TAISHO</text>
+                
+                <rect x="-10" y="500" width="620" height="8" class="rail"/>
+                <rect x="-10" y="600" width="620" height="8" class="rail"/>
+                <rect x="-10" y="700" width="620" height="8" class="rail"/>
+            </g>
+            
+            <g id="autumn-section">
+                <text x="-25" y="950" class="bp-text" transform="rotate(-90, -25, 950)">AUTUMN</text>
+                <rect x="-10" y="800" width="620" height="8" class="rail"/>
+                <text x="300" y="855" class="bp-text-xs" text-anchor="middle">ROWS 9-10: RISSHU, SHOSHO, HAKURO, SHUBUN, KANRO, SOKO</text>
+                
+                <rect x="-10" y="900" width="620" height="8" class="rail"/>
+            </g>
+            
+            <g id="winter-section">
+                <text x="-25" y="1150" class="bp-text" transform="rotate(-90, -25, 1150)">WINTER</text>
+                <rect x="-10" y="1000" width="620" height="8" class="rail"/>
+                <text x="300" y="1055" class="bp-text-xs" text-anchor="middle">ROWS 11-12: RITTO, SHOSETSU, TAISETSU, TOJI, SHOKAN, DAIKAN</text>
+                
+                <rect x="-10" y="1100" width="620" height="8" class="rail"/>
+                <rect x="-10" y="1200" width="620" height="8" class="rail"/>
+            </g>
+            
+            <!-- VISIBLE TUBING ON RIGHT SIDE -->
+            <g id="tubing-system" transform="translate(620, 0)">
+                <text x="25" y="600" class="bp-text-xs" transform="rotate(-90, 25, 600)">HYDRAULIC CIRCULATION</text>
+                
+                <!-- Main vertical feed -->
+                <path d="M 15,10 L 15,1190" class="flow-line"/>
+                <text x="22" y="20" class="bp-text-xs">FEED</text>
+                <text x="22" y="28" class="bp-text-xs">50mL/min</text>
+                
+                <!-- Branch connections to rows -->
+                <path d="M 15,55 L -5,55" class="flow-thin" marker-end="url(#flow-arrow)"/>
+                <path d="M 15,155 L -5,155" class="flow-thin" marker-end="url(#flow-arrow)"/>
+                <path d="M 15,255 L -5,255" class="flow-thin" marker-end="url(#flow-arrow)"/>
+                <path d="M 15,355 L -5,355" class="flow-thin" marker-end="url(#flow-arrow)"/>
+                <path d="M 15,455 L -5,455" class="flow-thin" marker-end="url(#flow-arrow)"/>
+                <path d="M 15,555 L -5,555" class="flow-thin" marker-end="url(#flow-arrow)"/>
+                <path d="M 15,655 L -5,655" class="flow-thin" marker-end="url(#flow-arrow)"/>
+                <path d="M 15,755 L -5,755" class="flow-thin" marker-end="url(#flow-arrow)"/>
+                <path d="M 15,855 L -5,855" class="flow-thin" marker-end="url(#flow-arrow)"/>
+                <path d="M 15,955 L -5,955" class="flow-thin" marker-end="url(#flow-arrow)"/>
+                <path d="M 15,1055 L -5,1055" class="flow-thin" marker-end="url(#flow-arrow)"/>
+                <path d="M 15,1155 L -5,1155" class="flow-thin" marker-end="url(#flow-arrow)"/>
+                
+                <!-- Return line -->
+                <path d="M 35,10 L 35,1190" class="flow-line"/>
+                <text x="42" y="1180" class="bp-text-xs">RETURN</text>
+                
+                <!-- Return connections -->
+                <path d="M -5,95 L 35,95" class="flow-thin"/>
+                <path d="M -5,195 L 35,195" class="flow-thin"/>
+                <path d="M -5,295 L 35,295" class="flow-thin"/>
+                <path d="M -5,395 L 35,395" class="flow-thin"/>
+                <path d="M -5,495 L 35,495" class="flow-thin"/>
+                <path d="M -5,595 L 35,595" class="flow-thin"/>
+                <path d="M -5,695 L 35,695" class="flow-thin"/>
+                <path d="M -5,795 L 35,795" class="flow-thin"/>
+                <path d="M -5,895 L 35,895" class="flow-thin"/>
+                <path d="M -5,995 L 35,995" class="flow-thin"/>
+                <path d="M -5,1095 L 35,1095" class="flow-thin"/>
+                <path d="M -5,1195 L 35,1195" class="flow-thin"/>
+            </g>
+            
+            <!-- ELECTRICAL BUSES ON RIGHT -->
+            <g id="electrical-buses" transform="translate(670, 0)">
+                <text x="15" y="600" class="bp-text-xs" transform="rotate(-90, 15, 600)">ELECTRICAL BUSES</text>
+                
+                <!-- Positive bus (anode) -->
+                <line x1="10" y1="30" x2="10" y2="1170" class="elec-pos" stroke-width="1.5"/>
+                <text x="15" y="35" class="bp-text-xs">+</text>
+                <text x="15" y="43" class="bp-text-xs">ANODE</text>
+                
+                <!-- Negative bus (cathode) -->
+                <line x1="20" y1="38" x2="20" y2="1178" class="elec-neg" stroke-width="1.5"/>
+                <text x="25" y="43" class="bp-text-xs">−</text>
+                <text x="25" y="51" class="bp-text-xs">CATHODE</text>
+                
+                <!-- Connection points to each row -->
+                <circle cx="10" cy="34" r="2" fill="#ff5555"/>
+                <circle cx="10" cy="134" r="2" fill="#ff5555"/>
+                <circle cx="10" cy="234" r="2" fill="#ff5555"/>
+                <text x="35" y="600" class="bp-text-xs" transform="rotate(-90, 35, 600)">72 MFCs PARALLEL</text>
+            </g>
+        </g>
+        
+        <!-- SINGLE PANEL DETAIL -->
+        <g id="panel-detail" transform="translate(850, 60)">
+            <text x="0" y="0" class="bp-text">PANEL DETAIL - DUAL-CHAMBER MFC</text>
+            <rect x="0" y="5" width="350" height="320" class="bp-line-thin"/>
+            
+            <g transform="translate(20, 25)">
+                <!-- Section view -->
+                <rect x="0" y="0" width="50" height="110" class="bp-line"/>
+                <rect x="3" y="3" width="44" height="104" fill="rgba(100,100,100,0.15)"/>
+                <text x="25" y="-5" class="bp-text-xs" text-anchor="middle">ANODE</text>
+                <text x="25" y="55" class="bp-text-xs" text-anchor="middle">GRAPHITE</text>
+                <text x="25" y="63" class="bp-text-xs" text-anchor="middle">FELT</text>
+                
+                <line x1="50" y1="0" x2="50" y2="110" stroke="#00d4ff" stroke-width="1" stroke-dasharray="1,1"/>
+                <text x="50" y="-8" class="bp-text-xs" text-anchor="middle">PEM</text>
+                
+                <rect x="50" y="0" width="70" height="110" class="bp-line"/>
+                <rect x="52" y="2" width="66" height="106" class="algae"/>
+                <text x="85" y="-5" class="bp-text-xs" text-anchor="middle">CATHODE</text>
+                <text x="85" y="55" class="bp-text-xs" text-anchor="middle">ALGAE +</text>
+                <text x="85" y="63" class="bp-text-xs" text-anchor="middle">Pt/C</text>
+                
+                <!-- Electrodes -->
+                <circle cx="25" cy="115" r="2.5" fill="#888" stroke="#00d4ff"/>
+                <line x1="25" y1="115" x2="25" y2="135" class="elec-neg"/>
+                <text x="30" y="130" class="bp-text-xs">− (ANODE)</text>
+                
+                <circle cx="120" cy="115" r="2.5" fill="#888" stroke="#00d4ff"/>
+                <line x1="120" y1="115" x2="120" y2="135" class="elec-pos"/>
+                <text x="125" y="130" class="bp-text-xs">+ (CATHODE)</text>
+                
+                <!-- Flow -->
+                <circle cx="85" cy="-5" r="2.5" class="flow-port"/>
+                <text x="85" y="-12" class="bp-text-xs" text-anchor="middle">IN</text>
+                <circle cx="85" cy="115" r="2.5" class="flow-port"/>
+                <text x="85" y="143" class="bp-text-xs" text-anchor="middle">OUT</text>
+            </g>
+            
+            <!-- Electrochemistry -->
+            <text x="10" y="175" class="bp-text-sm">ELECTROCHEMICAL REACTIONS:</text>
+            
+            <text x="15" y="188" class="bp-text-xs">ANODE (Oxidation, E° = −0.28 V vs SHE):</text>
+            <text x="20" y="198" class="bp-text-xs">CH₃COO⁻ + 2H₂O → 2CO₂ + 7H⁺ + 8e⁻</text>
+            
+            <text x="15" y="213" class="bp-text-xs">CATHODE (Reduction, E° = +0.82 V vs SHE):</text>
+            <text x="20" y="223" class="bp-text-xs">O₂ + 4H⁺ + 4e⁻ → 2H₂O</text>
+            <text x="20" y="233" class="bp-text-xs">(O₂ from algae photosynthesis)</text>
+            
+            <text x="15" y="248" class="bp-text-xs">OVERALL:</text>
+            <text x="20" y="258" class="bp-text-xs">E°cell = 1.10 V (theoretical)</text>
+            <text x="20" y="268" class="bp-text-xs">Vactual = 0.4-0.5 V (with losses)</text>
+            <text x="20" y="278" class="bp-text-xs">Power = 0.1-0.15 W per cell</text>
+            <text x="20" y="288" class="bp-text-xs">Current = 0.2-0.3 A per cell</text>
+            <text x="20" y="298" class="bp-text-xs">Coulombic efficiency: 15-25%</text>
+        </g>
+        
+        <!-- CIRCUIT DIAGRAM -->
+        <g id="circuit-diagram" transform="translate(850, 400)">
+            <text x="0" y="0" class="bp-text">ELECTRICAL SYSTEM SCHEMATIC</text>
+            <rect x="0" y="5" width="350" height="250" class="bp-line-thin"/>
+            
+            <text x="10" y="20" class="bp-text-sm">72 MFCs PARALLEL → BOOST CONVERTER → 12V</text>
+            
+            <g transform="translate(30, 40)">
+                <!-- MFC array representation -->
+                <text x="40" y="0" class="bp-text-xs" text-anchor="middle">MFC ARRAY (72 CELLS)</text>
+                <rect x="10" y="10" width="60" height="50" class="bp-line"/>
+                <text x="40" y="35" class="bp-text-xs" text-anchor="middle">72 × 0.5V</text>
+                <text x="40" y="44" class="bp-text-xs" text-anchor="middle">PARALLEL</text>
+                
+                <!-- Buses out -->
+                <line x1="40" y1="10" x2="40" y2="-5" class="elec-pos"/>
+                <text x="45" y="3" class="bp-text-xs">+</text>
+                <line x1="40" y1="60" x2="40" y2="75" class="elec-neg"/>
+                <text x="45" y="73" class="bp-text-xs">−</text>
+                
+                <!-- To converter -->
+                <line x1="70" y1="20" x2="100" y2="20" class="elec-pos"/>
+                <line x1="70" y1="50" x2="100" y2="50" class="elec-neg"/>
+                
+                <text x="75" y="15" class="bp-text-xs">0.4-0.5V</text>
+                <text x="75" y="23" class="bp-text-xs">18-28A</text>
+                
+                <!-- Converter -->
+                <rect x="100" y="15" width="70" height="40" class="bp-line-thick"/>
+                <text x="135" y="30" class="bp-text-xs" text-anchor="middle">DC-DC BOOST</text>
+                <text x="135" y="38" class="bp-text-xs" text-anchor="middle">MPPT</text>
+                <text x="135" y="46" class="bp-text-xs" text-anchor="middle">η=85%</text>
+                
+                <!-- Output -->
+                <line x1="170" y1="25" x2="200" y2="25" class="elec-pos"/>
+                <line x1="170" y1="45" x2="200" y2="45" class="elec-neg"/>
+                
+                <text x="175" y="20" class="bp-text-xs">12V</text>
+                <text x="175" y="28" class="bp-text-xs">0.5-0.75A</text>
+                <text x="175" y="36" class="bp-text-xs">6-9W</text>
+                
+                <!-- Load -->
+                <rect x="200" y="25" width="40" height="20" class="bp-line"/>
+                <text x="220" y="37" class="bp-text-xs" text-anchor="middle">LED</text>
+                <text x="220" y="45" class="bp-text-xs" text-anchor="middle">36W</text>
+            </g>
+            
+            <!-- Specs -->
+            <text x="10" y="120" class="bp-text-sm">PERFORMANCE:</text>
+            <text x="15" y="133" class="bp-text-xs">MFC Output: 7-11W @ 0.5V → 6-9W @ 12V</text>
+            <text x="15" y="143" class="bp-text-xs">LED Load: 36W total (72 panels × 0.5W)</text>
+            <text x="15" y="153" class="bp-text-xs">MFC Contribution: 17-25%</text>
+            <text x="15" y="163" class="bp-text-xs">Grid Supplement: 27-30W</text>
+            
+            <text x="10" y="183" class="bp-text-sm">PARALLEL CONFIGURATION:</text>
+            <text x="15" y="196" class="bp-text-xs">All 72 cells same voltage (~0.5V)</text>
+            <text x="15" y="206" class="bp-text-xs">Currents sum: Itotal = I₁ + I₂ + ... + I₇₂</text>
+            <text x="15" y="216" class="bp-text-xs">Ptotal = V × (I₁ + I₂ + ... + I₇₂)</text>
+            <text x="15" y="226" class="bp-text-xs">= 0.5V × (18-28A) = 7-11W</text>
+        </g>
+        
+        <!-- HYDRAULIC SYSTEM -->
+        <g id="hydraulic-system" transform="translate(850, 670)">
+            <text x="0" y="0" class="bp-text">HYDRAULIC CIRCULATION SYSTEM</text>
+            <rect x="0" y="5" width="350" height="220" class="bp-line-thin"/>
+            
+            <text x="10" y="20" class="bp-text-sm">SERIES FLOW THROUGH 72 PANELS</text>
+            
+            <g transform="translate(20, 35)">
+                <!-- Reservoir -->
+                <rect x="0" y="20" width="50" height="40" class="bp-line"/>
+                <text x="25" y="38" class="bp-text-xs" text-anchor="middle">RESERVOIR</text>
+                <text x="25" y="46" class="bp-text-xs" text-anchor="middle">20L BG-11</text>
+                
+                <!-- Pump -->
+                <circle cx="80" cy="40" r="15" class="bp-line"/>
+                <text x="80" y="43" class="bp-text-xs" text-anchor="middle">PUMP</text>
+                
+                <!-- To panels -->
+                <path d="M 50,40 L 65,40" class="flow-line" marker-end="url(#flow-arrow)"/>
+                <path d="M 95,40 L 120,40" class="flow-line" marker-end="url(#flow-arrow)"/>
+                
+                <text x="100" y="35" class="bp-text-xs">50mL/min</text>
+                
+                <!-- Panel array -->
+                <rect x="120" y="20" width="100" height="40" class="bp-line"/>
+                <text x="170" y="38" class="bp-text-xs" text-anchor="middle">72 PANELS</text>
+                <text x="170" y="46" class="bp-text-xs" text-anchor="middle">SERPENTINE</text>
+                
+                <!-- Return -->
+                <path d="M 220,40 L 250,40 L 250,80 L 25,80 L 25,60" class="flow-line" marker-end="url(#flow-arrow)"/>
+            </g>
+            
+            <!-- Specs -->
+            <text x="10" y="140" class="bp-text-sm">FLOW PARAMETERS:</text>
+            <text x="15" y="153" class="bp-text-xs">Total flow: 50 mL/min</text>
+            <text x="15" y="163" class="bp-text-xs">Per panel: 0.69 mL/min</text>
+            <text x="15" y="173" class="bp-text-xs">Residence time: ~6 min/panel</text>
+            <text x="15" y="183" class="bp-text-xs">Full cycle: ~7.2 hours</text>
+            <text x="15" y="193" class="bp-text-xs">Tubing: 6mm ID silicone</text>
+            <text x="15" y="203" class="bp-text-xs">Pump: 12V peristaltic</text>
+        </g>
+        
+        <!-- Title Block -->
+        <g id="title-block" transform="translate(850, 1700)">
+            <rect x="0" y="0" width="420" height="150" class="title-bg"/>
+            
+            <text x="210" y="22" class="bp-title" text-anchor="middle">72 MICROSEASONS</text>
+            <text x="210" y="37" class="bp-title" text-anchor="middle">BIOREACTOR CALENDAR</text>
+            
+            <line x1="10" y1="47" x2="410" y2="47" class="bp-line-thin"/>
+            
+            <text x="10" y="60" class="bp-text-xs">LAYOUT: 6 COLUMNS × 12 ROWS (72 PANELS)</text>
+            <text x="10" y="70" class="bp-text-xs">DIMENSIONS: 600×1200×95mm (W×H×D)</text>
+            <text x="10" y="80" class="bp-text-xs">ORGANISM: CHLORELLA VULGARIS (UTEX 265)</text>
+            <text x="10" y="90" class="bp-text-xs">MFC TYPE: DUAL-CHAMBER, NAFION® 117 PEM</text>
+            <text x="10" y="100" class="bp-text-xs">ELECTRICAL: 72 CELLS PARALLEL, 0.5V→12V (6-9W)</text>
+            <text x="10" y="110" class="bp-text-xs">HYDRAULIC: SERIES FLOW, 50mL/min</text>
+            <text x="10" y="120" class="bp-text-xs">DRAWING NO: MS-CAL-001  REV: A</text>
+            <text x="10" y="130" class="bp-text-xs">DATE: 2025-12-18  SCALE: 1:12</text>
+            <text x="10" y="140" class="bp-text-xs">REFERENCE: Logan et al. (2006) Environ. Sci. Technol.</text>
+            
+            <text x="280" y="65" class="bp-text-xs">DESIGNER:</text>
+            <text x="280" y="77" class="bp-text-xs">BIO ENG:</text>
+            <text x="280" y="89" class="bp-text-xs">ELEC ENG:</text>
+            <text x="280" y="101" class="bp-text-xs">APPROVED:</text>
+            
+            <line x1="270" y1="52" x2="270" y2="145" class="bp-line-thin"/>
+        </g>
+        
+        <!-- NOTES -->
+        <g id="notes" transform="translate(80, 1700)">
+            <text x="0" y="0" class="bp-text">NOTES:</text>
+            <text x="0" y="13" class="bp-text-xs">1. Calendar organized by Japanese 72 microseasons (kō)</text>
+            <text x="0" y="23" class="bp-text-xs">2. Each panel = 1 microseason (~5 days)</text>
+            <text x="0" y="33" class="bp-text-xs">3. Seasonal organization: Spring (rows 1-4), Summer (5-8)</text>
+            <text x="0" y="43" class="bp-text-xs">   Autumn (9-10), Winter (11-12)</text>
+            <text x="0" y="53" class="bp-text-xs">4. Visible tubing on right side shows hydraulic infrastructure</text>
+            <text x="0" y="63" class="bp-text-xs">5. Horizontal rails support each row of panels</text>
+            <text x="0" y="73" class="bp-text-xs">6. All MFCs wired in parallel (constant V, sum I)</text>
+            <text x="0" y="83" class="bp-text-xs">7. Algae O₂ production supports cathode reaction</text>
+            <text x="0" y="93" class="bp-text-xs">8. Proton exchange membrane (PEM) prevents crossover</text>
+            <text x="0" y="103" class="bp-text-xs">9. LED indicators (5 per panel) track daily habits</text>
+            <text x="0" y="113" class="bp-text-xs">10. Biomass/culture refresh every 90 days</text>
+        </g>
+    </svg>
+</body>
+</html>
