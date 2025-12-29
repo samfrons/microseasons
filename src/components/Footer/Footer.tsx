@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import { useCalendarStore } from '@/store/useCalendarStore';
 import clsx from 'clsx';
 
@@ -60,30 +61,35 @@ export function Footer() {
               className="text-[10px] font-mono uppercase tracking-[0.2em] mb-5 opacity-50"
               style={{ color: 'var(--color-textSecondary)' }}
             >
-              Learn More
+              Explore
             </h4>
             <ul className="space-y-3">
-              {['About Microseasons', 'Calendar Traditions', 'Customization', 'FAQ'].map(
-                (item) => (
-                  <li key={item}>
-                    <a
-                      href="#"
-                      className="text-sm transition-colors duration-300"
-                      style={{
-                        color: 'var(--color-textSecondary)',
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.color = 'var(--color-accent)';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.color = 'var(--color-textSecondary)';
-                      }}
-                    >
-                      {item}
-                    </a>
-                  </li>
-                )
-              )}
+              {[
+                { label: 'Home', href: '/' },
+                { label: 'Make Your Own', href: '/generate', highlight: true },
+                { label: 'LED Twin', href: '/led-twin' },
+              ].map((item) => (
+                <li key={item.label}>
+                  <Link
+                    href={item.href}
+                    className="text-sm transition-colors duration-300"
+                    style={{
+                      color: item.highlight ? 'var(--color-accent)' : 'var(--color-textSecondary)',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.color = 'var(--color-accent)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.color = item.highlight ? 'var(--color-accent)' : 'var(--color-textSecondary)';
+                    }}
+                  >
+                    {item.label}
+                    {item.highlight && (
+                      <span className="ml-1 text-[9px] opacity-70">✨</span>
+                    )}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 

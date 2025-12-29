@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter, EB_Garamond } from 'next/font/google'
+import { Navigation } from '@/components/Navigation'
+import { AuthProvider, AuthModal } from '@/components/Auth'
 import './globals.css'
 
 const inter = Inter({
@@ -32,7 +34,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${ebGaramond.variable}`}>
       <body className="antialiased">
-        {children}
+        <AuthProvider>
+          <Navigation />
+          <AuthModal />
+          {children}
+        </AuthProvider>
       </body>
     </html>
   )
