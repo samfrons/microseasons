@@ -30,6 +30,9 @@ An exceptional, award-worthy showcase website for a customizable microseasons ca
 - **Premium typography** with careful hierarchy
 - **Fully responsive** design for all device sizes
 
+### Digital Twin — engineering sheets
+- **`/twin`**: the bioreactor-calendar wall (6 × 12 panels, one per kō) as a wall elevation plus ISA-5.1 P&ID sheets for the array and for every panel, drawn from declarative specs on a blueprint plate. See [`docs/DIGITAL_TWIN.md`](docs/DIGITAL_TWIN.md).
+
 ### The 72 Microseasons
 The calendar showcases all 72 traditional Japanese microseasons (kō), each lasting approximately five days and marking subtle environmental changes throughout the year. These ancient observations of nature are beautifully overlaid with the familiar Western calendar system.
 

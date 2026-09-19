@@ -11,6 +11,7 @@ const navLinks = [
   { href: '/', label: 'Home' },
   { href: '/generate', label: 'Make Your Own', highlight: true },
   { href: '/led-twin', label: 'LED Twin' },
+  { href: '/twin', label: 'Digital Twin' },
 ];
 
 export function Navigation() {
