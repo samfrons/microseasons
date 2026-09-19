@@ -68,6 +68,30 @@ built spec (panel size, envelope, plinth, flow, voltages) and the totals against
 the per-panel figures (`hyd.culture-total` = `hyd.culture-per-panel` × 72,
 `light.backlight-total` = per-panel × 72, `hyd.loop-time` = residence × 72).
 
+## Website surfaces
+
+Three places on the site show the twin, all from the same specs:
+
+- **The homepage hero** (`src/components/DigitalTwinHero/`) — the first thing a
+  visitor sees is MS-CAL-001 itself, mounted live on its blueprint plate in the
+  `today` state with today's kō lit, under a short headline and two calls to
+  action (*Open the digital twin* → `/twin`, *Browse the schematics* →
+  `/schematics`). The page chrome around the plate uses the site's theme CSS
+  variables; the plate keeps its own Blueprint / Classic palette. A quiet
+  `SchematicsTeaser` row further down the homepage points at the drawing set.
+- **`/twin`** — the interactive gallery: both elevations, the venue plan, the
+  array P&ID, the selected panel's P&ID, the full parameters table and the lint
+  readout. Click a panel on an elevation to open its own sheet.
+- **`/schematics`** (`src/app/schematics/page.tsx`) — the gallery of the whole
+  drawing set, one card per sheet: drawing number, title, a one-line
+  description, the sheet with its state and theme chips and its ↓ SVG button,
+  and `formatLint`'s verdict printed underneath. The seventy-two MS-CAL-003
+  panel sheets are not mounted at once — a picker of all 72 kō mounts one
+  `PidSheet` at a time.
+
+The navigation links to **Digital Twin** and **Schematics**; on those dark-plate
+routes the transparent top bar switches to paper-white ink so it stays legible.
+
 ## Where things live
 
 - `src/lib/twin/` — `spec.ts` (types, `EngValue`, `CalendarFace`,
