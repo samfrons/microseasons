@@ -182,6 +182,8 @@ process lines; process lines should not cross each other — reroute.
 - Three lineweights only (`WEIGHT`); hierarchy by weight and size, never by
   fading (opacity clamped ≥ .78).
 - Sharp corners, mono type, uppercase drawing text with `.08em` tracking.
+- Panels engrave an English poem line + kō number only — no Japanese text on
+  the object (client brief); `nameJa` stays in data/tips.
 - Chips are `<button aria-pressed>`; state repaints, nothing animates.
 - Title block always tells the truth: `status: 'CONCEPT'` stamps
   "CONCEPT — NOT FOR CONSTRUCTION". **Every number carries a basis** (see

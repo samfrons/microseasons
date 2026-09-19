@@ -1,5 +1,5 @@
 import { microseasons } from '@/data/microseasons';
-import { algaeTint, buildCalendarTwin, envelopeOf, seasonOf } from '../build-calendar';
+import { algaeTint, buildCalendarTwin, envelopeOf, poemLine, seasonOf } from '../build-calendar';
 import { spanDays } from '../lint';
 import { findParameter } from '../spec';
 
@@ -97,5 +97,46 @@ describe('buildCalendarTwin', () => {
     expect(tints.every((t) => /^#[0-9a-f]{6}$/.test(t))).toBe(true);
     expect(new Set(tints).size).toBeGreaterThan(30);
     expect(algaeTint(27)).not.toBe(algaeTint(9));
+  });
+
+  it('carries an English poem line on every panel, never Japanese', () => {
+    const CJK = /[぀-ヿ一-鿿]/;
+    for (const p of spec.panels) {
+      expect(p.poem).toBe(p.poem.toLowerCase());
+      expect(CJK.test(p.poem)).toBe(false);
+      const words = p.poem.split(' ');
+      expect(words.length).toBeGreaterThanOrEqual(1);
+      expect(words.length).toBeLessThanOrEqual(8);
+    }
+    expect(spec.panels[0].poem).toBe('east wind melts the ice');
+  });
+
+  it('adds panel engraving and control strip rows to the geometry parameters', () => {
+    const engraving = findParameter(spec.parameters, 'geom.panel-engraving')!;
+    const strip = findParameter(spec.parameters, 'geom.control-strip')!;
+    expect(engraving.v.value).toBe('one English poem line + kō number, no Japanese text');
+    expect(engraving.v.basis).toBe('design');
+    expect(strip.v.value).toBe('day LEDs (one per day) + brass day button + mode indicator');
+    expect(strip.v.basis).toBe('design');
+  });
+});
+
+describe('poemLine', () => {
+  it('lowercases nameEn, strips a trailing period, and keeps 4–8 words', () => {
+    expect(poemLine({ ...microseasons[0], nameEn: 'East wind melts the ice.' })).toBe('east wind melts the ice');
+    expect(poemLine(microseasons[0])).toBe('east wind melts the ice');
+  });
+
+  it('keeps only the first 8 words of a longer name', () => {
+    const nine = { ...microseasons[0], nameEn: 'One two three four five six seven eight nine' };
+    const line = poemLine(nine);
+    expect(line.split(' ')).toHaveLength(8);
+    expect(line).toBe('one two three four five six seven eight');
+  });
+
+  it('never carries Japanese text', () => {
+    for (const ms of microseasons) {
+      expect(poemLine(ms)).not.toMatch(/[぀-ヿ一-鿿]/);
+    }
   });
 });

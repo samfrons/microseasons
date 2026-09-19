@@ -8,7 +8,10 @@ A microbial fuel cell sits behind every culture window, a strip of day-LEDs
 under it, silicone culture tubing snakes inside the frame and **crosses from
 face A to face B at the base**, through the plinth head, and the +/− bus runs
 in the vertical rails of both faces. The plinth holds the reservoir V-101, the
-pump P-101, the controller cabinet U-100 and a drip tray.
+pump P-101, the controller cabinet U-100 and a drip tray. Each panel is
+engraved with an English poem line (derived from `nameEn` via `poemLine()`)
+top-left and its `#n NAME` bottom — no Japanese text on the object, per the
+client brief; `nameJa` still lives in the panel data and its tip/aria-label.
 
 It is modelled as **four ISA-5.1 sheets from one declarative spec**, following
 the spec → lint → render pattern of MESSAI's `@messai/pid-schematic`.

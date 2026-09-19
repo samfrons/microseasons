@@ -26,7 +26,19 @@ describe('calendar elevations', () => {
     expect((svg.match(/data-panel="p\d\d"/g) ?? []).length).toBe(72);
     expect(svg).toContain('MS-CAL-001');
     expect(svg).toContain('CONCEPT — NOT FOR CONSTRUCTION');
-    expect(svg).toContain('東風解凍');
+    expect(svg).toContain('east wind melts the ice');
+  });
+
+  it('engraves an English poem line, never Japanese text, on the object', () => {
+    /* the title-block org string ('七十二候') is CJK by design — scope the
+       check to the panel groups, the thing actually engraved on the piece */
+    const CJK = /[぀-ヿ一-鿿]/;
+    const panelBlocks = svg.match(/<g[^>]*data-panel="p\d\d"[\s\S]*?<\/g>/g) ?? [];
+    expect(panelBlocks.length).toBe(72);
+    for (const block of panelBlocks) {
+      const engraved = [...block.matchAll(/<text[^>]*>([^<]*)<\/text>/g)].map((m) => m[1]);
+      for (const line of engraved) expect(CJK.test(line)).toBe(false);
+    }
   });
 
   it('lights only the today panel with the live accent frame', () => {

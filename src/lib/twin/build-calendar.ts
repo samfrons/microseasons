@@ -120,6 +120,17 @@ export function algaeTint(n: number, total = 72): string {
   return ALGAE_TINT.spring;
 }
 
+/**
+ * Turn a microseason's `nameEn` into a quiet lowercase 4–8 word line for the
+ * panel engraving — no Japanese, no shouting caps. Strips a trailing period,
+ * lowercases, and keeps the first 8 words.
+ */
+export function poemLine(ms: Microseason): string {
+  const stripped = ms.nameEn.replace(/\.\s*$/, '');
+  const words = stripped.toLowerCase().split(/\s+/).filter(Boolean);
+  return words.slice(0, 8).join(' ');
+}
+
 export function panelTag(n: number): string {
   return `R-${String(100 + n).padStart(3, '0')}`;
 }
@@ -150,6 +161,7 @@ export function toPanel(
     microseasonId: ms.id,
     nameEn: ms.nameEn,
     nameJa: ms.nameJa,
+    poem: poemLine(ms),
     solarTerm: ms.solarTerm,
     season,
     row,
@@ -246,6 +258,8 @@ export function buildParameters(opts: {
         { id: 'geom.plinth-d', label: 'Plinth depth', v: D(String(opts.plinth.dMm), 'mm') },
         { id: 'geom.plinth-h', label: 'Plinth height', v: D(String(opts.plinth.hMm), 'mm', 'Puts the first row of panels at standing eye level.') },
         { id: 'geom.mass', label: 'Mass, filled', v: A('≈ 440', 'kg', 'Panels ≈ 3.6 kg each filled, + frame ≈ 60 kg, + plinth, reservoir and tray ≈ 120 kg. Not weighed.') },
+        { id: 'geom.panel-engraving', label: 'Panel engraving', v: D('one English poem line + kō number, no Japanese text', undefined, 'Client brief; nameJa stays in data/tips, not on the object.') },
+        { id: 'geom.control-strip', label: 'Control strip', v: D('day LEDs (one per day) + brass day button + mode indicator', undefined, 'Under each panel; the day button is the only visitor input.') },
       ],
     },
     {

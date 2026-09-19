@@ -160,6 +160,8 @@ export interface CalendarPanel {
   microseasonId: number;
   nameEn: string;
   nameJa: string;
+  /** quiet lowercase 4–8 word line derived from `nameEn`, engraved top-left; `nameJa` stays data-only */
+  poem: string;
   solarTerm: string;
   season: Season;
   /** 0-based grid position WITHIN ITS FACE */

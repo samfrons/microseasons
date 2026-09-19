@@ -27,6 +27,25 @@ export interface CalendarTwinDiagramProps {
   className?: string;
 }
 
+/**
+ * Clip a panel's poem line to what the engraving can actually carry — the
+ * panel is ~88 sheet units wide; shrink the SLICE (drop trailing words), not
+ * the font. `maxChars` is tuned against `POEM_SIZE` below (measured via a
+ * headless render, not guessed) with margin inside the frame.
+ */
+export function fitPoem(poem: string, maxChars = 23): string {
+  const words = poem.split(' ').filter(Boolean);
+  let line = '';
+  for (const w of words) {
+    const next = line ? `${line} ${w}` : w;
+    if (next.length > maxChars) break;
+    line = next;
+  }
+  return line || words[0]?.slice(0, maxChars) || '';
+}
+
+const POEM_SIZE = 5;
+
 /** The face a panel belongs to (falls back to the first face). */
 export function faceFor(spec: CalendarTwinSpec, p: CalendarPanel): CalendarFace {
   return spec.faces.find((f) => f.id === p.face) ?? spec.faces[0];
@@ -208,9 +227,9 @@ export function CalendarTwinDiagram({ spec, state, onSelect, selected, className
                 />
               );
             })}
-            {/* engraving: number + name */}
+            {/* engraving: poem line (top-left) + kō number/name (bottom) — no Japanese text on the object */}
+            <Txt x={r.x + 8} y={r.y + 11} size={POEM_SIZE} plain bright={isLit} opacity={isLit ? 1 : 0.85}>{fitPoem(p.poem)}</Txt>
             <Txt x={r.x + 8} y={r.y + r.h - 3} size={4.6} muted={!isLit} bright={isLit}>{`#${p.n} ${p.nameEn.toUpperCase().slice(0, 18)}`}</Txt>
-            <Txt x={r.x + r.w - 6} y={r.y + 11} size={4.6} anchor="end" bright={isLit} opacity={0.9}>{p.nameJa}</Txt>
             {isSel && <rect x={r.x - 1.5} y={r.y - 1.5} width={r.w + 3} height={r.h + 3} fill="none" stroke={pal.hi} strokeWidth={0.8} strokeDasharray="3 2" />}
           </g>
         );

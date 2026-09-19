@@ -19,10 +19,12 @@ function bodyProps(p: Palette) {
 /* ------------------------------------------------------------------ text */
 
 export function Txt({
-  x, y, children, size = 7, anchor = 'start', bright = false, muted = false, weight = 400, opacity = 1, rotate,
+  x, y, children, size = 7, anchor = 'start', bright = false, muted = false, weight = 400, opacity = 1, rotate, plain = false,
 }: {
   x: number; y: number; children: ReactNode; size?: number; anchor?: 'start' | 'middle' | 'end';
   bright?: boolean; muted?: boolean; weight?: number; opacity?: number; rotate?: number;
+  /** quiet lowercase copy (e.g. the panel poem line) — modest tracking instead of the drawing-text `.08em` */
+  plain?: boolean;
 }) {
   const p = usePalette();
   return (
@@ -35,7 +37,7 @@ export function Txt({
       textAnchor={anchor}
       fill={bright ? p.hi : muted ? p.muted : p.ink}
       opacity={Math.max(MIN_TEXT_OPACITY, opacity)}
-      letterSpacing=".08em"
+      letterSpacing={plain ? '.02em' : '.08em'}
       transform={rotate ? `rotate(${rotate} ${x} ${y})` : undefined}
     >
       {children}
