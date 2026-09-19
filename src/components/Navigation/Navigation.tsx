@@ -11,7 +11,16 @@ const navLinks = [
   { href: '/', label: 'Home' },
   { href: '/generate', label: 'Make Your Own', highlight: true },
   { href: '/led-twin', label: 'LED Twin' },
+  { href: '/twin', label: 'Digital Twin' },
+  { href: '/schematics', label: 'Schematics' },
 ];
+
+/**
+ * Routes whose page is a dark drafting plate. The nav is transparent until
+ * you scroll, so on these the site's near-black ink would be invisible —
+ * use the plate's paper-white ink instead until the cream bar fades in.
+ */
+const DARK_PLATE_ROUTES = ['/twin', '/schematics', '/led-twin'];
 
 export function Navigation() {
   const pathname = usePathname();
@@ -31,6 +40,12 @@ export function Navigation() {
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [pathname]);
+
+  const onDarkPlate =
+    !isScrolled &&
+    DARK_PLATE_ROUTES.some((r) => pathname === r || pathname.startsWith(`${r}/`));
+  const inkPrimary = onDarkPlate ? '#F4FAFE' : 'var(--color-textPrimary)';
+  const inkSecondary = onDarkPlate ? '#A9C6D8' : 'var(--color-textSecondary)';
 
   return (
     <>
@@ -55,7 +70,7 @@ export function Navigation() {
             <Link href="/" className="flex items-center gap-2 group">
               <span
                 className="text-xl lg:text-2xl font-serif tracking-tight transition-colors duration-300"
-                style={{ color: 'var(--color-textPrimary)' }}
+                style={{ color: inkPrimary }}
               >
                 Microseasons
               </span>
@@ -90,18 +105,18 @@ export function Navigation() {
                       color: link.highlight
                         ? 'var(--color-accent)'
                         : isActive
-                          ? 'var(--color-textPrimary)'
-                          : 'var(--color-textSecondary)',
+                          ? inkPrimary
+                          : inkSecondary,
                       fontWeight: link.highlight ? 500 : 400,
                     }}
                     onMouseEnter={(e) => {
                       if (!link.highlight) {
-                        e.currentTarget.style.color = 'var(--color-textPrimary)';
+                        e.currentTarget.style.color = inkPrimary;
                       }
                     }}
                     onMouseLeave={(e) => {
                       if (!link.highlight && !isActive) {
-                        e.currentTarget.style.color = 'var(--color-textSecondary)';
+                        e.currentTarget.style.color = inkSecondary;
                       }
                     }}
                   >
@@ -142,12 +157,12 @@ export function Navigation() {
                     y: isMobileMenuOpen ? 8 : 0,
                   }}
                   className="w-full h-0.5 origin-left"
-                  style={{ backgroundColor: 'var(--color-textPrimary)' }}
+                  style={{ backgroundColor: inkPrimary }}
                 />
                 <motion.span
                   animate={{ opacity: isMobileMenuOpen ? 0 : 1 }}
                   className="w-full h-0.5"
-                  style={{ backgroundColor: 'var(--color-textPrimary)' }}
+                  style={{ backgroundColor: inkPrimary }}
                 />
                 <motion.span
                   animate={{
@@ -155,7 +170,7 @@ export function Navigation() {
                     y: isMobileMenuOpen ? -8 : 0,
                   }}
                   className="w-full h-0.5 origin-left"
-                  style={{ backgroundColor: 'var(--color-textPrimary)' }}
+                  style={{ backgroundColor: inkPrimary }}
                 />
               </div>
             </button>
