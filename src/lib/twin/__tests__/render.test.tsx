@@ -8,12 +8,12 @@ import { TextEncoder, TextDecoder } from 'util';
 Object.assign(globalThis, { TextEncoder, TextDecoder });
 
 /* eslint-disable @typescript-eslint/no-var-requires */
-const { renderCalendarToSvg, renderPidToSvg } = require('@/components/DigitalTwin/render-static');
+const { renderCalendarToSvg, renderPidToSvg, renderVenueToSvg } = require('@/components/DigitalTwin/render-static');
 const { culturePath } = require('@/components/DigitalTwin/CalendarTwinDiagram');
-const { CALENDAR_TWIN, PID_SHEETS } = require('@/lib/twin/sheets');
+const { CALENDAR_TWIN, PID_SHEETS, VENUE_PLAN } = require('@/lib/twin/sheets');
 const { BLUEPRINT, CLASSIC } = require('@/lib/twin/blueprint');
 
-describe('calendar wall', () => {
+describe('calendar elevations', () => {
   const svg = renderCalendarToSvg(CALENDAR_TWIN, 'today');
 
   it('is a standalone SVG with the plate painted in', () => {
@@ -37,9 +37,24 @@ describe('calendar wall', () => {
     expect(liveFrames(summer)).toBeGreaterThan(liveFrames(today));
   });
 
-  it('draws the culture tubing as one continuous serpentine', () => {
+  it('draws both faces, labelled, with every panel on one of them', () => {
+    expect((svg.match(/data-face="A"/g) ?? []).length).toBe(1 + 36);
+    expect((svg.match(/data-face="B"/g) ?? []).length).toBe(1 + 36);
+    expect(svg).toContain('FACE A · SPRING + SUMMER');
+    expect(svg).toContain('FACE B · AUTUMN + WINTER');
+    expect(svg).toContain('KŌ 37–72 · 6 × 6');
+  });
+
+  it('prints the envelope and the parameters summary', () => {
+    expect(svg).toContain('1300 W × 1580 H × 400 D mm OVERALL');
+    expect(svg).toContain('PLINTH 1400 × 400 × 700 mm (V-101 · P-101)');
+    expect(svg).toContain('0 MEASURED');
+  });
+
+  it('draws the culture tubing as one continuous serpentine across the crossover', () => {
     const pts = culturePath(CALENDAR_TWIN);
-    expect(pts.length).toBe(72 * 2 + 11);
+    /* 2 points per panel, 5 row-changes per face, 4 for the crossover */
+    expect(pts.length).toBe(72 * 2 + 10 + 4);
     for (let i = 1; i < pts.length; i++) {
       const [a, b] = [pts[i - 1], pts[i]];
       expect(a[0] === b[0] || a[1] === b[1]).toBe(true);
@@ -50,6 +65,47 @@ describe('calendar wall', () => {
     const refresh = renderCalendarToSvg(CALENDAR_TWIN, 'refresh');
     expect(refresh).toContain('stroke-dasharray="2 2"');
     expect(refresh).toContain('MAINTENANCE — LOOP DRAINED');
+  });
+});
+
+describe('venue plan MS-CAL-004', () => {
+  const svg = renderVenueToSvg(VENUE_PLAN, 'viewing');
+
+  it('renders the plan, the section and the datasheet', () => {
+    expect(svg.startsWith('<svg')).toBe(true);
+    expect(svg).toContain('MS-CAL-004');
+    expect(svg).toContain('PLAN · VENUE FLOOR · CLEARANCE ZONES');
+    expect(svg).toContain('SECTION A–A · THROUGH WIDTH · PLINTH INTERNALS');
+    expect(svg).toContain('CONCEPT — NOT FOR CONSTRUCTION');
+    expect((svg.match(/data-view="/g) ?? []).length).toBe(2);
+  });
+
+  it('shows the plinth internals with the P&ID symbols', () => {
+    for (const tag of ['V-101', 'P-101', 'U-100', 'LSLL']) expect(svg).toContain(tag);
+    expect(svg).toContain('DRIP TRAY 1380 × 380 × 60');
+  });
+
+  it('prints every datasheet row with its basis', () => {
+    expect(VENUE_PLAN.datasheet.rows).toHaveLength(12);
+    for (const r of VENUE_PLAN.datasheet.rows) expect(svg).toContain(r.v.basis.toUpperCase());
+    expect(svg).toContain('ASSUMED');
+    expect(svg).not.toContain('>MEASURED<');
+  });
+
+  it('lights the clearance zones the state names', () => {
+    const viewing = renderVenueToSvg(VENUE_PLAN, 'viewing');
+    const install = renderVenueToSvg(VENUE_PLAN, 'install');
+    const live = (s: string) => (s.match(new RegExp(BLUEPRINT.live, 'g')) ?? []).length;
+    expect(live(viewing)).toBeGreaterThan(live(install));
+    expect(install).toContain('INSTALL — LOOP EMPTY');
+  });
+
+  it('prints on either plate', () => {
+    const classic = renderVenueToSvg(VENUE_PLAN, 'service', 'classic');
+    expect(classic).toContain(CLASSIC.plateBottom);
+    expect(classic).toContain(CLASSIC.live);
+    expect(classic).not.toContain(BLUEPRINT.live);
+    expect(classic).not.toContain(BLUEPRINT.ink);
   });
 });
 
@@ -81,6 +137,7 @@ describe('P&ID sheets', () => {
 
 describe('classic theme', () => {
   const wall = renderCalendarToSvg(CALENDAR_TWIN, 'today', 'classic');
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const array = renderPidToSvg(PID_SHEETS['pid-array'], 'day', 'classic');
 
   it('prints on white paper with near-black ink', () => {

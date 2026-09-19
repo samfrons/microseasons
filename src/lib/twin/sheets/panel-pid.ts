@@ -21,6 +21,9 @@ export function buildPanelPid(panel: CalendarPanel): PidSpec {
   const prev = neighbourTag(panel.n, -1);
   const next = neighbourTag(panel.n, +1);
   const ltr = panel.ports.in === 'left';
+  /* the two faces are one loop: 36 → 37 crosses at the base of the monolith */
+  const inCross = panel.n === 37 ? ' (CROSSOVER)' : '';
+  const outCross = panel.n === 36 ? ' (CROSSOVER)' : '';
   const inX = ltr ? 60 : 640;
   const outX = ltr ? 640 : 60;
   const outY = 350;
@@ -30,24 +33,24 @@ export function buildPanelPid(panel: CalendarPanel): PidSpec {
     id: `pid-panel-${panel.id}`,
     subject: `panel:${panel.n}`,
     sheet: { width: 1000, height: 560 },
-    caption: `sheet 3 · panel ${t} · #${panel.n} ${panel.nameJa} — ${panel.nameEn} · photobioreactor + MFC`,
+    caption: `sheet 3 · panel ${t} · face ${panel.face} · #${panel.n} ${panel.nameJa} — ${panel.nameEn} · photobioreactor + MFC`,
     title: {
       org: 'MICROSEASONS — 七十二候',
       title: `Panel ${t} — ${panel.nameEn} — P&ID`,
       drawing: `MS-CAL-003-${String(panel.n).padStart(2, '0')}`,
       rev: 'B',
       sheet: 3,
-      of: 3,
+      of: 4,
       status: 'CONCEPT',
-      scale: 'SCALE: SCHEMATIC · PANEL 100 × 100 × 95 mm',
+      scale: 'SCALE: SCHEMATIC · PANEL 180 × 110 × 95 mm',
       drawn: 'microseasons-digital-twin · buildPanelPid',
     },
     equipment: [
-      { id: 'in', kind: 'source', x: inX, y: 170, label: `CULTURE FROM ${prev}` },
-      { id: 'out', kind: 'sink', x: ltr ? 650 : outX, y: outY, label: `CULTURE TO ${next}` },
+      { id: 'in', kind: 'source', x: inX, y: 170, label: `CULTURE FROM ${prev}${inCross}` },
+      { id: 'out', kind: 'sink', x: ltr ? 650 : outX, y: outY, label: `CULTURE TO ${next}${outCross}` },
       { id: 'anode-ch', kind: 'chamber', tag: `${t}B`, x: 260, y: 200, w: 100, h: 120, label: 'ANODE CHAMBER', tip: 'Sealed anaerobic chamber, acetate anolyte, exoelectrogenic biofilm on graphite felt. Refreshed with the culture every 90 d via S.' },
       { id: 'membrane', kind: 'membrane', tag: `X-${String(100 + panel.n).padStart(3, '0')}`, x: 314, y: 200, w: 8, h: 120, labelSide: 'below', label: 'NAFION 117', tip: 'Proton-exchange membrane, 183 µm. Keeps the culture out of the anolyte.' },
-      { id: 'algae-ch', kind: 'chamber', tag: `${t}A`, x: 400, y: 200, w: 150, h: 120, label: 'PHOTOBIOREACTOR', tip: `Chlorella vulgaris suspension, 250 mL, tinted ${panel.tint} for ${panel.season}. O₂ from photosynthesis feeds the cathode.` },
+      { id: 'algae-ch', kind: 'chamber', tag: `${t}A`, x: 400, y: 200, w: 150, h: 120, label: 'PHOTOBIOREACTOR', tip: `Chlorella vulgaris suspension, 400 mL, tinted ${panel.tint} for ${panel.season} on face ${panel.face}. O₂ from photosynthesis feeds the cathode.` },
       { id: 'anode', kind: 'electrode', x: 236, y: 205, w: 8, h: 80, polarity: 'anode', tip: 'Graphite felt anode, 20 × 15 cm design.' },
       { id: 'cathode', kind: 'electrode', x: 340, y: 205, w: 8, h: 80, polarity: 'cathode', tip: 'Carbon cloth + Pt/C cathode facing the culture; breathes algal O₂.' },
       { id: 's1', kind: 'sample', x: 210, y: 225, tip: 'Anolyte sample / refresh port.' },
@@ -89,7 +92,7 @@ export function buildPanelPid(panel: CalendarPanel): PidSpec {
     ],
     parts: [
       { n: 1, ref: 'anode-ch', name: `Anode chamber ${t}B, graphite felt` },
-      { n: 2, ref: 'algae-ch', name: `Photobioreactor ${t}A, 250 mL Chlorella` },
+      { n: 2, ref: 'algae-ch', name: `Photobioreactor ${t}A, 400 mL Chlorella` },
       { n: 3, ref: 'membrane', name: 'Nafion 117 membrane' },
       { n: 4, ref: 'backlight', name: 'Backlight, 0.5 W 2700 K' },
       { n: 5, ref: 'strip', name: `Day strip, ${panel.days} LEDs` },

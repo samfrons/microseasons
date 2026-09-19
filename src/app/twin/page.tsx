@@ -9,11 +9,11 @@
  */
 import { useMemo, useState } from 'react';
 import { microseasons } from '@/data/microseasons';
-import { CalendarTwinSheet, PidSheet } from '@/components/DigitalTwin';
+import { CalendarTwinSheet, ParametersTable, PidSheet, VenuePlanSheet } from '@/components/DigitalTwin';
 import { BLUEPRINT as B, MONO_FONT } from '@/lib/twin/blueprint';
 import { buildCalendarTwin, panelForDate } from '@/lib/twin/build-calendar';
-import { formatLint, lintCalendarTwin, lintPid } from '@/lib/twin/lint';
-import { arrayPid, buildPanelPid } from '@/lib/twin/sheets';
+import { formatLint, lintCalendarTwin, lintPid, lintVenuePlan } from '@/lib/twin/lint';
+import { arrayPid, buildPanelPid, buildVenuePlan } from '@/lib/twin/sheets';
 import type { CalendarPanel } from '@/lib/twin/spec';
 
 const mono: React.CSSProperties = { fontFamily: MONO_FONT, letterSpacing: '.08em' };
@@ -23,13 +23,15 @@ export default function TwinPage() {
   const today = useMemo(() => panelForDate(wall.panels, new Date())?.panel ?? wall.panels[0], [wall]);
   const [panel, setPanel] = useState<CalendarPanel>(today);
   const panelSheet = useMemo(() => buildPanelPid(panel), [panel]);
+  const venue = useMemo(() => buildVenuePlan(wall), [wall]);
   const lint = useMemo(
     () => [
       { name: wall.title.drawing, r: lintCalendarTwin(wall) },
+      { name: venue.title.drawing, r: lintVenuePlan(venue) },
       { name: arrayPid.title.drawing, r: lintPid(arrayPid) },
       { name: panelSheet.title.drawing, r: lintPid(panelSheet) },
     ],
-    [wall, panelSheet]
+    [wall, venue, panelSheet]
   );
 
   return (
@@ -37,25 +39,28 @@ export default function TwinPage() {
       <header style={{ borderBottom: `1px solid ${B.border}`, padding: '28px 24px 20px' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <p style={{ ...mono, fontSize: '.625rem', textTransform: 'uppercase', color: B.muted, margin: 0 }}>
-            microseasons · digital twin · MS-CAL-001 / 002 / 003
+            microseasons · digital twin · MS-CAL-001 / 002 / 003 / 004
           </p>
           <h1 style={{ ...mono, fontSize: '1.4rem', fontWeight: 600, color: B.hi, margin: '6px 0 8px' }}>
             72 microseasons bioreactor calendar — engineering sheets
           </h1>
           <p style={{ maxWidth: 760, fontSize: '.85rem', lineHeight: 1.55, color: B.ink, margin: 0 }}>
-            The wall in the renders under <code style={mono}>microseasons-cal/</code> — six columns by twelve rows of
-            timber-framed photobioreactor panels, one per kō, each with a microbial fuel cell behind the culture
-            window and a strip of day LEDs — drawn as three ISA-5.1 sheets from one declarative spec. Every
-            number is a design basis from the reference blueprint, not a measurement. Click a panel on the wall to
-            open its own P&amp;ID below.
+            A freestanding, double-sided monolith on a plinth: seventy-two timber-framed photobioreactor panels,
+            one per kō, thirty-six on face A (spring + summer) and thirty-six on face B (autumn + winter), each with
+            a microbial fuel cell behind the culture window and a strip of day LEDs. Drawn as four ISA-5.1 sheets
+            from one declarative spec — two elevations, the venue plan, the array P&amp;ID and a sheet per panel —
+            with the full parameters layer below. Every number carries its <strong>basis</strong>; nothing has been
+            measured. Click a panel on an elevation to open its own P&amp;ID.
           </p>
         </div>
       </header>
 
       <main style={{ maxWidth: 1100, margin: '0 auto', padding: '24px 24px 64px', display: 'grid', gap: 40 }}>
         <CalendarTwinSheet spec={wall} onSelectPanel={setPanel} />
+        <VenuePlanSheet spec={venue} />
         <PidSheet spec={arrayPid} />
         <PidSheet key={panelSheet.id} spec={panelSheet} />
+        <ParametersTable sections={wall.parameters} caption="parameters · installation design basis · MS-CAL-001 / 004" />
 
         <section aria-labelledby="lint" style={{ ...mono, fontSize: '.7rem', color: B.muted }}>
           <h2 id="lint" style={{ fontSize: '.625rem', textTransform: 'uppercase', letterSpacing: '.18em', margin: '0 0 8px' }}>

@@ -10,9 +10,10 @@
 import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { PALETTES, type TwinTheme } from '@/lib/twin/blueprint';
-import type { CalendarTwinSpec, PidSpec } from '@/lib/twin/spec';
+import type { CalendarTwinSpec, PidSpec, VenuePlanSpec } from '@/lib/twin/spec';
 import { CalendarTwinDiagram } from './CalendarTwinDiagram';
 import { PidDiagram } from './PidDiagram';
+import { VenuePlanDiagram } from './VenuePlanDiagram';
 import { TwinThemeProvider } from './theme';
 
 function withPlate(body: string, w: number, h: number, theme: TwinTheme): string {
@@ -33,6 +34,13 @@ export function renderPidToSvg(spec: PidSpec, state?: string, theme: TwinTheme =
 export function renderCalendarToSvg(spec: CalendarTwinSpec, state?: string, theme: TwinTheme = 'blueprint'): string {
   const body = renderToStaticMarkup(
     createElement(TwinThemeProvider, { theme, children: createElement(CalendarTwinDiagram, { spec, state }) })
+  );
+  return withPlate(body, spec.sheet.width, spec.sheet.height, theme);
+}
+
+export function renderVenueToSvg(spec: VenuePlanSpec, state?: string, theme: TwinTheme = 'blueprint'): string {
+  const body = renderToStaticMarkup(
+    createElement(TwinThemeProvider, { theme, children: createElement(VenuePlanDiagram, { spec, state }) })
   );
   return withPlate(body, spec.sheet.width, spec.sheet.height, theme);
 }

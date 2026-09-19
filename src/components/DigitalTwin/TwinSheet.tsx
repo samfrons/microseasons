@@ -11,9 +11,10 @@
  */
 import { useId, useRef, useState, type CSSProperties, type ReactNode } from 'react';
 import { MONO_FONT, PALETTES, type Palette, type TwinTheme } from '@/lib/twin/blueprint';
-import { getCalendarState, getPidState, type CalendarPanel, type CalendarTwinSpec, type Equipment, type PidSpec } from '@/lib/twin/spec';
+import { getCalendarState, getPidState, getVenueState, type CalendarPanel, type CalendarTwinSpec, type Equipment, type PidSpec, type VenuePlanSpec } from '@/lib/twin/spec';
 import { CalendarTwinDiagram } from './CalendarTwinDiagram';
 import { PidDiagram } from './PidDiagram';
+import { VenuePlanDiagram } from './VenuePlanDiagram';
 import { TwinThemeProvider } from './theme';
 
 /**
@@ -222,6 +223,27 @@ export function PidSheet({ spec, initialState, theme: initialTheme = 'blueprint'
       )}
     >
       <PidDiagram spec={spec} state={state} onSelect={setSel} />
+    </Shell>
+  );
+}
+
+/** MS-CAL-004 on the plate: the venue plan, its states and the theme pair. */
+export function VenuePlanSheet({ spec, initialState, theme: initialTheme = 'blueprint' }: { spec: VenuePlanSpec; initialState?: string; theme?: TwinTheme }) {
+  const [state, setState] = useState(initialState ?? getVenueState(spec).id);
+  const [theme, setTheme] = useState<TwinTheme>(initialTheme);
+  return (
+    <Shell
+      label={spec.title.drawing}
+      captionText={`${spec.title.drawing} · rev ${spec.title.rev} · sheet ${spec.title.sheet} of ${spec.title.of}`}
+      states={spec.states}
+      state={state}
+      setState={setState}
+      theme={theme}
+      setTheme={setTheme}
+      drawing={spec.title.drawing}
+      sheet={spec.sheet}
+    >
+      <VenuePlanDiagram spec={spec} state={state} />
     </Shell>
   );
 }
