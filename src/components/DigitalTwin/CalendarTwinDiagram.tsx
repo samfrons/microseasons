@@ -4,9 +4,10 @@
  * the vertical rails, one LED per day under every window. A `CalendarTwinSpec`
  * in, one SVG out. Server-safe.
  */
-import { BLUEPRINT as B, WEIGHT } from '@/lib/twin/blueprint';
+import { WEIGHT } from '@/lib/twin/blueprint';
 import { getCalendarState, type CalendarPanel, type CalendarTwinSpec, type Pt } from '@/lib/twin/spec';
 import { Defs, Legend, LogicBlockBox, Poly, SheetFrame, TitleBlockBox, Txt } from './symbols';
+import { usePalette, useTwinTheme } from './theme';
 
 export interface CalendarTwinDiagramProps {
   spec: CalendarTwinSpec;
@@ -45,6 +46,8 @@ export function culturePath(spec: CalendarTwinSpec): Pt[] {
 }
 
 export function CalendarTwinDiagram({ spec, state, onSelect, selected, className }: CalendarTwinDiagramProps) {
+  const pal = usePalette();
+  const theme = useTwinTheme();
   const st = getCalendarState(spec, state);
   const lit = new Set(st.litPanels);
   const cultureLive = st.streams.includes('culture');
@@ -57,6 +60,9 @@ export function CalendarTwinDiagram({ spec, state, onSelect, selected, className
   const wallW = cols * (w + gap) - gap;
   const wallH = rows * (h + gap) - gap;
   const interactive = Boolean(onSelect);
+  /* on white paper a 45% tint washes out — print the culture a little harder */
+  const litTintOpacity = theme === 'classic' ? 0.9 : 0.85;
+  const idleTintOpacity = theme === 'classic' ? 0.5 : 0.45;
 
   return (
     <svg
@@ -72,8 +78,8 @@ export function CalendarTwinDiagram({ spec, state, onSelect, selected, className
       {spec.caption && <Txt x={12} y={12} size={6} muted>{spec.caption.toUpperCase()}</Txt>}
 
       {/* vertical rails carrying the bus bars */}
-      <rect x={ox - 14} y={oy - 8} width={8} height={wallH + 16} fill={B.body} stroke={B.timber} strokeWidth={WEIGHT.fine} />
-      <rect x={ox + wallW + 6} y={oy - 8} width={8} height={wallH + 16} fill={B.body} stroke={B.timber} strokeWidth={WEIGHT.fine} />
+      <rect x={ox - 14} y={oy - 8} width={8} height={wallH + 16} fill={pal.body} stroke={pal.timber} strokeWidth={WEIGHT.fine} />
+      <rect x={ox + wallW + 6} y={oy - 8} width={8} height={wallH + 16} fill={pal.body} stroke={pal.timber} strokeWidth={WEIGHT.fine} />
       <Poly pts={[[ox - 10, oy - 8], [ox - 10, oy + wallH + 8]]} kind="electric" live={busLive} />
       <Poly pts={[[ox + wallW + 10, oy - 8], [ox + wallW + 10, oy + wallH + 8]]} kind="electric" live={busLive} />
       <Txt x={ox - 18} y={oy + wallH / 2} size={6} anchor="middle" rotate={-90} muted>{spec.electrical.anodeBus === 'left' ? 'ANODE BUS (−)' : 'CATHODE BUS (+)'}</Txt>
@@ -81,11 +87,11 @@ export function CalendarTwinDiagram({ spec, state, onSelect, selected, className
 
       {/* horizontal rail under every row */}
       {Array.from({ length: rows }, (_, r) => (
-        <rect key={r} x={ox - 6} y={oy + r * (h + gap) + h + 1} width={wallW + 12} height={3} fill={B.timber} opacity={0.55} />
+        <rect key={r} x={ox - 6} y={oy + r * (h + gap) + h + 1} width={wallW + 12} height={3} fill={pal.timber} opacity={0.55} />
       ))}
 
       {/* culture tubing behind the wall */}
-      <Poly pts={culturePath(spec)} kind="process" live={cultureLive} stroke={cultureLive ? undefined : B.muted} />
+      <Poly pts={culturePath(spec)} kind="process" live={cultureLive} stroke={cultureLive ? undefined : pal.muted} />
 
       {/* the panels */}
       {spec.panels.map((p) => {
@@ -110,17 +116,17 @@ export function CalendarTwinDiagram({ spec, state, onSelect, selected, className
           >
             <title>{aria}</title>
             {/* timber glow behind a lit panel */}
-            {isLit && <rect x={r.x - 3} y={r.y - 3} width={r.w + 6} height={r.h + 6} fill={B.live} opacity={0.22} />}
+            {isLit && <rect x={r.x - 3} y={r.y - 3} width={r.w + 6} height={r.h + 6} fill={pal.live} opacity={0.22} />}
             {/* frame */}
-            <rect x={r.x} y={r.y} width={r.w} height={r.h} fill={B.body} stroke={isLit ? B.live : B.timber} strokeWidth={isLit ? WEIGHT.live : WEIGHT.process} />
+            <rect x={r.x} y={r.y} width={r.w} height={r.h} fill={pal.body} stroke={isLit ? pal.live : pal.timber} strokeWidth={isLit ? WEIGHT.live : WEIGHT.process} />
             {/* culture window */}
-            <rect x={r.x + 6} y={r.y + 5} width={r.w - 12} height={r.h - 22} fill={filled ? p.tint : 'none'} opacity={filled ? (isLit ? 0.85 : 0.45) : 1} stroke={B.ink} strokeWidth={WEIGHT.fine} strokeDasharray={filled ? undefined : '2 2'} />
+            <rect x={r.x + 6} y={r.y + 5} width={r.w - 12} height={r.h - 22} fill={filled ? p.tint : 'none'} opacity={filled ? (isLit ? litTintOpacity : idleTintOpacity) : 1} stroke={pal.ink} strokeWidth={WEIGHT.fine} strokeDasharray={filled ? undefined : '2 2'} />
             {/* ports */}
-            <circle cx={p.ports.in === 'left' ? r.x + 3 : r.x + r.w - 3} cy={r.y + r.h * 0.3} r={1.6} fill={cultureLive ? B.live : B.ink} />
-            <circle cx={p.ports.out === 'left' ? r.x + 3 : r.x + r.w - 3} cy={r.y + r.h * 0.3} r={1.6} fill="none" stroke={B.ink} strokeWidth={WEIGHT.fine} />
+            <circle cx={p.ports.in === 'left' ? r.x + 3 : r.x + r.w - 3} cy={r.y + r.h * 0.3} r={1.6} fill={cultureLive ? pal.live : pal.ink} />
+            <circle cx={p.ports.out === 'left' ? r.x + 3 : r.x + r.w - 3} cy={r.y + r.h * 0.3} r={1.6} fill="none" stroke={pal.ink} strokeWidth={WEIGHT.fine} />
             {/* electrode leads to the bus rails */}
-            <line x1={r.x} y1={r.y + r.h - 12} x2={r.x + 4} y2={r.y + r.h - 12} stroke={B.ink} strokeWidth={WEIGHT.fine} />
-            <line x1={r.x + r.w - 4} y1={r.y + r.h - 12} x2={r.x + r.w} y2={r.y + r.h - 12} stroke={B.ink} strokeWidth={WEIGHT.fine} />
+            <line x1={r.x} y1={r.y + r.h - 12} x2={r.x + 4} y2={r.y + r.h - 12} stroke={pal.ink} strokeWidth={WEIGHT.fine} />
+            <line x1={r.x + r.w - 4} y1={r.y + r.h - 12} x2={r.x + r.w} y2={r.y + r.h - 12} stroke={pal.ink} strokeWidth={WEIGHT.fine} />
             {/* day-LED strip */}
             {Array.from({ length: p.days }, (_, d) => {
               const on = stripOn && (st.litDay === undefined || !isLit || d <= st.litDay);
@@ -132,9 +138,9 @@ export function CalendarTwinDiagram({ spec, state, onSelect, selected, className
                   y={r.y + r.h - 12}
                   width={ledW}
                   height={4}
-                  fill={today ? B.hi : on ? B.live : 'none'}
+                  fill={today ? pal.hi : on ? pal.live : 'none'}
                   opacity={on && !today && !isLit ? 0.55 : 1}
-                  stroke={B.ink}
+                  stroke={pal.ink}
                   strokeWidth={0.4}
                 />
               );
@@ -142,7 +148,7 @@ export function CalendarTwinDiagram({ spec, state, onSelect, selected, className
             {/* engraving: number + name */}
             <Txt x={r.x + 8} y={r.y + r.h - 3} size={4.6} muted={!isLit} bright={isLit}>{`#${p.n} ${p.nameEn.toUpperCase().slice(0, 22)}`}</Txt>
             <Txt x={r.x + r.w - 6} y={r.y + 11} size={4.6} anchor="end" bright={isLit} opacity={0.9}>{p.nameJa}</Txt>
-            {isSel && <rect x={r.x - 1.5} y={r.y - 1.5} width={r.w + 3} height={r.h + 3} fill="none" stroke={B.hi} strokeWidth={0.8} strokeDasharray="3 2" />}
+            {isSel && <rect x={r.x - 1.5} y={r.y - 1.5} width={r.w + 3} height={r.h + 3} fill="none" stroke={pal.hi} strokeWidth={0.8} strokeDasharray="3 2" />}
           </g>
         );
       })}
@@ -159,10 +165,10 @@ export function CalendarTwinDiagram({ spec, state, onSelect, selected, className
       {wrap(st.description, 58).map((line, i) => <Txt key={i} x={610} y={86 + i * 9} size={6}>{line}</Txt>)}
       <Txt x={610} y={140} size={6} muted>SEASON TINT</Txt>
       {(['spring', 'summer', 'autumn', 'winter'] as const).map((s, i) => {
-        const p = spec.panels.find((q) => q.season === s && q.col === 2);
+        const swatch = spec.panels.find((q) => q.season === s && q.col === 2);
         return (
           <g key={s}>
-            <rect x={610 + i * 90} y={148} width={20} height={10} fill={p?.tint ?? B.ink} opacity={0.7} stroke={B.ink} strokeWidth={WEIGHT.fine} />
+            <rect x={610 + i * 90} y={148} width={20} height={10} fill={swatch?.tint ?? pal.ink} opacity={0.7} stroke={pal.ink} strokeWidth={WEIGHT.fine} />
             <Txt x={636 + i * 90} y={156} size={6}>{s.toUpperCase()}</Txt>
           </g>
         );

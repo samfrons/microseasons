@@ -16,7 +16,11 @@ spec → lint → render pattern of MESSAI's `@messai/pid-schematic`.
 See them at **`/twin`**. Click a panel on the wall to open its own P&ID.
 Each sheet has state chips (today / season / night / refresh; day / night /
 refresh / trip; day / night / habit / refresh) that repaint the live path in
-amber, and a ↓ SVG button that downloads the drawing as shown.
+amber, and a ↓ SVG button that downloads the drawing as shown. A
+**Blueprint / Classic** chip pair switches the plate — Classic prints the
+same sheet as a traditional drawing (white paper, no drafting grid,
+near-black ink, a strong blue for the live path) and the download follows the
+theme on screen.
 
 ## Where things live
 

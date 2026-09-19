@@ -3,13 +3,14 @@
  * → bodies → instruments → furniture so opaque bodies hide the runs behind
  * them. Pure and server-safe (no hooks, no window).
  */
-import { BLUEPRINT as B, WEIGHT } from '@/lib/twin/blueprint';
+import { WEIGHT } from '@/lib/twin/blueprint';
 import { getPidState, type Equipment, type PidSpec, type Pt } from '@/lib/twin/spec';
 import {
   Balloon, Cabinet, Chamber, Converter, Defs, Electrode, Filter, InstrumentBubble, Leader, Led, Legend, Load,
   LogicBlockBox, Membrane, OffSheet, PanelArray, PartsList, Poly, PowerSupply, Pump, SamplePoint, SheetFrame,
   Storage, Switch, TitleBlockBox, Txt, Valve, Vessel,
 } from './symbols';
+import { usePalette } from './theme';
 
 export interface PidDiagramProps {
   spec: PidSpec;
@@ -31,6 +32,7 @@ function labelPos(e: Equipment): { x: number; y: number; anchor: 'start' | 'midd
 }
 
 export function PidDiagram({ spec, state, onSelect, className }: PidDiagramProps) {
+  const p = usePalette();
   const st = getPidState(spec, state);
   const lit = new Set(st.streams);
   const open = new Set(st.valvesOpen ?? []);
@@ -147,7 +149,7 @@ export function PidDiagram({ spec, state, onSelect, className }: PidDiagramProps
       {(spec.notes ?? []).flatMap((n) => wrapNote(n, 150)).slice(0, 3).map((n, i) => (
         <Txt key={i} x={24} y={height - 22 + i * 8} size={5.5} muted>{n}</Txt>
       ))}
-      <line x1={0} y1={height - 30} x2={width - 362} y2={height - 30} stroke={B.ink} strokeWidth={WEIGHT.fine} opacity={0.4} />
+      <line x1={0} y1={height - 30} x2={width - 362} y2={height - 30} stroke={p.ink} strokeWidth={WEIGHT.fine} opacity={0.4} />
       {byId.size === 0 && <Txt x={width / 2} y={height / 2} anchor="middle">EMPTY SHEET</Txt>}
     </svg>
   );

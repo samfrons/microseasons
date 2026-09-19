@@ -122,10 +122,18 @@ process lines; process lines should not cross each other — reroute.
 
 ## Style rules (durable)
 
-- Plate `#16324A → #0F2438`, ink `#D7E7F2`, bright `#F4FAFE`, live `#F6A97F`,
-  timber `#C9A66B`. Tokens in `src/lib/twin/blueprint.ts`; never inline a
-  colour in a symbol. **No red, no cyan** — the old sketches' cyan ink and
-  red/blue polarity strokes are the deprecated path.
+- **Two themes, one drawing.** `blueprint` — plate `#16324A → #0F2438`, ink
+  `#D7E7F2`, bright `#F4FAFE`, live `#F6A97F`, timber `#C9A66B`; and
+  `classic` — white paper, no drafting grid, ink `#111827`, live `#1D4ED8`,
+  timber `#8B6A3E`. Both are `Palette`s in `PALETTES`
+  (`src/lib/twin/blueprint.ts`) with identical key sets. **Never inline a
+  colour and never read `BLUEPRINT` in a symbol or renderer — call
+  `usePalette()`** (`src/components/DigitalTwin/theme.tsx`); that is the whole
+  reason a third theme would be a palette, not a prop. `<TwinSheet>` carries
+  the Blueprint / Classic chips and wraps the diagram in `TwinThemeProvider`;
+  `renderPidToSvg(spec, state, theme)` does the same for static export.
+  **No red, no cyan** — the old sketches' cyan ink and red/blue polarity
+  strokes are the deprecated path.
 - The ONE exception to ink-only: an algae window is tinted by season
   (`ALGAE_TINT`, blended per panel by `algaeTint(n)`), because the culture's
   colour is calendar data. Lines, labels and symbols stay ink.
@@ -164,10 +172,13 @@ process lines; process lines should not cross each other — reroute.
 - `src/lib/twin/spec.ts` — `CalendarTwinSpec`, `PidSpec`, `EquipmentKind`.
 - `src/lib/twin/lint.ts` — `lintCalendarTwin`, `lintPid`, `formatLint`.
 - `src/lib/twin/tags.ts` — ISA letter tables, `validateInstrumentTag`.
-- `src/lib/twin/blueprint.ts` — plate, ink, live, timber, `ALGAE_TINT`, weights.
+- `src/lib/twin/blueprint.ts` — `BLUEPRINT`, `CLASSIC`, `PALETTES`,
+  `TwinTheme`, `ALGAE_TINT`, weights.
 - `src/lib/twin/build-calendar.ts` — `buildCalendarTwin`, `panelForDate`, `algaeTint`.
 - `src/lib/twin/sheets/array-pid.ts` — MS-CAL-002; `panel-pid.ts` — `buildPanelPid`;
   `index.ts` — `CALENDAR_TWIN`, `PID_SHEETS` registry.
+- `src/components/DigitalTwin/theme.tsx` — `TwinThemeProvider`, `usePalette`,
+  `useTwinTheme`, `defId` (per-theme marker / pattern ids).
 - `src/components/DigitalTwin/symbols.tsx` — primitives; `PidDiagram.tsx`,
   `CalendarTwinDiagram.tsx` — renderers; `TwinSheet.tsx` — plate + chips;
   `render-static.ts` — SVG strings.

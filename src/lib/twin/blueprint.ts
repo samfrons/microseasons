@@ -42,6 +42,90 @@ export const BLUEPRINT = {
 } as const;
 
 /**
+ * The visual THEME of a sheet. `blueprint` is the Prussian-blue plate above;
+ * `classic` is the traditional printed engineering drawing — white paper,
+ * near-black ink, no drafting grid, and a strong blue for whatever is LIVE.
+ */
+export type TwinTheme = 'blueprint' | 'classic';
+
+/** Every colour a symbol may reach for. Both palettes expose the same keys. */
+export interface Palette {
+  /** plate gradient, top → bottom */
+  plateTop: string;
+  plateBottom: string;
+  /** drafting grid line (`transparent` = no grid) */
+  grid: string;
+  /** plate border (the CSS frame around the whole sheet) */
+  border: string;
+  /** the drawn sheet frame inside the SVG, and how solid it is */
+  frame: string;
+  frameOpacity: number;
+  /** the ink every line and label is drawn in */
+  ink: string;
+  /** brighter ink for tag text inside bubbles / balloons */
+  hi: string;
+  /** dimmer ink for captions and eyebrows */
+  muted: string;
+  /** opaque fill for bodies (vessels, cabinets) so lines behind them hide */
+  body: string;
+  /** fill for instrument bubbles + balloons */
+  bubble: string;
+  /** fill for the logic block and the title block */
+  panel: string;
+  /** border of an unpressed state / theme chip */
+  chipBorder: string;
+  /** the LIVE accent: the active stream, the open valve, the lit panel */
+  live: string;
+  /** the concept stamp (kraft label + oxblood ink) */
+  stampPaper: string;
+  stampInk: string;
+  /** the timber frame of a calendar panel, drawn as a warm outline */
+  timber: string;
+}
+
+/**
+ * The CLASSIC plate — a printed engineering drawing, not an inverted
+ * blueprint: white paper, no drafting grid, near-black monoline ink, opaque
+ * white bodies, and a strong blue (never red, never cyan) for LIVE. `muted`
+ * is dark enough that the MIN_TEXT_OPACITY clamp still leaves a 6px label
+ * well above 5:1 on white, and `timber` is a warm brown that reads on paper
+ * instead of the pale tan that only works on the blue plate.
+ */
+export const CLASSIC: Palette = {
+  plateTop: '#FFFFFF',
+  plateBottom: '#FFFFFF',
+  /* real printed drawings have no drafting grid */
+  grid: 'transparent',
+  border: '#111827',
+  frame: '#111827',
+  frameOpacity: 1,
+  ink: '#111827',
+  /* on white paper the bright ink IS the ink — one black, printed once */
+  hi: '#111827',
+  muted: '#374151',
+  body: '#FFFFFF',
+  bubble: '#FFFFFF',
+  panel: '#FFFFFF',
+  chipBorder: '#9CA3AF',
+  live: '#1D4ED8',
+  stampPaper: '#E3D5B8',
+  stampInk: '#5A1A0C',
+  timber: '#8B6A3E',
+};
+
+/** Palette by theme id. `blueprint` is the default everywhere. */
+export const PALETTES: Record<TwinTheme, Palette> = {
+  blueprint: {
+    ...BLUEPRINT,
+    frame: BLUEPRINT.ink,
+    frameOpacity: 0.5,
+    panel: 'rgba(7,20,34,.6)',
+    chipBorder: 'rgba(226,240,248,.45)',
+  },
+  classic: CLASSIC,
+};
+
+/**
  * Seasonal tint of a Chlorella culture over the year — the only colour on
  * the plate that is not ink. Values are what the renders in
  * `microseasons-cal/` show: pale spring green → saturated summer green →
