@@ -75,7 +75,7 @@ export const PhysicalCalendarSection = () => {
   return (
     <section
       className={clsx(
-        'py-32 px-6 transition-colors duration-500',
+        'py-32 px-6 overflow-x-clip transition-colors duration-500',
         darkMode ? 'bg-sumi-800' : 'bg-gradient-to-b from-washi-50 to-sakura-50'
       )}
     >
@@ -137,7 +137,7 @@ export const PhysicalCalendarSection = () => {
           <PhysicalCalendarMockup variant="hero" material={selectedMaterial} />
 
           {/* Material Selector */}
-          <div className="flex justify-center gap-6 mt-16">
+          <div className="flex flex-wrap justify-center gap-4 sm:gap-6 mt-16">
             {materials.map((material) => (
               <motion.button
                 key={material.id}

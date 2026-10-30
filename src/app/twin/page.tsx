@@ -55,7 +55,7 @@ export default function TwinPage() {
         </div>
       </header>
 
-      <main style={{ maxWidth: 1100, margin: '0 auto', padding: '24px 24px 64px', display: 'grid', gap: 40 }}>
+      <main style={{ maxWidth: 1100, margin: '0 auto', padding: '24px 24px 64px', display: 'grid', gridTemplateColumns: 'minmax(0, 1fr)', gap: 40 }}>
         <CalendarTwinSheet spec={wall} onSelectPanel={setPanel} />
         <VenuePlanSheet spec={venue} />
         <PidSheet spec={arrayPid} />

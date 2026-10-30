@@ -65,7 +65,8 @@ export function ParametersTable({ sections, theme = 'blueprint', caption }: Para
         <span style={{ color: p.live }}>{count('assumed')} assumed</span> · {count('measured')} measured — nothing has been built, so
         nothing is measured.
       </p>
-      <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+      <div style={{ overflowX: 'auto' }}>
+      <table style={{ width: '100%', minWidth: 560, borderCollapse: 'collapse' }}>
         <thead>
           <tr>
             <th style={{ ...th, width: '34%' }}>Parameter</th>
@@ -100,6 +101,7 @@ export function ParametersTable({ sections, theme = 'blueprint', caption }: Para
           </tbody>
         ))}
       </table>
+      </div>
     </section>
   );
 }
