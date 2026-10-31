@@ -21,7 +21,7 @@ export function MicroseasonsSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-32 lg:py-48 transition-colors duration-700"
+      className="relative py-32 lg:py-48 overflow-x-clip transition-colors duration-700"
       style={{ backgroundColor: 'var(--color-bgSecondary)' }}
     >
       <div className="container mx-auto px-6 lg:px-20 max-w-[1600px]">

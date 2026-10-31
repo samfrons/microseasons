@@ -1,5 +1,6 @@
 'use client';
 
+import { DigitalTwinHero, SchematicsTeaser } from '@/components/DigitalTwinHero';
 import { HeroSection } from '@/components/HeroSection/HeroSection';
 import ConvergenceSection from '@/components/ConvergenceSection';
 import LocationSpecificSection from '@/components/LocationSpecificSection';
@@ -29,8 +30,14 @@ export default function Home() {
         className="min-h-screen transition-colors duration-500"
         style={{ backgroundColor: 'var(--color-bgPrimary)' }}
       >
-        {/* New bioreactor-focused hero */}
+        {/* The live digital twin — the first thing a visitor sees */}
+        <DigitalTwinHero />
+
+        {/* The physical product: renders, current microseason, LED tracking */}
         <HeroSection />
+
+        {/* The drawing set */}
+        <SchematicsTeaser />
 
         {/* The Convergence - bioelectrochemistry meets daily ritual */}
         <ConvergenceSection />

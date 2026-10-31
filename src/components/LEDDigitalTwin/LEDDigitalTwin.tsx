@@ -115,7 +115,7 @@ export function LEDDigitalTwin({
   }
 
   return (
-    <div className={`relative ${className}`}>
+    <div className={`relative max-w-full overflow-x-auto ${className}`}>
       {/* LED Grid Container */}
       <div
         className="relative bg-gray-900 rounded-lg p-8"

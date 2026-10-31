@@ -15,7 +15,7 @@ export function HeroSection() {
   }, []);
 
   return (
-    <section className="relative min-h-screen overflow-hidden bg-[#0a0f0a]">
+    <section id="the-product" aria-labelledby="the-product-title" className="relative overflow-hidden bg-[#0a0f0a]">
       {/* Living algae ambient background */}
       <div className="absolute inset-0">
         {/* Deep green gradient base */}
@@ -60,12 +60,12 @@ export function HeroSection() {
               style={{ backgroundColor: 'var(--color-led-cyan)' }}
             />
             <span className="text-xs uppercase tracking-[0.2em] text-white/50 font-mono">
-              Living Climate Infrastructure
+              The product · living climate infrastructure
             </span>
           </div>
 
           {/* Main title */}
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold text-white tracking-tight leading-[0.95] mb-6">
+          <h2 id="the-product-title" className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white tracking-tight leading-[0.95] mb-6">
             A Living Calendar
             <br />
             <span
@@ -76,7 +76,7 @@ export function HeroSection() {
             >
               That Breathes
             </span>
-          </h1>
+          </h2>
 
           {/* Subtitle */}
           <p className="text-lg lg:text-xl text-white/60 max-w-2xl leading-relaxed font-serif">
@@ -290,16 +290,6 @@ export function HeroSection() {
         </motion.div>
       </div>
 
-      {/* Scroll indicator */}
-      <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
-        animate={{ y: [0, 8, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
-      >
-        <div className="w-5 h-8 border border-white/20 flex justify-center pt-2">
-          <div className="w-1 h-2 bg-white/40" />
-        </div>
-      </motion.div>
     </section>
   );
 }

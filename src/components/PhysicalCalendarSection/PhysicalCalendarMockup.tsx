@@ -468,7 +468,7 @@ export const PhysicalCalendarMockup = ({ variant, material = 'walnut', className
 
           {/* Layer labels */}
           <motion.div
-            className="absolute -right-32 top-1/4 text-sm space-y-20"
+            className="absolute -right-32 top-1/4 text-sm space-y-20 hidden lg:block"
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ delay: 1.2, duration: 0.6 }}
